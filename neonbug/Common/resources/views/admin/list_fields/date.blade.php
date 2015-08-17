@@ -1,0 +1,1 @@
+{{ date('d.m.Y', strtotime($item->$field_name)) }}
