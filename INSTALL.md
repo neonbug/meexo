@@ -6,7 +6,8 @@
 
 * Issue this command in your terminal:
 
-		composer create-project neonbug/meexo {directory}
+		composer create-project -s dev neonbug/meexo {directory}
+		# answer Yes when asked "Do you want to remove the existing VCS (.git, .svn..) history?"
 
 ### 1.2. Manually install
 
@@ -15,8 +16,6 @@
 ## 2. Configure
 
 ### 2.1. .env file
-
-* Copy file `.env.example` to `.env`. Open it and change `APP_KEY` to a random value.
 
 * Change `DB_*` constants.
 
@@ -30,7 +29,7 @@
 
 * Open `config/app.php` file and add packages to `$package_providers` array. E.g. for News package add `'Neonbug\News\Providers\ServiceProvider'`.
 
-* Add packages to `composer.json` (e.g. //*TODO write this*// and issue `composer install` command in your terminal.
+* FUTURE USE: Add packages to `composer.json` (e.g. //*TODO write this*// and issue `composer install` command in your terminal.
 
 ## 4. Copy package files to proper locations and initialize database
 
@@ -41,7 +40,11 @@ php artisan vendor:publish
 php artisan migrate
 ```
 
-## 5. Test
+## 5. Writable directories
+
+//TODO: write this section
+
+## 6. Test
 
 Migration created a default user, named Administrator. You can use it to log into the admin area.
 
@@ -49,16 +52,16 @@ Visit `http://yoursite/admin` and enter `admin` as username and `admin` again as
 
 **After logging in, change your password!**
 
-## 6. Start coding
+## 7. Start coding
 
 You can start by customizing the News package views. Since you can not modify any files in `neonbug` directory, `migrate` command copies those files into your app.
 
 E.g. you can find News views in `resources/views/vendor/news/` directory.
 
-## 7. Extending Neonbug packages
+## 8. Extending Neonbug packages
 
 //TODO: write this section
 
-## 8. Writing your own Neonbug packages
+## 9. Writing your own Neonbug packages
 
 //TODO: write this section
