@@ -2,25 +2,25 @@
 
 ## 1. Download ##
 
-### 1.1 Install using composer
+### 1.1. Install using composer
 
 * Issue this command in your terminal:
 
 		composer create-project neonbug/meexo {directory}
 
-### 1.2 Manually install
+### 1.2. Manually install
 
 * Download the files from `https://github.com/neonbug/meexo` into a directory.
 
 ## 2. Configure
 
-### 2.1 .env file
+### 2.1. .env file
 
 * Copy file `.env.example` to `.env`. Open it and change `APP_KEY` to a random value.
 
 * Change `DB_*` constants.
 
-### 2.2 config/app.php file
+### 2.2. config/app.php file
 
 * Change `url` to match your environment.
 
