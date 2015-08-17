@@ -1,15 +1,15 @@
-<?php namespace Neonbug\News\Controllers;
+namespace Neonbug\{{ $package_name }}\Controllers;
 
 use App;
 use Request;
 use Auth;
 
-use \Neonbug\News\Models\News as Model;
+use \Neonbug\{{ $package_name }}\Models\{{ $model_name }} as Model;
 
 class AdminController extends \App\Http\Controllers\Controller {
 	
-	const PREFIX 		= 'news';
-	const CONFIG_PREFIX = 'neonbug.news';
+	const PREFIX 		= '{{ $route_prefix }}';
+	const CONFIG_PREFIX = 'neonbug.{{ $config_prefix }}';
 	
 	private $admin_helper;
 	
@@ -21,17 +21,17 @@ class AdminController extends \App\Http\Controllers\Controller {
 	public function admin_list()
 	{
 		return $this->admin_helper->adminList(
-			[ 'News', 'List' ], 
+			[ '{{ $package_name }}', 'List' ], 
 			config(static::CONFIG_PREFIX . '.list.fields'), 
 			static::PREFIX, 
-			'\Neonbug\News\Repositories\NewsRepository'
+			'\Neonbug\{{ $package_name }}\Repositories\{{ $model_name }}Repository'
 		);
 	}
 	
 	public function admin_add()
 	{
 		return $this->admin_helper->adminAdd(
-			[ 'News', 'Add' ], 
+			[ '{{ $package_name }}', 'Add' ], 
 			config(static::CONFIG_PREFIX . '.add.language_dependent_fields'), 
 			config(static::CONFIG_PREFIX . '.add.language_independent_fields'), 
 			session('messages', [])
@@ -42,7 +42,7 @@ class AdminController extends \App\Http\Controllers\Controller {
 	{
 		return $this->admin_helper->handleAdminAdd(
 			Request::input('field'), //first level keys are language ids, second level are field names
-			'\Neonbug\News\Models\News', 
+			'\Neonbug\{{ $package_name }}\Models\{{ $model_name }}', 
 			Auth::user()->id_user, 
 			config(static::CONFIG_PREFIX . '.add.language_independent_fields'), 
 			config(static::CONFIG_PREFIX . '.add.language_dependent_fields'), 
@@ -55,7 +55,7 @@ class AdminController extends \App\Http\Controllers\Controller {
 		$item = Model::findOrFail($id);
 		
 		return $this->admin_helper->adminEdit(
-			[ 'News', 'Edit' ], 
+			[ '{{ $package_name }}', 'Edit' ], 
 			config(static::CONFIG_PREFIX . '.edit.language_dependent_fields'), 
 			config(static::CONFIG_PREFIX . '.edit.language_independent_fields'), 
 			session('messages', []), 
@@ -69,7 +69,7 @@ class AdminController extends \App\Http\Controllers\Controller {
 		
 		return $this->admin_helper->handleAdminEdit(
 			Request::input('field'), //first level keys are language ids, second level are field names
-			'\Neonbug\News\Models\News', 
+			'\Neonbug\{{ $package_name }}\Models\{{ $model_name }}', 
 			Auth::user()->id_user, 
 			config(static::CONFIG_PREFIX . '.edit.language_independent_fields'), 
 			config(static::CONFIG_PREFIX . '.edit.language_dependent_fields'), 
@@ -83,7 +83,7 @@ class AdminController extends \App\Http\Controllers\Controller {
 		$id   = Request::input('id');
 		$item = Model::findOrFail($id);
 		
-		$this->admin_helper->deleteItem($id, '\Neonbug\News\Models\News', $item->{$item->getKeyName()});
+		$this->admin_helper->deleteItem($id, '\Neonbug\{{ $package_name }}\Models\{{ $model_name }}', $item->{$item->getKeyName()});
 		
 		return [ 'success' => true ];
 	}

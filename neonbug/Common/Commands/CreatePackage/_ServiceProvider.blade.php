@@ -1,4 +1,4 @@
-<?php namespace Neonbug\News\Providers;
+namespace Neonbug\{{ $package_name }}\Providers;
 
 use App;
 use Route;
@@ -7,12 +7,12 @@ use \Illuminate\Routing\Router as Router;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 	
-	const PACKAGE_NAME     = 'news';
-	const PREFIX           = 'news';
-	const ROLE             = 'news';
-	const TABLE_NAME       = 'news';
-	const CONTROLLER       = '\Neonbug\News\Controllers\Controller';
-	const ADMIN_CONTROLLER = '\Neonbug\News\Controllers\AdminController';
+	const PACKAGE_NAME     = '{{ $lowercase_package_name }}';
+	const PREFIX           = '{{ $route_prefix }}';
+	const ROLE             = '{{ $table_name }}';
+	const TABLE_NAME       = '{{ $table_name }}';
+	const CONTROLLER       = '\Neonbug\{{ $package_name }}\Controllers\Controller';
+	const ADMIN_CONTROLLER = '\Neonbug\{{ $package_name }}\Controllers\AdminController';
 	
 	/**
 	 * Define your route model bindings, pattern filters, etc.
@@ -118,9 +118,9 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 		//===========
 		//== BINDS ==
 		//===========
-		if (!App::bound('\Neonbug\News\Repositories\NewsRepository'))
+		if (!App::bound('\Neonbug\{{ $package_name }}\Repositories\{{ $model_name }}Repository'))
 		{
-			App::singleton('\Neonbug\News\Repositories\NewsRepository', '\Neonbug\News\Repositories\NewsRepository');
+			App::singleton('\Neonbug\{{ $package_name }}\Repositories\{{ $model_name }}Repository', '\Neonbug\{{ $package_name }}\Repositories\{{ $model_name }}Repository');
 		}
 	}
 	
