@@ -59,6 +59,15 @@ class CreatePackage extends Command {
 		$model_name = studly_case($table_name);
 		
 		//TODO ask user if info is correct, and if we should continue
+		$this->info('About to create a package:');
+		$this->table([ 'Key', 'Value' ], [
+			[ 'Package name',            $name ], 
+			[ 'Table name',        $table_name ], 
+			[ 'Route prefix',    $route_prefix ], 
+			[ 'Config name',    $config_prefix ], 
+			[ 'Model name',        $model_name ]
+		]);
+		if (!$this->confirm('Is this information correct, do you wish to continue (y/n)? [y]', true)) return;
 		
 		mkdir($package_path, 0755, true);
 		
