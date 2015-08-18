@@ -45,6 +45,7 @@ class CreatePackage extends Command {
 	 */
 	public function fire()
 	{
+		//gather information
 		$name = studly_case($this->argument('name'));
 		
 		$package_path = $this->neonbug_packages_path . $name . '/';
@@ -58,7 +59,7 @@ class CreatePackage extends Command {
 		
 		$model_name = studly_case($table_name);
 		
-		//TODO ask user if info is correct, and if we should continue
+		//check with user if this is it
 		$this->info('About to create a package:');
 		$this->table([ 'Key', 'Value' ], [
 			[ 'Package name',            $name ], 
@@ -111,6 +112,7 @@ class CreatePackage extends Command {
 			file_put_contents($package_path . $template_destination['dir'] . $template_destination['file'], $contents);
 		}
 		
+		//inform user we're done
 		$this->info('Done!');
 		$this->info('You should now:');
 		$this->info('1) add table columns in file database/migrations/' . $migration_name . ', ');
