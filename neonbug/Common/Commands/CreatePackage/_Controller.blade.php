@@ -23,7 +23,7 @@ class Controller extends \App\Http\Controllers\Controller {
 			return $items;
 		};
 		
-		$items = (App::environment() != 'production' ? $get_items() : 
+		$items = (!App::environment('production') ? $get_items() : 
 			Cache::rememberForever(static::PACKAGE_NAME . '::items', $get_items));
 		
 		return App::make('\Neonbug\Common\Helpers\CommonHelper')
@@ -43,7 +43,7 @@ class Controller extends \App\Http\Controllers\Controller {
 			return $item;
 		};
 		
-		$item = (App::environment() != 'production' ? $get_item() : 
+		$item = (!App::environment('production') ? $get_item() : 
 			Cache::rememberForever(static::PACKAGE_NAME . '::item::' . $id, $get_item));
 		if ($item == null)
 		{
