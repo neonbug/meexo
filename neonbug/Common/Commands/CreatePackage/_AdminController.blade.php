@@ -3,12 +3,14 @@ namespace Neonbug\{{ $package_name }}\Controllers;
 use App;
 use Request;
 use Auth;
+use Cache;
 
 use \Neonbug\{{ $package_name }}\Models\{{ $model_name }} as Model;
 
 class AdminController extends \App\Http\Controllers\Controller {
 	
-	const PREFIX 		= '{{ $route_prefix }}';
+	const PACKAGE_NAME  = '{{ $lowercase_package_name }}';
+	const PREFIX        = '{{ $route_prefix }}';
 	const CONFIG_PREFIX = 'neonbug.{{ $config_prefix }}';
 	
 	private $admin_helper;
@@ -40,7 +42,7 @@ class AdminController extends \App\Http\Controllers\Controller {
 	
 	public function admin_add_post()
 	{
-		return $this->admin_helper->handleAdminAdd(
+		$retval = $this->admin_helper->handleAdminAdd(
 			Request::input('field'), //first level keys are language ids, second level are field names
 			'\Neonbug\{{ $package_name }}\Models\{{ $model_name }}', 
 			Auth::user()->id_user, 
@@ -48,6 +50,10 @@ class AdminController extends \App\Http\Controllers\Controller {
 			config(static::CONFIG_PREFIX . '.add.language_dependent_fields'), 
 			static::PREFIX
 		);
+		
+		Cache::forget(static::PACKAGE_NAME . '::items');
+		
+		return $retval;
 	}
 	
 	public function admin_edit($id)
@@ -67,7 +73,7 @@ class AdminController extends \App\Http\Controllers\Controller {
 	{
 		$item = Model::findOrFail($id);
 		
-		return $this->admin_helper->handleAdminEdit(
+		$retval = $this->admin_helper->handleAdminEdit(
 			Request::input('field'), //first level keys are language ids, second level are field names
 			'\Neonbug\{{ $package_name }}\Models\{{ $model_name }}', 
 			Auth::user()->id_user, 
@@ -76,6 +82,11 @@ class AdminController extends \App\Http\Controllers\Controller {
 			static::PREFIX, 
 			$item
 		);
+		
+		Cache::forget(static::PACKAGE_NAME . '::item::' . $item->{$item->getKeyName()});
+		Cache::forget(static::PACKAGE_NAME . '::items');
+		
+		return $retval;
 	}
 	
 	public function admin_delete_post()
@@ -83,7 +94,11 @@ class AdminController extends \App\Http\Controllers\Controller {
 		$id   = Request::input('id');
 		$item = Model::findOrFail($id);
 		
-		$this->admin_helper->deleteItem($id, '\Neonbug\{{ $package_name }}\Models\{{ $model_name }}', $item->{$item->getKeyName()});
+		$this->admin_helper->deleteItem($id, '\Neonbug\{{ $package_name }}\Models\{{ $model_name }}', 
+			$item->{$item->getKeyName()});
+			
+		Cache::forget(static::PACKAGE_NAME . '::item::' . $item->{$item->getKeyName()});
+		Cache::forget(static::PACKAGE_NAME . '::items');
 		
 		return [ 'success' => true ];
 	}

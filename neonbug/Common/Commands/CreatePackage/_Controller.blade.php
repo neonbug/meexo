@@ -13,11 +13,18 @@ class Controller extends \App\Http\Controllers\Controller {
 	
 	public function index()
 	{
-		$repo = App::make('\Neonbug\{{ $package_name }}\Repositories\{{ $model_name }}Repository');
-		$items = $repo->getLatest();
+		$get_items = function() {
+			$repo = App::make('\Neonbug\{{ $package_name }}\Repositories\{{ $model_name }}Repository');
+			$items = $repo->getLatest();
+			
+			$language = App::make('Language');
+			App::make('ResourceRepository')->inflateObjectsWithValues($items, $language->id_language);
+			
+			return $items;
+		};
 		
-		$language = App::make('Language');
-		App::make('ResourceRepository')->inflateObjectsWithValues($items, $language->id_language);
+		$items = (App::environment() != 'production' ? $get_items() : 
+			Cache::rememberForever(static::PACKAGE_NAME . '::items', $get_items));
 		
 		return App::make('\Neonbug\Common\Helpers\CommonHelper')
 			->loadView(static::PACKAGE_NAME, 'index', [ 'items' => $items ]);
@@ -25,10 +32,23 @@ class Controller extends \App\Http\Controllers\Controller {
 	
 	public function item($id)
 	{
-		$item = Model::findOrFail($id);
+		$get_item = function() use ($id) {
+			$item = Model::find($id);
+			if ($item != null)
+			{
+				$language = App::make('Language');
+				App::make('ResourceRepository')->inflateObjectWithValues($item, $language->id_language);
+			}
+			
+			return $item;
+		};
 		
-		$language = App::make('Language');
-		App::make('ResourceRepository')->inflateObjectWithValues($item, $language->id_language);
+		$item = (App::environment() != 'production' ? $get_item() : 
+			Cache::rememberForever(static::PACKAGE_NAME . '::item::' . $id, $get_item));
+		if ($item == null)
+		{
+			abort(404);
+		}
 		
 		return App::make('\Neonbug\Common\Helpers\CommonHelper')
 			->loadView(static::PACKAGE_NAME, 'item', [ 'item' => $item ]);
