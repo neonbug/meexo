@@ -50,9 +50,10 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 		$router->group([ 'middleware' => [ 'online' ], 'prefix' => $locale . '/' . static::PREFIX ], 
 			function($router) use ($locale, $resource_repo, $language)
 		{
-			$router->get('/',         [ 'as' => static::PREFIX . '::index', 'uses' => static::CONTROLLER . '@index' ]);
-			$router->get('index',     [                                     'uses' => static::CONTROLLER . '@index' ]);
-			$router->get('item/{id}', [ 'as' => static::PREFIX . '::item',  'uses' => static::CONTROLLER . '@item' ]);
+			$router->get('/',             [ 'as' => static::PREFIX . '::index',   'uses' => static::CONTROLLER . '@index' ]);
+			$router->get('index',         [                                       'uses' => static::CONTROLLER . '@index' ]);
+			$router->get('item/{id}',     [ 'as' => static::PREFIX . '::item',    'uses' => static::CONTROLLER . '@item' ]);
+			$router->get('preview/{key}', [ 'as' => static::PREFIX . '::preview', 'uses' => static::CONTROLLER . '@preview' ]);
 			
 			if ($language != null)
 			{

@@ -17,7 +17,7 @@ class AdminController extends \App\Http\Controllers\Controller {
 	
 	public function __construct()
 	{
-		$this->admin_helper  = App::make('\Neonbug\Common\Helpers\AdminHelper');
+		$this->admin_helper = App::make('\Neonbug\Common\Helpers\AdminHelper');
 	}
 	
 	public function admin_list()
@@ -42,6 +42,11 @@ class AdminController extends \App\Http\Controllers\Controller {
 	
 	public function admin_add_post()
 	{
+		if (Request::input('preview') !== null)
+		{
+			return $this->admin_add_preview_post();
+		}
+		
 		$retval = $this->admin_helper->handleAdminAdd(
 			Request::input('field'), //first level keys are language ids, second level are field names
 			'\Neonbug\News\Models\News', 
@@ -52,6 +57,19 @@ class AdminController extends \App\Http\Controllers\Controller {
 		);
 		
 		Cache::forget(static::PACKAGE_NAME . '::items');
+		
+		return $retval;
+	}
+	
+	private function admin_add_preview_post()
+	{
+		$retval = $this->admin_helper->handleAdminPreview(
+			Request::input('field'), //first level keys are language ids, second level are field names
+			Auth::user()->id_user, 
+			config(static::CONFIG_PREFIX . '.add.language_independent_fields'), 
+			config(static::CONFIG_PREFIX . '.add.language_dependent_fields'), 
+			static::PREFIX
+		);
 		
 		return $retval;
 	}
@@ -71,6 +89,11 @@ class AdminController extends \App\Http\Controllers\Controller {
 	
 	public function admin_edit_post($id)
 	{
+		if (Request::input('preview') !== null)
+		{
+			return $this->admin_edit_preview_post($id);
+		}
+		
 		$item = Model::findOrFail($id);
 		
 		$retval = $this->admin_helper->handleAdminEdit(
@@ -85,6 +108,22 @@ class AdminController extends \App\Http\Controllers\Controller {
 		
 		Cache::forget(static::PACKAGE_NAME . '::item::' . $item->{$item->getKeyName()});
 		Cache::forget(static::PACKAGE_NAME . '::items');
+		
+		return $retval;
+	}
+	
+	private function admin_edit_preview_post($id)
+	{
+		$item = Model::findOrFail($id);
+		
+		$retval = $this->admin_helper->handleAdminPreview(
+			Request::input('field'), //first level keys are language ids, second level are field names
+			Auth::user()->id_user, 
+			config(static::CONFIG_PREFIX . '.add.language_independent_fields'), 
+			config(static::CONFIG_PREFIX . '.add.language_dependent_fields'), 
+			static::PREFIX, 
+			$id
+		);
 		
 		return $retval;
 	}

@@ -3,7 +3,7 @@
 @section('head')
 	<script type="text/javascript">
 	$(document).ready(function() {
-		$('.form').on('submit', function() {
+		$('.save-button').click(function() {
 			$('.save-button').addClass('loading').attr('disabled', 'disabled');
 		});
 		
@@ -74,5 +74,6 @@
 		<div class="ui hidden divider"></div>
 		
 		<button type="submit" class="save-button ui button orange">Save</button>
+		<button type="submit" formaction="?preview" formtarget="_blank" class="preview-button ui button">Preview</button>
 	</form>
 @stop
