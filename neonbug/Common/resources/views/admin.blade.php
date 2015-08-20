@@ -139,8 +139,9 @@
 				}
 				.main-menu .ui.menu .item.level-two
 				{
+					color: #999999;
 					text-transform: capitalize;
-					padding: 1.5em 4.5em;
+					padding: 1.0em 4.5em;
 				}
 				.main-menu .ui.menu .item.header
 				{
