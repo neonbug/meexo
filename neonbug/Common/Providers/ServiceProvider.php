@@ -123,6 +123,10 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 		//===========
 		//== BINDS ==
 		//===========
+		App::singleton('session', function($app) { return new \Neonbug\Common\Session\SessionManager($app);	});
+		App::singleton('Illuminate\Contracts\Debug\ExceptionHandler', '\Neonbug\Common\Exceptions\Handler');
+		App::singleton('Illuminate\Session\Middleware\StartSession', '\Neonbug\Common\Session\Middleware\StartSession');
+		
 		if (!App::bound('ResourceRepository'))
 		{
 			App::singleton('ResourceRepository', '\Neonbug\Common\Repositories\ResourceRepository');

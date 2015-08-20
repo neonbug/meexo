@@ -11,8 +11,6 @@
 |
 */
 
-App::singleton('Illuminate\Contracts\Debug\ExceptionHandler', '\Neonbug\Common\Exceptions\Handler');
-
 /* get locale from URL */
 $locale = Request::segment(1);
 if ($locale == null || !in_array($locale, Config::get('app.available_locales')))
