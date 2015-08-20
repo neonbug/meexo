@@ -133,8 +133,7 @@ class AdminController extends \App\Http\Controllers\Controller {
 		$id   = Request::input('id');
 		$item = Model::findOrFail($id);
 		
-		$this->admin_helper->deleteItem($id, '\Neonbug\{{ $package_name }}\Models\{{ $model_name }}', 
-			$item->{$item->getKeyName()});
+		$this->admin_helper->deleteItem($id, '\Neonbug\{{ $package_name }}\Models\{{ $model_name }}', $item->getKeyName());
 			
 		Cache::forget(static::PACKAGE_NAME . '::item::' . $item->{$item->getKeyName()});
 		Cache::forget(static::PACKAGE_NAME . '::items');
