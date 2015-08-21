@@ -33,7 +33,7 @@
 @stop
 
 @section('content')
-	<table class="ui striped table">
+	<table class="ui striped padded table">
 		<thead>
 			<tr>
 				@if ($edit_route != null)

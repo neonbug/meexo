@@ -175,6 +175,12 @@
 			{
 				border-bottom: 0px;
 			}
+			
+			.main-content .main-inner-content
+			{
+				padding: 48px;
+				padding-top: 30px;
+			}
 	.inverted a
 	{
 		color: #ffffff;
@@ -229,7 +235,7 @@
 				</div>
 			</div>
 			
-			<div class="ui basic segment">
+			<div class="main-inner-content ui basic segment">
 				@yield('content')
 			</div>
 		</div>
