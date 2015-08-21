@@ -7,7 +7,15 @@
 
     # Redirect Trailing Slashes...
     RewriteRule ^(.*)/$ /$1 [L,R=301]
-
+    
+    <FilesMatch "\.(jpg|jpeg|png|gif|swf|js|css)$">
+        Header set Cache-Control "max-age=604800, public"
+    </FilesMatch>
+        
+    # Redirect cached URLs (assets)
+    RewriteCond %{REQUEST_URI} (.*)/cached/[0-9]+/(.*)
+    RewriteRule ^ %1/%2 [L]
+    
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f

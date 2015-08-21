@@ -123,24 +123,59 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 		//===========
 		//== BINDS ==
 		//===========
-		App::singleton('session', function($app) { return new \Neonbug\Common\Session\SessionManager($app);	});
-		App::singleton('Illuminate\Contracts\Debug\ExceptionHandler', '\Neonbug\Common\Exceptions\Handler');
-		App::singleton('Illuminate\Session\Middleware\StartSession', '\Neonbug\Common\Session\Middleware\StartSession');
+		$this->app->singleton('session', function($app) { return new \Neonbug\Common\Session\SessionManager($app); });
+		$this->app->singleton('Illuminate\Contracts\Debug\ExceptionHandler', '\Neonbug\Common\Exceptions\Handler');
+		$this->app->singleton('Illuminate\Session\Middleware\StartSession', '\Neonbug\Common\Session\Middleware\StartSession');
 		
-		if (!App::bound('ResourceRepository'))
+		$this->app->bindShared('url', function($app)
 		{
-			App::singleton('ResourceRepository', '\Neonbug\Common\Repositories\ResourceRepository');
+			$routes = $app['router']->getRoutes();
+
+			// The URL generator needs the route collection that exists on the router.
+			// Keep in mind this is an object, so we're passing by references here
+			// and all the registered routes will be available to the generator.
+			$app->instance('routes', $routes);
+
+			$url = new \Neonbug\Common\Routing\UrlGenerator(
+				$routes, $app->rebinding(
+					'request', function($app, $request) {
+						$app['url']->setRequest($request);
+					}
+				)
+			);
+
+			$url->setSessionResolver(function()
+			{
+				return $this->app['session'];
+			});
+
+			// If the route collection is "rebound", for example, when the routes stay
+			// cached for the application, we will need to rebind the routes on the
+			// URL generator instance so it has the latest version of the routes.
+			$app->rebinding('routes', function($app, $routes)
+			{
+				$app['url']->setRoutes($routes);
+			});
+
+			return $url;
+		});
+		
+		if (!$this->app->bound('ResourceRepository'))
+		{
+			$this->app->singleton('ResourceRepository', '\Neonbug\Common\Repositories\ResourceRepository');
 		}
 		
-		if (!App::bound('\Neonbug\Common\Helpers\AdminHelper'))
+		if (!$this->app->bound('\Neonbug\Common\Helpers\AdminHelper'))
 		{
-			App::singleton('\Neonbug\Common\Helpers\AdminHelper', '\Neonbug\Common\Helpers\AdminHelper');
+			$this->app->singleton('\Neonbug\Common\Helpers\AdminHelper', '\Neonbug\Common\Helpers\AdminHelper');
 		}
 		
-		if (!App::bound('\Neonbug\Common\Helpers\CommonHelper'))
+		if (!$this->app->bound('\Neonbug\Common\Helpers\CommonHelper'))
 		{
-			App::singleton('\Neonbug\Common\Helpers\CommonHelper', '\Neonbug\Common\Helpers\CommonHelper');
+			$this->app->singleton('\Neonbug\Common\Helpers\CommonHelper', '\Neonbug\Common\Helpers\CommonHelper');
 		}
+		
+		include __DIR__ . '/../helpers.php';
 	}
 
 }

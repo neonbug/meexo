@@ -6,10 +6,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Admin login</title>
 	
-	<script src="{{ asset('vendor/common/admin_assets/jquery-2.1.4.min.js') }}"></script>
+	<script src="{{ cached_asset('vendor/common/admin_assets/jquery-2.1.4.min.js') }}"></script>
 	
-	<script src="{{ asset('vendor/common/admin_assets/semanticui/semantic.min.js') }}"></script>
-	<link rel="stylesheet" type="text/css" href="{{ asset('vendor/common/admin_assets/semanticui/semantic.min.css') }}" />
+	<script src="{{ cached_asset('vendor/common/admin_assets/semanticui/semantic.min.js') }}"></script>
+	<link rel="stylesheet" type="text/css" href="{{ cached_asset('vendor/common/admin_assets/semanticui/semantic.min.css') }}" />
 	
 	<style type="text/css">
 	html { height: 100%; }
