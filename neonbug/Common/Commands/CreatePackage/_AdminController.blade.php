@@ -5,8 +5,6 @@ use Request;
 use Auth;
 use Cache;
 
-use \Neonbug\{{ $package_name }}\Models\{{ $model_name }} as Model;
-
 class AdminController extends \App\Http\Controllers\Controller {
 	
 	const PACKAGE_NAME  = '{{ $lowercase_package_name }}';
@@ -14,10 +12,12 @@ class AdminController extends \App\Http\Controllers\Controller {
 	const CONFIG_PREFIX = 'neonbug.{{ $config_prefix }}';
 	
 	private $admin_helper;
+	private $model;
 	
 	public function __construct()
 	{
 		$this->admin_helper  = App::make('\Neonbug\Common\Helpers\AdminHelper');
+		$this->model = config(static::CONFIG_PREFIX . '.model');
 	}
 	
 	public function admin_list()
@@ -49,7 +49,7 @@ class AdminController extends \App\Http\Controllers\Controller {
 		
 		$retval = $this->admin_helper->handleAdminAdd(
 			Request::input('field'), //first level keys are language ids, second level are field names
-			'\Neonbug\{{ $package_name }}\Models\{{ $model_name }}', 
+			$model, 
 			Auth::user()->id_user, 
 			config(static::CONFIG_PREFIX . '.add.language_independent_fields'), 
 			config(static::CONFIG_PREFIX . '.add.language_dependent_fields'), 
@@ -76,7 +76,8 @@ class AdminController extends \App\Http\Controllers\Controller {
 	
 	public function admin_edit($id)
 	{
-		$item = Model::findOrFail($id);
+		$model = $this->model;
+		$item = $model::findOrFail($id);
 		
 		return $this->admin_helper->adminEdit(
 			[ '{{ $package_name }}', 'Edit' ], 
@@ -94,11 +95,12 @@ class AdminController extends \App\Http\Controllers\Controller {
 			return $this->admin_edit_preview_post($id);
 		}
 		
-		$item = Model::findOrFail($id);
+		$model = $this->model;
+		$item = $model::findOrFail($id);
 		
 		$retval = $this->admin_helper->handleAdminEdit(
 			Request::input('field'), //first level keys are language ids, second level are field names
-			'\Neonbug\{{ $package_name }}\Models\{{ $model_name }}', 
+			$model, 
 			Auth::user()->id_user, 
 			config(static::CONFIG_PREFIX . '.edit.language_independent_fields'), 
 			config(static::CONFIG_PREFIX . '.edit.language_dependent_fields'), 
@@ -114,7 +116,8 @@ class AdminController extends \App\Http\Controllers\Controller {
 	
 	private function admin_edit_preview_post($id)
 	{
-		$item = Model::findOrFail($id);
+		$model = $this->model;
+		$item = $model::findOrFail($id);
 		
 		$retval = $this->admin_helper->handleAdminPreview(
 			Request::input('field'), //first level keys are language ids, second level are field names
@@ -130,10 +133,12 @@ class AdminController extends \App\Http\Controllers\Controller {
 	
 	public function admin_delete_post()
 	{
-		$id   = Request::input('id');
-		$item = Model::findOrFail($id);
+		$model = $this->model;
 		
-		$this->admin_helper->deleteItem($id, '\Neonbug\{{ $package_name }}\Models\{{ $model_name }}', $item->getKeyName());
+		$id   = Request::input('id');
+		$item = $model::findOrFail($id);
+		
+		$this->admin_helper->deleteItem($id, $model, $item->getKeyName());
 			
 		Cache::forget(static::PACKAGE_NAME . '::item::' . $item->{$item->getKeyName()});
 		Cache::forget(static::PACKAGE_NAME . '::items');

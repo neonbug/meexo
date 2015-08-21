@@ -2,11 +2,20 @@
 
 class NewsRepository {
 	
+	const CONFIG_PREFIX = 'neonbug.news';
+	
 	protected $latest_items_limit = 20;
+	protected $model;
+	
+	public function __construct()
+	{
+		$this->model = config(static::CONFIG_PREFIX . '.model');
+	}
 	
 	public function getLatest()
 	{
-		return \Neonbug\News\Models\News::where('published', true)
+		$model = $this->model;
+		return $model::where('published', true)
 			->where('published_from_date', '<=', date('Y-m-d'))
 			->orderBy('published_from_date', 'DESC')
 			->limit($this->latest_items_limit)
@@ -15,7 +24,8 @@ class NewsRepository {
 	
 	public function getForAdminList()
 	{
-		return \Neonbug\News\Models\News::all();
+		$model = $this->model;
+		return $model::all();
 	}
 	
 }

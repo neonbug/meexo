@@ -2,6 +2,8 @@
 
 return [
 	
+	'model' => '\Neonbug\News\Models\News', 
+	
 	'list' => [
 		'fields' => [
 			'id_news' => [

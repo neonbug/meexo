@@ -1,6 +1,8 @@
 
 return [
 	
+	'model' => '\Neonbug\{{ $package_name }}\Models\{{ $model_name }}', 
+	
 	'list' => [
 		'fields' => [
 			'{{ 'id_' . str_replace('\\', '', snake_case($model_name)) }}' => [

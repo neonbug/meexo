@@ -1,15 +1,18 @@
 namespace Neonbug\{{ $package_name }}\Controllers;
 
 use App;
-use \Neonbug\{{ $package_name }}\Models\{{ $model_name }} as Model;
 
 class Controller extends \App\Http\Controllers\Controller {
 	
-	const PACKAGE_NAME = '{{ $lowercase_package_name }}';
-	const PREFIX       = '{{ $route_prefix }}';
+	const PACKAGE_NAME  = '{{ $lowercase_package_name }}';
+	const PREFIX        = '{{ $route_prefix }}';
+	const CONFIG_PREFIX = 'neonbug.{{ $config_prefix }}';
+	
+	private $model;
 	
 	public function __construct()
 	{
+		$this->model = config(static::CONFIG_PREFIX . '.model');
 	}
 	
 	public function index()
@@ -34,7 +37,8 @@ class Controller extends \App\Http\Controllers\Controller {
 	public function item($id)
 	{
 		$get_item = function() use ($id) {
-			$item = Model::find($id);
+			$model = $this->model;
+			$item = $model::find($id);
 			if ($item != null)
 			{
 				$language = App::make('Language');
@@ -66,7 +70,8 @@ class Controller extends \App\Http\Controllers\Controller {
 		$allowed_lang_independent_fields = $item_data['allowed_lang_independent_fields'];
 		$allowed_lang_dependent_fields   = $item_data['allowed_lang_dependent_fields'];
 		
-		$item = ($id_item == -1 ? new Model() : Model::findOrFail($id_item));
+		$model = $this->model;
+		$item = ($id_item == -1 ? new $model() : $model::findOrFail($id_item));
 		
 		$admin_helper = App::make('\Neonbug\Common\Helpers\AdminHelper');
 		$values = $admin_helper->fillItem($item, $fields, $allowed_lang_independent_fields, 
