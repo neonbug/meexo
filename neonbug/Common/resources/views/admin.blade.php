@@ -198,8 +198,8 @@
 			
 			.main-content .main-inner-content
 			{
-				padding: 48px;
-				padding-top: 30px;
+				padding: 24px;
+				padding-top: 10px;
 			}
 	.inverted a
 	{
