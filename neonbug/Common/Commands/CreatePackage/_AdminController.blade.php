@@ -1,149 +1,24 @@
 namespace Neonbug\{{ $package_name }}\Controllers;
 
-use App;
-use Request;
-use Auth;
-use Cache;
-
-class AdminController extends \App\Http\Controllers\Controller {
+class AdminController extends \Neonbug\Common\Http\Controllers\BaseAdminController {
 	
-	const PACKAGE_NAME  = '{{ $lowercase_package_name }}';
-	const PREFIX        = '{{ $route_prefix }}';
 	const CONFIG_PREFIX = 'neonbug.{{ $config_prefix }}';
-	
-	private $admin_helper;
 	private $model;
 	
 	public function __construct()
 	{
-		$this->admin_helper  = App::make('\Neonbug\Common\Helpers\AdminHelper');
+		parent::__construct();
+		
 		$this->model = config(static::CONFIG_PREFIX . '.model');
 	}
 	
-	public function admin_list()
-	{
-		return $this->admin_helper->adminList(
-			[ '{{ $package_name }}', 'List' ], 
-			config(static::CONFIG_PREFIX . '.list.fields'), 
-			static::PREFIX, 
-			'\Neonbug\{{ $package_name }}\Repositories\{{ $model_name }}Repository'
-		);
-	}
-	
-	public function admin_add()
-	{
-		return $this->admin_helper->adminAdd(
-			[ '{{ $package_name }}', 'Add' ], 
-			config(static::CONFIG_PREFIX . '.add.language_dependent_fields'), 
-			config(static::CONFIG_PREFIX . '.add.language_independent_fields'), 
-			session('messages', [])
-		);
-	}
-	
-	public function admin_add_post()
-	{
-		if (Request::input('preview') !== null)
-		{
-			return $this->admin_add_preview_post();
-		}
-		
-		$retval = $this->admin_helper->handleAdminAdd(
-			Request::input('field'), //first level keys are language ids, second level are field names
-			$model, 
-			Auth::user()->id_user, 
-			config(static::CONFIG_PREFIX . '.add.language_independent_fields'), 
-			config(static::CONFIG_PREFIX . '.add.language_dependent_fields'), 
-			static::PREFIX
-		);
-		
-		Cache::forget(static::PACKAGE_NAME . '::items');
-		
-		return $retval;
-	}
-	
-	private function admin_add_preview_post()
-	{
-		$retval = $this->admin_helper->handleAdminPreview(
-			Request::input('field'), //first level keys are language ids, second level are field names
-			Auth::user()->id_user, 
-			config(static::CONFIG_PREFIX . '.add.language_independent_fields'), 
-			config(static::CONFIG_PREFIX . '.add.language_dependent_fields'), 
-			static::PREFIX
-		);
-		
-		return $retval;
-	}
-	
-	public function admin_edit($id)
-	{
-		$model = $this->model;
-		$item = $model::findOrFail($id);
-		
-		return $this->admin_helper->adminEdit(
-			[ '{{ $package_name }}', 'Edit' ], 
-			config(static::CONFIG_PREFIX . '.edit.language_dependent_fields'), 
-			config(static::CONFIG_PREFIX . '.edit.language_independent_fields'), 
-			session('messages', []), 
-			$item
-		);
-	}
-	
-	public function admin_edit_post($id)
-	{
-		if (Request::input('preview') !== null)
-		{
-			return $this->admin_edit_preview_post($id);
-		}
-		
-		$model = $this->model;
-		$item = $model::findOrFail($id);
-		
-		$retval = $this->admin_helper->handleAdminEdit(
-			Request::input('field'), //first level keys are language ids, second level are field names
-			$model, 
-			Auth::user()->id_user, 
-			config(static::CONFIG_PREFIX . '.edit.language_independent_fields'), 
-			config(static::CONFIG_PREFIX . '.edit.language_dependent_fields'), 
-			static::PREFIX, 
-			$item
-		);
-		
-		Cache::forget(static::PACKAGE_NAME . '::item::' . $item->{$item->getKeyName()});
-		Cache::forget(static::PACKAGE_NAME . '::items');
-		
-		return $retval;
-	}
-	
-	private function admin_edit_preview_post($id)
-	{
-		$model = $this->model;
-		$item = $model::findOrFail($id);
-		
-		$retval = $this->admin_helper->handleAdminPreview(
-			Request::input('field'), //first level keys are language ids, second level are field names
-			Auth::user()->id_user, 
-			config(static::CONFIG_PREFIX . '.add.language_independent_fields'), 
-			config(static::CONFIG_PREFIX . '.add.language_dependent_fields'), 
-			static::PREFIX, 
-			$id
-		);
-		
-		return $retval;
-	}
-	
-	public function admin_delete_post()
-	{
-		$model = $this->model;
-		
-		$id   = Request::input('id');
-		$item = $model::findOrFail($id);
-		
-		$this->admin_helper->deleteItem($id, $model, $item->getKeyName());
-			
-		Cache::forget(static::PACKAGE_NAME . '::item::' . $item->{$item->getKeyName()});
-		Cache::forget(static::PACKAGE_NAME . '::items');
-		
-		return [ 'success' => true ];
-	}
+	protected function getModel()        { return $this->model; }
+	protected function getRepository()   { return '\Neonbug\{{ $package_name }}\Repositories\{{ $model_name }}Repository'; }
+	protected function getConfigPrefix() { return self::CONFIG_PREFIX; }
+	protected function getRoutePrefix()  { return '{{ $route_prefix }}'; }
+	protected function getPackageName()  { return '{{ $lowercase_package_name }}'; }
+	protected function getListTitle()    { return [ '{{ $package_name }}', 'List' ]; }
+	protected function getAddTitle()     { return [ '{{ $package_name }}', 'Add' ]; }
+	protected function getEditTitle()    { return [ '{{ $package_name }}', 'Edit' ]; }
 	
 }

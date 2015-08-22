@@ -75,30 +75,30 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 		{
 			$router->get('list', [
 				'as'   => static::PREFIX . '::admin::list', 
-				'uses' => static::ADMIN_CONTROLLER . '@admin_list'
+				'uses' => static::ADMIN_CONTROLLER . '@adminList'
 			]);
 			
 			$router->get('add', [
 				'as'   => static::PREFIX . '::admin::add', 
-				'uses' => static::ADMIN_CONTROLLER . '@admin_add'
+				'uses' => static::ADMIN_CONTROLLER . '@adminAdd'
 			]);
 			$router->post('add', [
 				'as'   => static::PREFIX . '::admin::add-save', 
-				'uses' => static::ADMIN_CONTROLLER . '@admin_add_post'
+				'uses' => static::ADMIN_CONTROLLER . '@adminAddPost'
 			]);
 			
 			$router->get('edit/{id}', [
 				'as'   => static::PREFIX . '::admin::edit', 
-				'uses' => static::ADMIN_CONTROLLER . '@admin_edit'
+				'uses' => static::ADMIN_CONTROLLER . '@adminEdit'
 			]);
 			$router->post('edit/{id}', [
 				'as'   => static::PREFIX . '::admin::edit-save', 
-				'uses' => static::ADMIN_CONTROLLER . '@admin_edit_post'
+				'uses' => static::ADMIN_CONTROLLER . '@adminEditPost'
 			]);
 			
 			$router->post('delete', [
 				'as'   => static::PREFIX . '::admin::delete', 
-				'uses' => static::ADMIN_CONTROLLER . '@admin_delete_post'
+				'uses' => static::ADMIN_CONTROLLER . '@adminDeletePost'
 			]);
 		});
 
@@ -123,18 +123,6 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 		{
 			App::singleton('\Neonbug\News\Repositories\NewsRepository', '\Neonbug\News\Repositories\NewsRepository');
 		}
-	}
-	
-	/**
-	 * Define the routes for the application.
-	 *
-	 * @param  \Illuminate\Routing\Router  $router
-	 * @return void
-	 */
-	public function map(Router $router)
-	{
-		dd('map');
-		
 	}
 
 }
