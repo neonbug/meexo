@@ -2,29 +2,15 @@
 
 class FormatterHelper {
 	
-	private $moment_date_format_tokens_to_php = [
-		'MMMM'  => 'F',    'MMM'   => 'M',    'MM'    => 'm',     'Mo'    => '', 
-		'M'     => 'n',    'Q'     => '',     'DDDD'  => '',      'DDDo'  => '', 
-		'DDD'   => 'z',    'DD'    => 'd',    'Do'    => 'jS',    'D'     => 'j', 
-		'dddd'  => 'l',    'ddd'   => 'D',    'dd'    => '',      'do'    => '', 
-		'd'     => 'w',    'e'     => 'w',    'E'     => 'N',     'ww'    => '', 
-		'wo'    => '', 	   'w'     => 'W',    'WW'    => '',      'Wo'    => '', 
-		'W'     => 'W',    'YYYY'  => 'Y',    'YY'    => 'y',     'gggg'  => 'Y', 
-		'gg'    => 'y',    'GGGG'  => 'Y',    'GG'    => 'y',     'A'     => 'A', 
-		'a'     => 'a',    'HH'    => 'H',    'H'     => 'G',     'hh'    => 'h', 
-		'h'     => 'g',    'mm'    => 'i',    'm'     => 'i',     'ss'    => 's', 
-		's'     => 's',    'SSSSS' => 'u',    'SSSS'  => 'u',     'SSS'   => 'u', 
-		'SS'    => 'u',    'S'     => 'u',    'zz'    => 'e',     'z'     => 'e', 
-		'ZZ'    => 'O',    'Z'     => 'P',    'X'     => 'U',     'x'     => 'U000', 
-	];
-	
+	private $moment_format_transformer;
 	private $moment_locales;
 	private $current_locale;
 	
-	public function __construct($locale)
+	public function __construct($locale, $momentFormatTransformer)
 	{
 		$this->moment_locales = include(__DIR__ . '/locale/locale.php');
 		$this->current_locale = $this->findLocale($locale);
+		$this->moment_format_transformer = $momentFormatTransformer;
 	}
 	
 	protected function findLocale($locale)
@@ -44,21 +30,11 @@ class FormatterHelper {
 	}
 	public function getPhpShortDatePattern($locale = null)
 	{
-		return $this->transformToPhpPattern($this->getShortDatePattern($locale));
+		return $this->moment_format_transformer->transformToPhp($this->getShortDatePattern($locale));
 	}
 	public function formatShortDate($timestamp, $locale = null)
 	{
 		return date($this->getPhpShortDatePattern($locale), $timestamp);
-		//return date('d.m.Y', $timestamp);
-	}
-	
-	protected function transformToPhpPattern($momentPattern)
-	{
-		return str_replace(
-			array_keys($this->moment_date_format_tokens_to_php), 
-			array_values($this->moment_date_format_tokens_to_php), 
-			$momentPattern
-		);
 	}
 	
 	public function parseLocalesFromMomentJsLocaleDir($path)
