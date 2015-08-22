@@ -37,7 +37,8 @@ return [
 			[
 				'name' => 'slug', 
 				'type' => 'slug', 
-				'value' => ''
+				'value' => '', 
+				'generate_from' => 'title'
 			], 
 			[
 				'name' => 'excerpt', 
@@ -79,7 +80,8 @@ return [
 			[
 				'name' => 'slug', 
 				'type' => 'slug', 
-				'value' => ''
+				'value' => '', 
+				'generate_from' => 'title'
 			], 
 			[
 				'name' => 'excerpt', 

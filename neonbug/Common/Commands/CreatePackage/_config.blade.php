@@ -30,7 +30,8 @@ return [
 			[
 				'name' => 'slug', 
 				'type' => 'slug', 
-				'value' => ''
+				'value' => '', 
+				'generate_from' => 'title'
 			]
 		], 
 		'language_independent_fields' => [
@@ -47,7 +48,8 @@ return [
 			[
 				'name' => 'slug', 
 				'type' => 'slug', 
-				'value' => ''
+				'value' => '', 
+				'generate_from' => 'title'
 			]
 		], 
 		'language_independent_fields' => [
