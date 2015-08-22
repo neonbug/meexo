@@ -20,6 +20,11 @@
 	<script src="{{ cached_asset('vendor/common/admin_assets/semanticui/semantic.min.js') }}"></script>
 	<link rel="stylesheet" type="text/css" href="{{ cached_asset('vendor/common/admin_assets/semanticui/semantic.min.css') }}" />
 	
+	<script src="{{ cached_asset('vendor/common/admin_assets/moment-with-locales.min.js') }}"></script>
+	
+	<script src="{{ cached_asset('vendor/common/admin_assets/pikaday/pikaday.js') }}"></script>
+	<link rel="stylesheet" type="text/css" href="{{ cached_asset('vendor/common/admin_assets/pikaday/pikaday.css') }}" />
+	
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/speakingurl/4.0.0/speakingurl.min.js"></script>
 	
 	<script type="text/javascript">
@@ -33,6 +38,7 @@
 			admin.initTabs();
 			admin.initSlugs();
 			admin.initCloseWarning();
+			admin.initDatePicker();
 		}, 
 		initCheckboxes: function() {
 			$('.ui.checkbox').checkbox({
@@ -83,6 +89,20 @@
 			
 			$('.add input, .add textarea').change(function() { admin.setContentChanged(true); });
 			//TODO maybe save all input values here, for diffing above?
+		}, 
+		initDatePicker: function() {
+			moment.locale(window.navigator.language);
+			
+			$('[data-type="date"]').each(function(index, item) {
+				var picker = new Pikaday({
+					field: item,
+					firstDay: 1,
+					format: '{{ $formatter->getShortDatePattern() }}', 
+					onSelect: function(date) {
+						$('[name="' + item.dataset.dateRel + '"]').val(moment(date).format('YYYY-MM-DD'));
+					}
+				});
+			});
 		}
 	};
 	

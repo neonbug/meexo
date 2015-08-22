@@ -77,6 +77,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 			$view->menu_items = array_values($menu_items);
 			$view->withEncryptedCsrfToken(Crypt::encrypt(csrf_token()));
 		});
+		
+		view()->share('formatter', App::make('\Neonbug\Common\Helpers\FormatterHelper'));
 
 		//admin
 		$router->get('admin', function() { return redirect(route('admin-home')); });
@@ -173,6 +175,13 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 		if (!$this->app->bound('\Neonbug\Common\Helpers\CommonHelper'))
 		{
 			$this->app->singleton('\Neonbug\Common\Helpers\CommonHelper', '\Neonbug\Common\Helpers\CommonHelper');
+		}
+		
+		if (!$this->app->bound('\Neonbug\Common\Helpers\FormatterHelper'))
+		{
+			$this->app->singleton('\Neonbug\Common\Helpers\FormatterHelper', function() {
+				return new \Neonbug\Common\Helpers\FormatterHelper(\Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']));
+			});
 		}
 		
 		include __DIR__ . '/../helpers.php';
