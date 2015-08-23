@@ -18,9 +18,13 @@
 	<script src="{{ cached_asset('vendor/common/admin_assets/jquery-2.1.4.min.js') }}"></script>
 	
 	<script src="{{ cached_asset('vendor/common/admin_assets/semanticui/semantic.min.js') }}"></script>
-	<link rel="stylesheet" type="text/css" href="{{ cached_asset('vendor/common/admin_assets/semanticui/semantic.min.css') }}" />
+	<link rel="stylesheet" type="text/css" 
+		href="{{ cached_asset('vendor/common/admin_assets/semanticui/semantic.min.css') }}" />
 	
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/speakingurl/4.0.0/speakingurl.min.js"></script>
+	
+	<script src="{{ cached_asset('vendor/common/admin_assets/ckeditor/ckeditor.js') }}"></script>
+	<script src="{{ cached_asset('vendor/common/admin_assets/ckeditor/adapters/jquery.js') }}"></script>
 	
 	<script type="text/javascript">
 	var admin = {
@@ -33,6 +37,7 @@
 			admin.initTabs();
 			admin.initSlugs();
 			admin.initCloseWarning();
+			admin.initRichEditors();
 		}, 
 		initCheckboxes: function() {
 			$('.ui.checkbox').checkbox({
@@ -83,6 +88,12 @@
 			
 			$('.add input, .add textarea').change(function() { admin.setContentChanged(true); });
 			//TODO maybe save all input values here, for diffing above?
+		}, 
+		initRichEditors: function() {
+			$('textarea[data-type="rich_text"]').ckeditor({
+				entities: false, 
+				baseHref: '{{ url() }}'
+			});
 		}
 	};
 	
