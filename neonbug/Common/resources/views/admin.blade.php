@@ -129,6 +129,13 @@
 			background-color: #1b1c1d;
 			min-height: 100%;
 		}
+			/* Smartphones (portrait and landscape) ----------- */
+			@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+				.main-menu
+				{
+					display: none;
+				}
+			}
 			.main-menu > .header
 			{
 				color: #ffffff;
