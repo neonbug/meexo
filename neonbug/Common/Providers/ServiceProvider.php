@@ -76,6 +76,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 			
 			$view->menu_items = array_values($menu_items);
 			$view->withEncryptedCsrfToken(Crypt::encrypt(csrf_token()));
+			$view->withUser(Auth::user());
 		});
 
 		//admin
