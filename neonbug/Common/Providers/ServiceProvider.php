@@ -20,6 +20,20 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 	public function boot(Router $router)
 	{
 		//============
+		//== ASSETS ==
+		//============
+		$this->loadViewsFrom(__DIR__.'/../resources/views', static::PACKAGE_NAME);
+		$this->loadTranslationsFrom('/', 'common');
+		
+		$this->publishes([
+			__DIR__.'/../database/migrations/' => database_path('/migrations')
+		], 'migrations');
+		
+		$this->publishes([
+			__DIR__.'/../assets/' => public_path('vendor/common'),
+		], 'public');
+		
+		//============
 		//== ROUTES ==
 		//============
 		$language = App::make('Language');
@@ -97,18 +111,6 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 					'uses' => '\Neonbug\Common\Http\Controllers\AdminController@index']);
 			});
 		});
-		
-		//resources
-		$this->loadViewsFrom(__DIR__.'/../resources/views', static::PACKAGE_NAME);
-		$this->loadTranslationsFrom('/', 'common');
-		
-		$this->publishes([
-			__DIR__.'/../database/migrations/' => database_path('/migrations')
-		], 'migrations');
-		
-		$this->publishes([
-			__DIR__.'/../assets/' => public_path('vendor/common'),
-		], 'public');
 	}
 
 	/**

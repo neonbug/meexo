@@ -49,7 +49,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 		$language 		= App::make('Language');
 		
 		//frontend
-		$router->group([ 'middleware' => [ 'online' ], 'prefix' => $locale . '/' . static::PREFIX ], 
+		$router->group([ 'middleware' => [ 'online' ], 'prefix' => $locale . '/' . 
+			trans(static::PACKAGE_NAME . '::frontend.route.prefix') ], 
 			function($router) use ($locale, $resource_repo, $language)
 		{
 			$router->get('/',             [ 'as' => static::PREFIX . '::index',   'uses' => static::CONTROLLER . '@index' ]);
