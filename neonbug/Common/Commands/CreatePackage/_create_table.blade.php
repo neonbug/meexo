@@ -23,6 +23,9 @@ class Create{{ $model_name }}Table extends Migration {
 			['id_role' => '{{ $table_name }}', 'name' => '{{ $package_name }} editor', 
 				'created_at' => date('Y-m-d'), 'updated_at' => date('Y-m-d')]
 		);
+		
+		$migration_helper = App::make('\Neonbug\Common\Helpers\MigrationHelper');
+		$migration_helper->insertTranslations(__DIR__ . '/translations.{{ $lowercase_package_name }}/');
 	}
 
 	/**

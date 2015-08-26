@@ -42,7 +42,7 @@
 		<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 		
 		<div class="ui top attached tabular menu">
-			<a class="active item" data-tab="general">{{ trans('admin.common.add.tab-title-general') }}</a>
+			<a class="active item" data-tab="general">{{ trans('common::admin.add.tab-title-general') }}</a>
 			@foreach ($languages as $language)
 				<?php if (!array_key_exists($language->id_language, $fields['language_dependent'])) continue; ?>
 				<a class="item" data-tab="{{ $language->locale }}">{{ $language->name }}</a>
@@ -74,10 +74,10 @@
 		<div class="ui hidden divider"></div>
 		
 		<button type="submit" class="save-button ui button orange">
-			{{ trans('admin.common.add.save-button') }}
+			{{ trans('common::admin.add.save-button') }}
 		</button>
 		<button type="submit" formaction="?preview" formtarget="_blank" class="preview-button ui button">
-			{{ trans('admin.common.add.preview-button') }}
+			{{ trans('common::admin.add.preview-button') }}
 		</button>
 	</form>
 @stop

@@ -1,5 +1,5 @@
 @extends('common::admin')
 
 @section('content')
-	{{ trans('admin.common.dashboard.title') }}
+	{{ trans('common::admin.dashboard.title') }}
 @stop

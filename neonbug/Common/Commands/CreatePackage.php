@@ -76,17 +76,20 @@ class CreatePackage extends Command {
 		$template_path = __DIR__ . '/CreatePackage/';
 		
 		$migration_name = date('Y_m_d') . '_000100_create_table.php';
+		$trans_dir = 'database/migrations/translations.' . mb_strtolower($name) . '/';
 		
 		$templates = [
-			'_create_table' 	=> [ 'dir' => 'database/migrations/', 	'file'                      => $migration_name ], 
-			'_Controller' 		=> [ 'dir' => 'Controllers/', 			'file'                     => 'Controller.php' ], 
-			'_AdminController' 	=> [ 'dir' => 'Controllers/', 			'file'                => 'AdminController.php' ], 
-			'_Model' 			=> [ 'dir' => 'Models/', 				'file'                 => $model_name . '.php' ], 
-			'_ServiceProvider' 	=> [ 'dir' => 'Providers/', 			'file'                => 'ServiceProvider.php' ], 
-			'_config' 			=> [ 'dir' => 'config/', 				'file'              => $config_prefix . '.php' ], 
-			'_ModelRepository' 	=> [ 'dir' => 'Repositories/', 			'file'       => $model_name . 'Repository.php' ], 
-			'_index' 			=> [ 'dir' => 'resources/views/', 		'file' => 'index.blade.php', 'prefix' => false ], 
-			'_item' 			=> [ 'dir' => 'resources/views/', 		'file'  => 'item.blade.php', 'prefix' => false ], 
+			'_create_table'     => [ 'dir' => 'database/migrations/', 'file'                      => $migration_name ], 
+			'_Controller'       => [ 'dir' => 'Controllers/',         'file'                     => 'Controller.php' ], 
+			'_AdminController'  => [ 'dir' => 'Controllers/',         'file'                => 'AdminController.php' ], 
+			'_Model'            => [ 'dir' => 'Models/',              'file'                 => $model_name . '.php' ], 
+			'_ServiceProvider'  => [ 'dir' => 'Providers/',           'file'                => 'ServiceProvider.php' ], 
+			'_config'           => [ 'dir' => 'config/',              'file'              => $config_prefix . '.php' ], 
+			'_ModelRepository'  => [ 'dir' => 'Repositories/',        'file'       => $model_name . 'Repository.php' ], 
+			'_trans_admin'      => [ 'dir' => $trans_dir,             'file'                          => 'admin.php' ], 
+			'_trans_frontend'   => [ 'dir' => $trans_dir,             'file'                       => 'frontend.php' ], 
+			'_index'            => [ 'dir' => 'resources/views/',     'file' => 'index.blade.php', 'prefix' => false ], 
+			'_item'             => [ 'dir' => 'resources/views/',     'file'  => 'item.blade.php', 'prefix' => false ], 
 		];
 		
 		foreach ($templates as $template_source=>$template_destination)

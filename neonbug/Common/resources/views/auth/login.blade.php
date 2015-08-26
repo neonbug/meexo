@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>{{ trans('admin.common.login.title') }}</title>
+	<title>{{ trans('common::admin.login.title') }}</title>
 	
 	<script src="{{ cached_asset('vendor/common/admin_assets/jquery-2.1.4.min.js') }}"></script>
 	
@@ -58,7 +58,7 @@
 					<div class="field {{ $errors->has('username') ? 'error' : '' }}">
 						<div class="ui left icon input">
 							<i class="user icon"></i>
-							<input type="text" name="username" placeholder="{{ trans('admin.common.login.username') }}" 
+							<input type="text" name="username" placeholder="{{ trans('common::admin.login.username') }}" 
 								value="{{ old('username') }}" autofocus />
 						</div>
 					</div>
@@ -66,14 +66,14 @@
 					<div class="field {{ $errors->has('password') ? 'error' : '' }}">
 						<div class="ui left icon input">
 							<i class="lock icon"></i>
-							<input type="password" name="password" placeholder="{{ trans('admin.common.login.password') }}">
+							<input type="password" name="password" placeholder="{{ trans('common::admin.login.password') }}">
 						</div>
 					</div>
 
 					<div>
 						<button type="submit" class="ui button orange">
 							<i class="power icon"></i>
-							{{ trans('admin.common.login.login-button') }}
+							{{ trans('common::admin.login.login-button') }}
 						</button>
 					</div>
 				</div>

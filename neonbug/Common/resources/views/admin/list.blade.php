@@ -37,10 +37,10 @@
 		<thead>
 			<tr>
 				@if ($edit_route != null)
-					<th>{{ trans('admin.common.list.edit-action') }}</th>
+					<th>{{ trans('common::admin.list.edit-action') }}</th>
 				@endif
 				@if ($delete_route != null)
-					<th>{{ trans('admin.common.list.delete-action') }}</th>
+					<th>{{ trans('common::admin.list.delete-action') }}</th>
 				@endif
 				@foreach ($fields as $field_name=>$field)
 					<th>{{ $field_name }}</th>
@@ -74,14 +74,14 @@
 	</table>
 	<div class="ui small modal delete-item-modal">
 		<div class="content">
-			{{ trans('admin.common.list.delete-confirmation-message') }}
+			{{ trans('common::admin.list.delete-confirmation-message') }}
 		</div>
 		<div class="actions">
 			<div class="ui black deny button">
-				{{ trans('admin.common.list.delete-confirmation-deny') }}
+				{{ trans('common::admin.list.delete-confirmation-deny') }}
 			</div>
 			<div class="ui ok right labeled icon button red">
-				{{ trans('admin.common.list.delete-confirmation-confirm') }}
+				{{ trans('common::admin.list.delete-confirmation-confirm') }}
 				<i class="checkmark icon"></i>
 			</div>
 		</div>

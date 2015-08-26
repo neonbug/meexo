@@ -100,6 +100,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 		
 		//resources
 		$this->loadViewsFrom(__DIR__.'/../resources/views', static::PACKAGE_NAME);
+		$this->loadTranslationsFrom('/', 'common');
 		
 		$this->publishes([
 			__DIR__.'/../database/migrations/' => database_path('/migrations')
@@ -174,6 +175,11 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 		if (!$this->app->bound('\Neonbug\Common\Helpers\CommonHelper'))
 		{
 			$this->app->singleton('\Neonbug\Common\Helpers\CommonHelper', '\Neonbug\Common\Helpers\CommonHelper');
+		}
+		
+		if (!$this->app->bound('\Neonbug\Common\Helpers\MigrationHelper'))
+		{
+			$this->app->singleton('\Neonbug\Common\Helpers\MigrationHelper', '\Neonbug\Common\Helpers\MigrationHelper');
 		}
 		
 		include __DIR__ . '/../helpers.php';

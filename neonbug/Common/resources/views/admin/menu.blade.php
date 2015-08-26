@@ -5,7 +5,7 @@
 	?>
 	<a class="item {{ ($active ? 'active' : '') }}" href="{{ $route }}">
 		<i class="home icon"></i>
-		{{ trans('admin.common.menu.dashboard') }}
+		{{ trans('common::admin.menu.dashboard') }}
 	</a>
 	
 	@foreach ($menu_items as $group_item)
