@@ -245,7 +245,7 @@
 						@endif
 					</div>
 					<div class="right floated right aligned six wide column">
-						{{ trans('common::admin.header.logged-in-as', [ 'name' => $user->name ]) }}
+						{!! trans('common::admin.header.logged-in-as', [ 'name' => $user->name ]) !!}
 						<div class="admin-top-menu-divider"></div>
 						<a href="{{ route('admin-logout') }}">{{ trans('common::admin.header.logout') }}</a>
 						<i class="sign out icon"></i>
