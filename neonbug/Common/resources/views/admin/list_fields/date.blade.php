@@ -1,1 +1,1 @@
-{{ date('d.m.Y', strtotime($item->$field_name)) }}
+{{ $formatter->formatShortDate(strtotime($item->$field_name)) }}

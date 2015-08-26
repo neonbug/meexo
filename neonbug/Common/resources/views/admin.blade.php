@@ -23,6 +23,11 @@
 	
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/speakingurl/4.0.0/speakingurl.min.js"></script>
 	
+	<script src="{{ cached_asset('vendor/common/admin_assets/moment-with-locales.min.js') }}"></script>
+	
+	<script src="{{ cached_asset('vendor/common/admin_assets/pikaday/pikaday.js') }}"></script>
+	<link rel="stylesheet" type="text/css" href="{{ cached_asset('vendor/common/admin_assets/pikaday/pikaday.css') }}" />
+	
 	<script src="{{ cached_asset('vendor/common/admin_assets/ckeditor/ckeditor.js') }}"></script>
 	<script src="{{ cached_asset('vendor/common/admin_assets/ckeditor/adapters/jquery.js') }}"></script>
 	
@@ -38,6 +43,7 @@
 			admin.initSlugs();
 			admin.initCloseWarning();
 			admin.initRichEditors();
+			admin.initDatePicker();
 		}, 
 		initCheckboxes: function() {
 			$('.ui.checkbox').checkbox({
@@ -93,6 +99,20 @@
 			$('textarea[data-type="rich_text"]').ckeditor({
 				entities: false, 
 				baseHref: '{{ url() }}'
+			});
+		},
+		initDatePicker: function() {
+			moment.locale(window.navigator.language);
+			
+			$('[data-type="date"]').each(function(index, item) {
+				var picker = new Pikaday({
+					field: item,
+					firstDay: 1,
+					format: '{{ $formatter->getShortDatePattern() }}', 
+					onSelect: function(date) {
+						$('[name="' + item.dataset.dateRel + '"]').val(moment(date).format('YYYY-MM-DD'));
+					}
+				});
 			});
 		}
 	};

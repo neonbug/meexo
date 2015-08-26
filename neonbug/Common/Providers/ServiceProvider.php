@@ -184,6 +184,16 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 			$this->app->singleton('\Neonbug\Common\Helpers\MigrationHelper', '\Neonbug\Common\Helpers\MigrationHelper');
 		}
 		
+		if (!$this->app->bound('\Neonbug\Common\Helpers\FormatterHelper'))
+		{
+			$this->app->singleton('\Neonbug\Common\Helpers\FormatterHelper', function() {
+				return new \Neonbug\Common\Helpers\FormatterHelper(
+					\Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']), 
+					new \Neonbug\Common\Helpers\MomentFormatTransformer()
+				);
+			});
+		}
+		
 		include __DIR__ . '/../helpers.php';
 	}
 
