@@ -24,11 +24,23 @@ class MomentFormatTransformer {
 	
 	public function transformToPhp($momentPattern)
 	{
-		return str_replace(
-			array_keys($this->moment_date_format_tokens_to_php), 
-			array_values($this->moment_date_format_tokens_to_php), 
-			$momentPattern
-		);
+		$matching_string = "%%%|*|%%%";
+		foreach ($this->moment_date_format_tokens_to_php as $key => $value) {
+			$offset = 0;
+			do { 
+				$str = strpos(momentPattern, $key, $offset);
+				if ($str === false) {
+					break;
+				} 
+				if (substr(momentPattern, $str, strlen($key) + strlen($matching_string)) == $key.$matching_string) {
+					$offset = $str + strlen($key);
+					continue;
+				} else {
+					momentPattern = substr_replace(momentPattern, $value.$matching_string, $str, strlen($key));
+					$offset = $str + strlen($key);
+				}		
+			} while (true);		
+		}
+		return str_replace($matching_string, "", momentPattern);
 	}
-	
 }
