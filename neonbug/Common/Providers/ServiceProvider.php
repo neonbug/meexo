@@ -92,7 +92,9 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 			$view->withEncryptedCsrfToken(Crypt::encrypt(csrf_token()));
 			$view->withUser(Auth::user());
 		});
-
+		
+		view()->share('formatter', App::make('\Neonbug\Common\Helpers\FormatterHelper'));
+		
 		//admin
 		$router->get('admin', function() { return redirect(route('admin-home')); });
 		$router->group(['prefix' => $locale . '/admin'], function($router)
