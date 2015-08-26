@@ -8,8 +8,8 @@ return [
 	'common::admin.list.delete-action'               => [ 'en' => 'Delete', 'sl' => 'Odstrani' ], 
 	'common::admin.list.delete-confirmation-message' => [ 'en' => 'Are you sure you want to delete that item?', 
 																	'sl' => 'Res želite odstraniti ta element?' ], 
-	'common::admin.list.delete-confirmation-deny'    => [ 'en' => 'Yes', 'sl' => 'Da' ], 
-	'common::admin.list.delete-confirmation-confirm' => [ 'en' => 'No', 'sl' => 'Ne' ], 
+	'common::admin.list.delete-confirmation-confirm' => [ 'en' => 'Yes', 'sl' => 'Da' ], 
+	'common::admin.list.delete-confirmation-deny'    => [ 'en' => 'No', 'sl' => 'Ne' ], 
 	
 	'common::admin.menu.dashboard'      => [ 'en' => 'Dashboard', 'sl' => 'Nadzorna plošča' ], 
 	'common::admin.menu.title'          => [ 'en' => 'Admin menu', 'sl' => 'Admin meni' ], 
