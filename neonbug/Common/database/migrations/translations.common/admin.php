@@ -4,8 +4,8 @@ return [
 	'common::admin.add.save-button'       => [ 'en' => 'Save', 'sl' => 'Shrani' ], 
 	'common::admin.add.preview-button'    => [ 'en' => 'Preview', 'sl' => 'Predogled' ], 
 	
-	'common::admin.list.edit-action'                 => [ 'en' => 'edit', 'sl' => 'uredi' ], 
-	'common::admin.list.delete-action'               => [ 'en' => 'delete', 'sl' => 'odstrani' ], 
+	'common::admin.list.edit-action'                 => [ 'en' => 'Edit', 'sl' => 'Uredi' ], 
+	'common::admin.list.delete-action'               => [ 'en' => 'Delete', 'sl' => 'Odstrani' ], 
 	'common::admin.list.delete-confirmation-message' => [ 'en' => 'Are you sure you want to delete that item?', 
 																	'sl' => 'Res želite odstraniti ta element?' ], 
 	'common::admin.list.delete-confirmation-deny'    => [ 'en' => 'Yes', 'sl' => 'Da' ], 

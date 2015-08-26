@@ -132,12 +132,13 @@ class AdminHelper {
 	}
 	
 	//rendering
-	public function adminList(Array $title, Array $fields, $prefix, $repo_class)
+	public function adminList($package_name, Array $title, Array $fields, $prefix, $repo_class)
 	{
 		$items = App::make('\Neonbug\Common\Helpers\AdminHelper')
 			->getListItems($repo_class);
 		
 		$params = [
+			'package_name' => $package_name, 
 			'title'        => $title, 
 			'items'        => $items, 
 			'fields'       => $fields, 
@@ -149,7 +150,7 @@ class AdminHelper {
 			->loadView('common', 'admin.list', $params);
 	}
 	
-	public function adminAdd(Array $title, Array $language_dependent_fields, Array $language_independent_fields, 
+	public function adminAdd($package_name, Array $title, Array $language_dependent_fields, Array $language_independent_fields, 
 		Array $messages)
 	{
 		$languages = App::make('LanguageRepository')->getAll();
@@ -161,16 +162,17 @@ class AdminHelper {
 		);
 		
 		$params = [
-			'title'     => $title, 
-			'fields'    => $fields, 
-			'messages'  => $messages, 
-			'languages' => $languages
+			'package_name' => $package_name, 
+			'title'        => $title, 
+			'fields'       => $fields, 
+			'messages'     => $messages, 
+			'languages'    => $languages
 		];
 		
 		return App::make('\Neonbug\Common\Helpers\CommonHelper')->loadView('common', 'admin.add', $params);
 	}
 	
-	public function adminEdit(Array $title, Array $language_dependent_fields, Array $language_independent_fields, 
+	public function adminEdit($package_name, Array $title, Array $language_dependent_fields, Array $language_independent_fields, 
 		Array $messages, $item)
 	{
 		$languages = App::make('LanguageRepository')->getAll();
@@ -183,10 +185,11 @@ class AdminHelper {
 		);
 		
 		$params = [
-			'title'     => $title, 
-			'fields'    => $fields, 
-			'messages'  => $messages, 
-			'languages' => $languages
+			'package_name' => $package_name, 
+			'title'        => $title, 
+			'fields'       => $fields, 
+			'messages'     => $messages, 
+			'languages'    => $languages
 		];
 		
 		return App::make('\Neonbug\Common\Helpers\CommonHelper')->loadView('common', 'admin.add', $params);

@@ -11,7 +11,7 @@
 	@foreach ($menu_items as $group_item)
 		<div class="header item">
 			<i class="newspaper icon"></i>
-			{{ $group_item['title'] }}
+			{{ trans($group_item['title'] . '::admin.menu.main') }}
 		</div>
 		@foreach ($group_item['items'] as $menu_item)
 			<?php
@@ -20,7 +20,7 @@
 			?>
 			
 			<a class="item {{ ($active ? 'active' : '') }} level-two" href="{{ $route }}">
-				{{ $menu_item['title'] }}
+				{{ trans($group_item['title'] . '::admin.menu.' . $menu_item['title']) }}
 			</a>
 		@endforeach
 	@endforeach

@@ -17,8 +17,17 @@ class AdminController extends \Neonbug\Common\Http\Controllers\BaseAdminControll
 	protected function getConfigPrefix() { return self::CONFIG_PREFIX; }
 	protected function getRoutePrefix()  { return '{{ $route_prefix }}'; }
 	protected function getPackageName()  { return '{{ $lowercase_package_name }}'; }
-	protected function getListTitle()    { return [ '{{ $package_name }}', 'List' ]; }
-	protected function getAddTitle()     { return [ '{{ $package_name }}', 'Add' ]; }
-	protected function getEditTitle()    { return [ '{{ $package_name }}', 'Edit' ]; }
+	protected function getListTitle()    { return [ 
+		trans($this->getPackageName() . '::admin.title.main'), 
+		trans($this->getPackageName() . '::admin.title.list')
+	]; }
+	protected function getAddTitle()     { return [ 
+		trans($this->getPackageName() . '::admin.title.main'), 
+		trans($this->getPackageName() . '::admin.title.add')
+	]; }
+	protected function getEditTitle()    { return [ 
+		trans($this->getPackageName() . '::admin.title.main'), 
+		trans($this->getPackageName() . '::admin.title.edit')
+	]; }
 	
 }

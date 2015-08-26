@@ -8,7 +8,7 @@
 		<div class="ui checkbox">
 			<input type="checkbox" class="hidden" data-name="field[{{ $id_language }}][{{ $field['name'] }}]" 
 				{!! ($field['value'] == true ? 'checked="checked"' : '') !!} />
-			<label>{{ $field['name'] }}</label>
+			<label>{{ $field_title }}</label>
 		</div>
 	</div>
 </td>

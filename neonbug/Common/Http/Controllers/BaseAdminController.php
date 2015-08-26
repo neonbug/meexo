@@ -26,6 +26,7 @@ abstract class BaseAdminController extends \App\Http\Controllers\Controller {
 	public function adminList()
 	{
 		return $this->admin_helper->adminList(
+			$this->getPackageName(), 
 			$this->getListTitle(), 
 			config($this->getConfigPrefix() . '.list.fields'), 
 			$this->getRoutePrefix(), 
@@ -36,6 +37,7 @@ abstract class BaseAdminController extends \App\Http\Controllers\Controller {
 	public function adminAdd()
 	{
 		return $this->admin_helper->adminAdd(
+			$this->getPackageName(), 
 			$this->getAddTitle(), 
 			config($this->getConfigPrefix() . '.add.language_dependent_fields'), 
 			config($this->getConfigPrefix() . '.add.language_independent_fields'), 
@@ -83,6 +85,7 @@ abstract class BaseAdminController extends \App\Http\Controllers\Controller {
 		$item = $model::findOrFail($id);
 		
 		return $this->admin_helper->adminEdit(
+			$this->getPackageName(), 
 			$this->getEditTitle(), 
 			config($this->getConfigPrefix() . '.edit.language_dependent_fields'), 
 			config($this->getConfigPrefix() . '.edit.language_independent_fields'), 

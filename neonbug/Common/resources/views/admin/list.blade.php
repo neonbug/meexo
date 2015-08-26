@@ -43,7 +43,7 @@
 					<th>{{ trans('common::admin.list.delete-action') }}</th>
 				@endif
 				@foreach ($fields as $field_name=>$field)
-					<th>{{ $field_name }}</th>
+					<th>{{ trans($package_name . '::admin.list.field-title.' . $field_name) }}</th>
 				@endforeach
 			</tr>
 		</thead>

@@ -1,5 +1,5 @@
 <td class="collapsing">
-	{{ $field['name'] }}
+	{{ $field_title }}
 </td>
 <td>
 	<div class="field">
