@@ -20,10 +20,19 @@ class CreateLanguageTable extends Migration {
 			$table->timestamps();
 		});
 		
-		DB::table('language')->insert(
-			['name' => 'English', 'locale' => 'en', 
-				'created_at' => date('Y-m-d'), 'updated_at' => date('Y-m-d')]
-		);
+		/* insert default languages */
+		$languages = Config::get('neonbug.common.languages', [
+			'en' => 'English'
+		]);
+		
+		$insert_arr = [];
+		foreach ($languages as $locale=>$name)
+		{
+			$insert_arr[] = [ 'name' => $name, 'locale' => $locale, 
+				'created_at' => date('Y-m-d'), 'updated_at' => date('Y-m-d') ];
+		}
+		
+		DB::table('language')->insert($insert_arr);
 	}
 
 	/**

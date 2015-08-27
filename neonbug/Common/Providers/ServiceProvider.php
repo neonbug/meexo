@@ -33,6 +33,10 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 			__DIR__.'/../assets/' => public_path('vendor/common'),
 		], 'public');
 		
+		$this->publishes([
+			__DIR__.'/../config/' . static::PACKAGE_NAME . '.php' => config_path('neonbug/' . static::PACKAGE_NAME . '.php'),
+		]);
+		
 		//============
 		//== ROUTES ==
 		//============
@@ -189,8 +193,11 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 		if (!$this->app->bound('\Neonbug\Common\Helpers\FormatterHelper'))
 		{
 			$this->app->singleton('\Neonbug\Common\Helpers\FormatterHelper', function() {
+				$lang = (array_key_exists('HTTP_ACCEPT_LANGUAGE', $_SERVER) ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : 
+					'en-US');
+				
 				return new \Neonbug\Common\Helpers\FormatterHelper(
-					\Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']), 
+					\Locale::acceptFromHttp($lang), 
 					new \Neonbug\Common\Helpers\MomentFormatTransformer()
 				);
 			});

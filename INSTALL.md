@@ -43,6 +43,30 @@ Make sure the database you set in `.env` file exists, then issue these commands 
 ```
 composer dump-autoload
 php artisan vendor:publish
+```
+
+### 4.1. Add languages
+
+Open `config/neonbug/common.php` file and add any languages to the `languages` array.
+
+E.g. if you add Slovenščina, the file will look like this:
+
+```
+<?php
+
+return [
+	
+	'languages' => [
+		'en' => 'English', 
+		'sl' => 'Slovenščina'
+	]
+	
+];
+```
+
+Afterwards, issue this command in your terminal:
+
+```
 php artisan migrate
 ```
 
