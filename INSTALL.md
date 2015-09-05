@@ -1,8 +1,17 @@
 # Installation #
 
-## 1. Download ##
+## 1. Requirements ##
 
-### 1.1. Install using composer
+* PHP >= 5.4
+* Mcrypt PHP Extension
+* OpenSSL PHP Extension
+* Mbstring PHP Extension
+* Tokenizer PHP Extension
+* Intl PHP extension
+
+## 2. Download ##
+
+### 2.1. Install using composer
 
 * Issue this command in your terminal:
 
@@ -15,37 +24,43 @@
 		
 		composer create-project neonbug/meexo {directory}
 
-### 1.2. Manually install
+### 2.2. Manually install
 
-* Download the files from `https://github.com/neonbug/meexo` into a directory.
+* Download the files from `https://github.com/neonbug/meexo` into a directory. 
 
-## 2. Configure
+* Copy `.env.example` file and name it `.env`.
 
-### 2.1. .env file
+* Issue `composer update` command in your terminal.
+ 
+## 3. Configure
+
+### 3.1. .env file
+
+* Change `APP_KEY` constant to a random value (only necessary when manually installing).
 
 * Change `DB_*` constants.
 
-### 2.2. config/app.php file
+### 3.2. config/app.php file
 
 * Change `url` to match your environment.
 
 * Add available languages to `available_locales` array and change the default language by changing `default_locale` value.
 
-## 3. Add packages
+## 4. Add packages
 
 * Open `config/app.php` file and add packages to `$package_providers` array. E.g. for News package add `'Neonbug\News\Providers\ServiceProvider'`.
 
 * FUTURE USE: Add packages to `composer.json` (e.g. //*TODO write this*// and issue `composer install` command in your terminal.
 
-## 4. Copy package files to proper locations and initialize database
+## 5. Copy package files to proper locations and initialize database
 
-Make sure the database you set in `.env` file exists, then issue these commands in your terminal:
+Issue these commands in your terminal:
 ```
 composer dump-autoload
 php artisan vendor:publish
 ```
 
-### 4.1. Add languages
+### 5.1. Add languages
 
 Open `config/neonbug/common.php` file and add any languages to the `languages` array.
 
@@ -64,17 +79,17 @@ return [
 ];
 ```
 
-Afterwards, issue this command in your terminal:
+**Make sure the database you set in `.env` file exists**, then issue this command in your terminal:
 
 ```
 php artisan migrate
 ```
 
-## 5. Writable directories
+## 6. Writable directories
 
 //TODO: write this section
 
-## 6. Test
+## 7. Test
 
 Migration created a default user, named Administrator. You can use it to log into the admin area.
 
@@ -82,16 +97,16 @@ Visit `http://yoursite/admin` and enter `admin` as username and `admin` again as
 
 **After logging in, change your password!**
 
-## 7. Start coding
+## 8. Start coding
 
 You can start by customizing the News package views. Since you can not modify any files in `neonbug` directory, `migrate` command copies those files into your app.
 
 E.g. you can find News views in `resources/views/vendor/news/` directory.
 
-## 8. Extending Neonbug packages
+## 9. Extending Neonbug packages
 
 //TODO: write this section
 
-## 9. Writing your own Neonbug packages
+## 10. Writing your own Neonbug packages
 
 //TODO: write this section
