@@ -159,6 +159,8 @@ return [
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
+		
+		'Bkwld\Croppa\ServiceProvider',
 
 	], $package_providers),
 
@@ -207,6 +209,8 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+		
+		'Croppa'    => 'Neonbug\Common\Facades\Croppa',
 
 	],
 
