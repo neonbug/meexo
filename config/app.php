@@ -2,7 +2,13 @@
 
 $cli_args = (isSet($argv) && $argv != null ? $argv : 
     (array_key_exists('argv', $_SERVER) ? $_SERVER['argv'] : []));
+
 $is_artisan_migrate = (sizeof($cli_args) >= 2 && $cli_args[0] == 'artisan' && $cli_args[1] == 'migrate');
+$is_artisan_vendor_publish = (sizeof($cli_args) >= 2 && $cli_args[0] == 'artisan' && $cli_args[1] == 'vendor:publish');
+
+$translation_provider = ($is_artisan_migrate || $is_artisan_vendor_publish ? 
+	'Neonbug\Common\Translation\MockTranslationServiceProvider' : 
+	'Neonbug\Common\Translation\TranslationServiceProvider');
 
 $package_providers = ($is_artisan_migrate ? [] : [ //don't load package providers because of migrations
     'Neonbug\Common\Providers\ServiceProvider', 
@@ -141,7 +147,7 @@ return [
 		'Illuminate\Redis\RedisServiceProvider',
 		'Illuminate\Auth\Passwords\PasswordResetServiceProvider',
 		'Illuminate\Session\SessionServiceProvider',
-		'Neonbug\Common\Translation\TranslationServiceProvider',
+		$translation_provider,
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 
