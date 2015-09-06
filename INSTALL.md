@@ -36,13 +36,13 @@
 
 ### 3.1. .env file
 
+* Change `APP_URL` to match your environment.
+
 * Change `APP_KEY` constant to a random value (only necessary when manually installing).
 
 * Change `DB_*` constants.
 
 ### 3.2. config/app.php file
-
-* Change `url` to match your environment.
 
 * Add available languages to `available_locales` array and change the default language by changing `default_locale` value.
 

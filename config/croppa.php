@@ -1,5 +1,5 @@
 <?php
-$root = $app->request->root();
+$root = env('APP_URL');
 
 $path = 'uploads/thumbs/';
 $url_prefix = trim($root.'/'.trim($path.'/'), '/');
