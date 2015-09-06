@@ -1,8 +1,14 @@
 <?php
 return [
-	'common::admin.add.tab-title-general' => [ 'en' => 'General', 'sl' => 'Splošno' ], 
-	'common::admin.add.save-button'       => [ 'en' => 'Save', 'sl' => 'Shrani' ], 
-	'common::admin.add.preview-button'    => [ 'en' => 'Preview', 'sl' => 'Predogled' ], 
+	'common::admin.add.tab-title-general'         => [ 'en' => 'General', 'sl' => 'Splošno' ], 
+	'common::admin.add.save-button'               => [ 'en' => 'Save', 'sl' => 'Shrani' ], 
+	'common::admin.add.preview-button'            => [ 'en' => 'Preview', 'sl' => 'Predogled' ], 
+	'common::admin.add.current-image-title'       => [ 'en' => 'Current image', 'sl' => 'Trenutna slika' ], 
+	'common::admin.add.current-image-remove'      => [ 'en' => 'Remove', 'sl' => 'Odstrani' ], 
+	'common::admin.add.current-image-description' => [ 
+		'en' => 'Check the checkbox below to remove this image', 
+		'sl' => 'Za odstranitev te slike, obkljukajte spodnje potrditveno polje'
+	], 
 	
 	'common::admin.list.edit-action'                 => [ 'en' => 'Edit', 'sl' => 'Uredi' ], 
 	'common::admin.list.delete-action'               => [ 'en' => 'Delete', 'sl' => 'Odstrani' ], 

@@ -20,16 +20,16 @@
 						<img src="{!! Croppa::url_resize('uploads/news/' . $field['value'], 290) !!}" />
 					</a>
 					<div class="content">
-						<div class="header">Current image</div>
+						<div class="header">{{ trans('common::admin.add.current-image-title') }}</div>
 						<div class="description">
-							Check the checkbox below to remove this image
+							{{ trans('common::admin.add.current-image-description') }}
 						</div>
 					</div>
 					<div class="extra content">
 						<div class="ui checkbox">
 							<input type="checkbox" name="field[{{ $id_language }}][remove-file][{{ $field['name'] }}]" 
 								value="true" />
-							<label>Remove</label>
+							<label>{{ trans('common::admin.add.current-image-remove') }}</label>
 						</div>
 					</div>
 					<!-- <div class="ui bottom attached button">
