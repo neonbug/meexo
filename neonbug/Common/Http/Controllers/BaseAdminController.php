@@ -54,6 +54,7 @@ abstract class BaseAdminController extends \App\Http\Controllers\Controller {
 		
 		$retval = $this->admin_helper->handleAdminAdd(
 			Request::input('field'), //first level keys are language ids, second level are field names
+			Request::file('field'), //first level keys are language ids, second level are field names
 			$this->getModel(), 
 			Auth::user()->id_user, 
 			config($this->getConfigPrefix() . '.add.language_independent_fields'), 
@@ -70,6 +71,7 @@ abstract class BaseAdminController extends \App\Http\Controllers\Controller {
 	{
 		$retval = $this->admin_helper->handleAdminPreview(
 			Request::input('field'), //first level keys are language ids, second level are field names
+			Request::file('field'), //first level keys are language ids, second level are field names
 			Auth::user()->id_user, 
 			config($this->getConfigPrefix() . '.add.language_independent_fields'), 
 			config($this->getConfigPrefix() . '.add.language_dependent_fields'), 
@@ -106,6 +108,7 @@ abstract class BaseAdminController extends \App\Http\Controllers\Controller {
 		
 		$retval = $this->admin_helper->handleAdminEdit(
 			Request::input('field'), //first level keys are language ids, second level are field names
+			Request::file('field'), //first level keys are language ids, second level are field names
 			$model, 
 			Auth::user()->id_user, 
 			config($this->getConfigPrefix() . '.edit.language_independent_fields'), 

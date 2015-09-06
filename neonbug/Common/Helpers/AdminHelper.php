@@ -2,6 +2,7 @@
 
 use App;
 use Cache;
+use Request;
 
 //TODO this class isn't very pretty; refactor!
 class AdminHelper {
@@ -195,8 +196,8 @@ class AdminHelper {
 		return App::make('\Neonbug\Common\Helpers\CommonHelper')->loadView('common', 'admin.add', $params);
 	}
 	
-	public function handleAdminAdd(Array $fields, $model_class, $id_user, Array $language_independent_fields, 
-		Array $language_dependent_fields, $prefix)
+	public function handleAdminAdd(Array $fields, Array $files, $model_class, $id_user, 
+		Array $language_independent_fields, Array $language_dependent_fields, $prefix)
 	{
 		$errors = []; //[ 'general' => 'DB error' ];
 		
@@ -207,8 +208,24 @@ class AdminHelper {
 		$allowed_lang_independent_fields = array_map($map, $language_independent_fields);
 		$allowed_lang_dependent_fields   = array_map($map, $language_dependent_fields);
 		
+		// handle files
+		$file_fields = $this->handleFileUpload($fields, $files, $prefix);
+		
+		$all_fields = $fields;
+		foreach ($file_fields as $id_language=>$file_field_arr)
+		{
+			if (!array_key_exists($id_language, $all_fields))
+			{
+				$all_fields[$id_language] = [];
+			}
+			foreach ($file_field_arr as $field_name=>$file_field)
+			{
+				$all_fields[$id_language][$field_name] = $file_field;
+			}
+		}
+		
 		App::make('\Neonbug\Common\Helpers\AdminHelper')
-			->fillAndSaveItem($item, $fields, $allowed_lang_independent_fields, $allowed_lang_dependent_fields);
+			->fillAndSaveItem($item, $all_fields, $allowed_lang_independent_fields, $allowed_lang_dependent_fields);
 		
 		if (sizeof($errors) > 0)
 		{
@@ -221,7 +238,7 @@ class AdminHelper {
 			]);
 	}
 	
-	public function handleAdminPreview(Array $fields, $id_user, Array $language_independent_fields, 
+	public function handleAdminPreview(Array $fields, Array $files, $id_user, Array $language_independent_fields, 
 		Array $language_dependent_fields, $prefix, $id_item = -1)
 	{
 		$errors = []; //[ 'general' => 'DB error' ];
@@ -229,6 +246,8 @@ class AdminHelper {
 		$map = function($field) { return $field['name']; };
 		$allowed_lang_independent_fields = array_map($map, $language_independent_fields);
 		$allowed_lang_dependent_fields   = array_map($map, $language_dependent_fields);
+		
+		//TODO handle files
 		
 		$key = str_random(10);
 		Cache::remember($prefix . '::admin::preview::' . $key, 10, function() use ($fields, $id_user, $id_item, 
@@ -253,8 +272,8 @@ class AdminHelper {
 			]);
 	}
 	
-	public function handleAdminEdit(Array $fields, $model_class, $id_user, Array $language_independent_fields, 
-		Array $language_dependent_fields, $prefix, $item)
+	public function handleAdminEdit(Array $fields, Array $files, $model_class, $id_user, 
+		Array $language_independent_fields, Array $language_dependent_fields, $prefix, $item)
 	{
 		$errors = []; //[ 'general' => 'DB error' ];
 		
@@ -262,8 +281,24 @@ class AdminHelper {
 		$allowed_lang_independent_fields = array_map($map, $language_independent_fields);
 		$allowed_lang_dependent_fields   = array_map($map, $language_dependent_fields);
 		
+		// handle files
+		$file_fields = $this->handleFileUpload($fields, $files, $prefix);
+		
+		$all_fields = $fields;
+		foreach ($file_fields as $id_language=>$file_field_arr)
+		{
+			if (!array_key_exists($id_language, $all_fields))
+			{
+				$all_fields[$id_language] = [];
+			}
+			foreach ($file_field_arr as $field_name=>$file_field)
+			{
+				$all_fields[$id_language][$field_name] = $file_field;
+			}
+		}
+		
 		App::make('\Neonbug\Common\Helpers\AdminHelper')
-			->fillAndSaveItem($item, $fields, $allowed_lang_independent_fields, $allowed_lang_dependent_fields);
+			->fillAndSaveItem($item, $all_fields, $allowed_lang_independent_fields, $allowed_lang_dependent_fields);
 		
 		if (sizeof($errors) > 0)
 		{
@@ -274,5 +309,58 @@ class AdminHelper {
 			->with([
 				'messages' => [ 'Saved' ]
 			]);
+	}
+	
+	protected function handleFileUpload(Array $fields, Array $files, $directory)
+	{
+		$new_fields = [];
+		
+		// delete files
+		foreach ($fields as $id_language=>$field_arr)
+		{
+			foreach ($field_arr as $field_name=>$file_arr)
+			{
+				if ($field_name != 'remove-file') continue;
+				
+				foreach ($file_arr as $file=>$val)
+				{
+					if (!array_key_exists($id_language, $new_fields))
+					{
+						$new_fields[$id_language] = [];
+					}
+					$new_fields[$id_language][$file] = '';
+					//TODO delete file
+				}
+			}
+		}
+		
+		// handle new files
+		foreach ($files as $id_language=>$file_fields)
+		{
+			foreach ($file_fields as $field_name=>$file)
+			{
+				if ($files[$id_language][$field_name] == null) continue;
+				if (!$file->isValid()) continue;
+				
+				$filename = $file->getClientOriginalName();
+				//TODO we shouldn't know of 'uploads' directory here; move it to a config or sth
+				
+				if (file_exists('uploads/' . $directory . '/' . $filename))
+				{
+					$path_info = pathinfo($filename);
+					$filename = $path_info['filename'] . '.' . date('Y-m-d-H-i-s') . 
+						($path_info['extension'] == '' ? '' : '.' . $path_info['extension']);
+				}
+				$file->move('uploads/' . $directory, $filename);
+				
+				if (!array_key_exists($id_language, $new_fields))
+				{
+					$new_fields[$id_language] = [];
+				}
+				$new_fields[$id_language][$field_name] = $filename;
+			}
+		}
+		
+		return $new_fields;
 	}
 }

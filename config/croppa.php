@@ -1,7 +1,10 @@
 <?php
 $root = $app->request->root();
-$path = '/uploads/thumbs/';
+
+$path = 'uploads/thumbs/';
 $url_prefix = trim($root.'/'.trim($path.'/'), '/');
+
+$root_url_prefix = $root;
 
 return array(
 	
@@ -80,6 +83,7 @@ return array(
 	// 'url_prefix' =>  '//'.Request::getHttpHost().'/uploads/',        // Local
 	// 'url_prefix' => 'https://your-bucket.s3.amazonaws.com/uploads/', // S3
 	'url_prefix' => $url_prefix,
+	'root_url_prefix' => $root_url_prefix,
 
 	/**
 	 * Reject attempts to maliciously create images by signing the generated the 
