@@ -41,7 +41,7 @@
 			admin.initCheckboxes();
 			admin.initTabs();
 			admin.initSlugs();
-			admin.initCloseWarning();
+			//admin.initCloseWarning();
 			admin.initRichEditors();
 			admin.initDatePicker();
 		}, 
