@@ -27,9 +27,6 @@ class CreateNewsTable extends Migration {
 		DB::table('role')->insert(
 			['id_role' => 'news', 'name' => 'News editor', 'created_at' => date('Y-m-d'), 'updated_at' => date('Y-m-d')]
 		);
-		
-		$migration_helper = App::make('\Neonbug\Common\Helpers\MigrationHelper');
-		$migration_helper->insertTranslations(__DIR__ . '/translations.news/');
 	}
 
 	/**

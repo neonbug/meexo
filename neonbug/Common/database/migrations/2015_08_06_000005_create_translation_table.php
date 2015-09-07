@@ -34,9 +34,6 @@ class CreateTranslationTable extends Migration {
 			$table->index('id_translation_source');
 			$table->index('id_language');
 		});
-		
-		$migration_helper = App::make('\Neonbug\Common\Helpers\MigrationHelper');
-		$migration_helper->insertTranslations(__DIR__ . '/translations.common/');
 	}
 
 	/**
