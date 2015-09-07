@@ -1,36 +1,59 @@
 <?php
+$p = 'common::admin.';
 return [
-	'common::admin.add.tab-title-general'         => [ 'en' => 'General', 'sl' => 'Splošno' ], 
-	'common::admin.add.save-button'               => [ 'en' => 'Save', 'sl' => 'Shrani' ], 
-	'common::admin.add.preview-button'            => [ 'en' => 'Preview', 'sl' => 'Predogled' ], 
-	'common::admin.add.current-image-title'       => [ 'en' => 'Current image', 'sl' => 'Trenutna slika' ], 
-	'common::admin.add.current-image-remove'      => [ 'en' => 'Remove', 'sl' => 'Odstrani' ], 
-	'common::admin.add.current-image-description' => [ 
+	// add
+	$p . 'add.tab-title-general'         => [ 'en' => 'General', 'sl' => 'Splošno' ], 
+	$p . 'add.save-button'               => [ 'en' => 'Save', 'sl' => 'Shrani' ], 
+	$p . 'add.preview-button'            => [ 'en' => 'Preview', 'sl' => 'Predogled' ], 
+	$p . 'add.current-image-title'       => [ 'en' => 'Current image', 'sl' => 'Trenutna slika' ], 
+	$p . 'add.current-image-remove'      => [ 'en' => 'Remove', 'sl' => 'Odstrani' ], 
+	$p . 'add.current-image-description' => [ 
 		'en' => 'Check the checkbox below to remove this image', 
 		'sl' => 'Za odstranitev te slike, obkljukajte spodnje potrditveno polje'
 	], 
 	
-	'common::admin.list.edit-action'                 => [ 'en' => 'Edit', 'sl' => 'Uredi' ], 
-	'common::admin.list.delete-action'               => [ 'en' => 'Delete', 'sl' => 'Odstrani' ], 
-	'common::admin.list.delete-confirmation-message' => [ 'en' => 'Are you sure you want to delete that item?', 
-																	'sl' => 'Res želite odstraniti ta element?' ], 
-	'common::admin.list.delete-confirmation-confirm' => [ 'en' => 'Yes', 'sl' => 'Da' ], 
-	'common::admin.list.delete-confirmation-deny'    => [ 'en' => 'No', 'sl' => 'Ne' ], 
+	$p . 'add.error-dialog-message' => [ 
+		'en' => 'There are errors in your form. Please resolve them and try again.', 
+		'sl' => 'Na vašem obrazcu so napake. Prosimo, popravite jih in poskusite znova.' ], 
+	$p . 'add.error-dialog-confirm' => [ 'en' => 'Ok', 'sl' => 'V redu' ], 
 	
-	'common::admin.menu.dashboard'      => [ 'en' => 'Dashboard', 'sl' => 'Nadzorna plošča' ], 
-	'common::admin.menu.title'          => [ 'en' => 'Admin menu', 'sl' => 'Admin meni' ], 
+	$p . 'add.errors.slug-empty'          => [ 'en' => 'Must not be empty', 'sl' => 'Polje ne sme biti prazno' ], 
+	$p . 'add.errors.slug-already-exists' => [ 
+		'en' => 'Already exists, choose another value', 
+		'sl' => 'Že obstaja, vpišite drugo vrednost'
+	], 
 	
-	'common::admin.dashboard.title'     => [ 'en' => 'Dashboard', 'sl' => 'Nadzorna plošča' ], 
+	// list
+	$p . 'list.edit-action'                 => [ 'en' => 'Edit', 'sl' => 'Uredi' ], 
+	$p . 'list.delete-action'               => [ 'en' => 'Delete', 'sl' => 'Odstrani' ], 
+	$p . 'list.delete-confirmation-message' => [ 
+		'en' => 'Are you sure you want to delete that item?', 
+		'sl' => 'Res želite odstraniti ta element?'
+	], 
+	$p . 'list.delete-confirmation-confirm' => [ 'en' => 'Yes', 'sl' => 'Da' ], 
+	$p . 'list.delete-confirmation-deny'    => [ 'en' => 'No', 'sl' => 'Ne' ], 
 	
-	'common::admin.header.title'        => [ 'en' => 'Admin', 'sl' => 'Admin' ], 
-	'common::admin.header.logged-in-as' => [ 'en' => 'Logged in as <strong>:name</strong>', 
-														'sl' => 'Prijavljen/a kot <strong>:name</strong>' ], 
-	'common::admin.header.logout'       => [ 'en' => 'Logout', 'sl' => 'Odjava' ], 
+	// menu
+	$p . 'menu.dashboard'      => [ 'en' => 'Dashboard', 'sl' => 'Nadzorna plošča' ], 
+	$p . 'menu.title'          => [ 'en' => 'Admin menu', 'sl' => 'Admin meni' ], 
 	
-	'common::admin.breadcrumbs.first-item' => [ 'en' => 'Home', 'sl' => 'Domov' ], 
+	// dashboard
+	$p . 'dashboard.title'     => [ 'en' => 'Dashboard', 'sl' => 'Nadzorna plošča' ], 
 	
-	'common::admin.login.title'         => [ 'en' => 'Admin login', 'sl' => 'Admin prijava' ], 
-	'common::admin.login.username'      => [ 'en' => 'Username', 'sl' => 'Uporabniško ime' ], 
-	'common::admin.login.password'      => [ 'en' => 'Password', 'sl' => 'Geslo' ], 
-	'common::admin.login.login-button'  => [ 'en' => 'Login', 'sl' => 'Prijava' ], 
+	// header
+	$p . 'header.title'        => [ 'en' => 'Admin', 'sl' => 'Admin' ], 
+	$p . 'header.logged-in-as' => [ 
+		'en' => 'Logged in as <strong>:name</strong>', 
+		'sl' => 'Prijavljen/a kot <strong>:name</strong>'
+	], 
+	$p . 'header.logout'       => [ 'en' => 'Logout', 'sl' => 'Odjava' ], 
+	
+	// breadcrumbs
+	$p . 'breadcrumbs.first-item' => [ 'en' => 'Home', 'sl' => 'Domov' ], 
+	
+	// login
+	$p . 'login.title'         => [ 'en' => 'Admin login', 'sl' => 'Admin prijava' ], 
+	$p . 'login.username'      => [ 'en' => 'Username', 'sl' => 'Uporabniško ime' ], 
+	$p . 'login.password'      => [ 'en' => 'Password', 'sl' => 'Geslo' ], 
+	$p . 'login.login-button'  => [ 'en' => 'Login', 'sl' => 'Prijava' ], 
 ];

@@ -1,7 +1,7 @@
-<tr>
-	<td class="collapsing">
+<tr class="top aligned field-boolean">
+	<th class="collapsing">
 		{{ $field_title }}
-	</td>
+	</th>
 	<td>
 		<div class="field">
 			<input type="hidden" name="field[{{ $id_language }}][{{ $field['name'] }}]" 

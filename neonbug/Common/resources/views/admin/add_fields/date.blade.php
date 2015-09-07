@@ -1,7 +1,7 @@
-<tr>
-	<td class="collapsing">
+<tr class="top aligned field-date">
+	<th class="collapsing">
 		{{ $field_title }}
-	</td>
+	</th>
 	<td>
 		<div class="field">
 			<input type="text" value="{{ $formatter->formatShortDate(strtotime($field['value'])) }}" 

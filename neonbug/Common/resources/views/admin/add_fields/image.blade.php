@@ -1,7 +1,7 @@
-<tr>
-	<td class="collapsing">
+<tr class="top aligned field-image">
+	<th class="collapsing">
 		{{ $field_title }}
-	</td>
+	</th>
 	<td>
 		<div class="field">
 			<input type="file" name="field[{{ $id_language }}][{{ $field['name'] }}]" data-name="{{ $field['name'] }}" />

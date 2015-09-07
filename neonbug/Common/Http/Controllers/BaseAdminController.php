@@ -41,7 +41,8 @@ abstract class BaseAdminController extends \App\Http\Controllers\Controller {
 			$this->getAddTitle(), 
 			config($this->getConfigPrefix() . '.add.language_dependent_fields'), 
 			config($this->getConfigPrefix() . '.add.language_independent_fields'), 
-			session('messages', [])
+			session('messages', []), 
+			$this->getRoutePrefix()
 		);
 	}
 	
@@ -92,6 +93,7 @@ abstract class BaseAdminController extends \App\Http\Controllers\Controller {
 			config($this->getConfigPrefix() . '.edit.language_dependent_fields'), 
 			config($this->getConfigPrefix() . '.edit.language_independent_fields'), 
 			session('messages', []), 
+			$this->getRoutePrefix(), 
 			$item
 		);
 	}
@@ -153,6 +155,17 @@ abstract class BaseAdminController extends \App\Http\Controllers\Controller {
 		Cache::forget($this->getPackageName() . '::items');
 		
 		return [ 'success' => true ];
+	}
+	
+	public function adminCheckSlugPost()
+	{
+		$id_language = Request::input('id_language');
+		$value       = Request::input('value');
+		$id_item     = Request::input('id_item', -1);
+		
+		$valid = !App::make('ResourceRepository')->slugExists($this->getRoutePrefix(), $id_language, $value, $id_item);
+		
+		return [ 'valid' => $valid ];
 	}
 	
 }

@@ -1,7 +1,7 @@
-<tr>
-	<td class="collapsing">
+<tr class="top aligned field-single-line-text">
+	<th class="collapsing">
 		{{ $field_title }}
-	</td>
+	</th>
 	<td>
 		<div class="field">
 			<input type="text" name="field[{{ $id_language }}][{{ $field['name'] }}]" value="{{ $field['value'] }}"

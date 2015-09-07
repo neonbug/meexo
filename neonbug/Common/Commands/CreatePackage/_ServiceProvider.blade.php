@@ -103,6 +103,11 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 				'as'   => static::PREFIX . '::admin::delete', 
 				'uses' => static::ADMIN_CONTROLLER . '@adminDeletePost'
 			]);
+			
+			$router->post('check-slug', [
+				'as'   => static::PREFIX . '::admin::check-slug', 
+				'uses' => static::ADMIN_CONTROLLER . '@adminCheckSlugPost'
+			]);
 		});
 
 		parent::boot($router);

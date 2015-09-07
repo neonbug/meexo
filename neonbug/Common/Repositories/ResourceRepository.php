@@ -27,6 +27,21 @@ class ResourceRepository {
 		return (array_key_exists($table_name, $this->cached_slugs) ? $this->cached_slugs[$table_name] : array());
 	}
 	
+	public function slugExists($table_name, $id_language, $value, $id_row = -1)
+	{
+		$query = Resource::where('id_language', $id_language)
+			->where('column_name', 'slug')
+			->where('value', $value)
+			->where('table_name', $table_name);
+		
+		if ($id_row != -1)
+		{
+			$query = $query->where('id_row', '!=', $id_row);
+		}
+		
+		return ($query->count() > 0);
+	}
+	
 	/*
 	$values should be in this format:
 	[
@@ -39,7 +54,7 @@ class ResourceRepository {
 		], 
 		...
 	]
-	 */
+	*/
 	public function setValues($table_name, $id_row, Array $values)
 	{
 		$column_names = [];

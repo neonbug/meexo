@@ -151,8 +151,8 @@ class AdminHelper {
 			->loadView('common', 'admin.list', $params);
 	}
 	
-	public function adminAdd($package_name, Array $title, Array $language_dependent_fields, Array $language_independent_fields, 
-		Array $messages)
+	public function adminAdd($package_name, Array $title, Array $language_dependent_fields, 
+		Array $language_independent_fields, Array $messages, $prefix)
 	{
 		$languages = App::make('LanguageRepository')->getAll();
 		
@@ -163,18 +163,20 @@ class AdminHelper {
 		);
 		
 		$params = [
-			'package_name' => $package_name, 
-			'title'        => $title, 
-			'fields'       => $fields, 
-			'messages'     => $messages, 
-			'languages'    => $languages
+			'package_name'     => $package_name, 
+			'title'            => $title, 
+			'fields'           => $fields, 
+			'messages'         => $messages, 
+			'languages'        => $languages, 
+			'check_slug_route' => $prefix . '::admin::check-slug', 
+			'item'             => null
 		];
 		
 		return App::make('\Neonbug\Common\Helpers\CommonHelper')->loadView('common', 'admin.add', $params);
 	}
 	
-	public function adminEdit($package_name, Array $title, Array $language_dependent_fields, Array $language_independent_fields, 
-		Array $messages, $item)
+	public function adminEdit($package_name, Array $title, Array $language_dependent_fields, 
+		Array $language_independent_fields, Array $messages, $prefix, $item)
 	{
 		$languages = App::make('LanguageRepository')->getAll();
 		
@@ -186,11 +188,13 @@ class AdminHelper {
 		);
 		
 		$params = [
-			'package_name' => $package_name, 
-			'title'        => $title, 
-			'fields'       => $fields, 
-			'messages'     => $messages, 
-			'languages'    => $languages
+			'package_name'     => $package_name, 
+			'title'            => $title, 
+			'fields'           => $fields, 
+			'messages'         => $messages, 
+			'languages'        => $languages, 
+			'check_slug_route' => $prefix . '::admin::check-slug', 
+			'item'             => $item
 		];
 		
 		return App::make('\Neonbug\Common\Helpers\CommonHelper')->loadView('common', 'admin.add', $params);

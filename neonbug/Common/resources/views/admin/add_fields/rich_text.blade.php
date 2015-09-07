@@ -1,7 +1,7 @@
-<tr>
-	<td class="collapsing">
+<tr class="top aligned field-rich-text">
+	<th class="collapsing">
 		{{ $field_title }}
-	</td>
+	</th>
 	<td>
 		<div class="field">
 			<textarea name="field[{{ $id_language }}][{{ $field['name'] }}]" 

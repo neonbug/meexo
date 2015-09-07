@@ -40,7 +40,6 @@
 		init: function() {
 			admin.initCheckboxes();
 			admin.initTabs();
-			admin.initSlugs();
 			//admin.initCloseWarning();
 			admin.initRichEditors();
 			admin.initDatePicker();
@@ -54,31 +53,6 @@
 		}, 
 		initTabs: function() {
 			$('.menu .item').tab();
-		}, 
-		initSlugs: function() {
-			$('[data-type="slug"]').each(function(idx, item) {
-				var generate_from = $('[data-name="' + item.dataset.slugGenerateFrom + '"]', $(item).closest('.tab'));
-				generate_from = (generate_from.length == 0 ? null : $(generate_from.get(0)));
-				if (generate_from.length == 0) return;
-				
-				$(item).change(function() {
-					this.dataset.slugIsEmpty = (this.value.length == 0 ? 'true' : 'false');
-					if (generate_from == null || !this.dataset.slugIsEmpty) return;
-					admin.updateSlug($(item), $(generate_from));
-				});
-				
-				if (generate_from != null)
-				{
-					generate_from.keyup(function() {
-						admin.updateSlug($(item), generate_from);
-					});
-					admin.updateSlug($(item), generate_from);
-				}
-			});
-		}, 
-		updateSlug: function(slug_field, generate_from_field) {
-			if (slug_field.get(0).dataset.slugIsEmpty == 'false') return;
-			slug_field.val(getSlug(generate_from_field.val()));
 		}, 
 		initCloseWarning: function() {
 			$(window).on('beforeunload', function(e) {
@@ -228,6 +202,15 @@
 	.add .tab.segment .ui.table
 	{
 	}
+		.add .tab.segment .ui.table tr th
+		{
+			padding-top: 19px;
+		}
+		.add .tab.segment .ui.table tr.field-boolean th, 
+			.add .tab.segment .ui.table tr.field-image th
+		{
+			padding-top: 9px;
+		}
 		.add .tab.segment .ui.table tr td
 		{
 			border-top: 0px;
@@ -237,6 +220,14 @@
 			min-width: 180px;
 			font-weight: bold;
 		}
+			.add .tab.segment .ui.table .field .error-label
+			{
+				display: none;
+			}
+			.add .tab.segment .ui.table .field.error .error-label
+			{
+				display: inline-block;
+			}
 	</style>
 	
 	@yield('head', '')
