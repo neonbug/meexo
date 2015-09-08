@@ -124,7 +124,18 @@
 					return;
 				}
 				
-				$('.save-button').addClass('loading').attr('disabled', 'disabled');
+				if ($('.preview-button').hasClass('loading'))
+				{
+					$('.preview-button').removeClass('loading');
+				}
+				else
+				{
+					$('.save-button').addClass('loading').attr('disabled', 'disabled');
+				}
+			});
+			
+			$('.preview-button').click(function() {
+				$('.preview-button').addClass('loading');
 			});
 		}, 
 		initMessageClose: function() {
