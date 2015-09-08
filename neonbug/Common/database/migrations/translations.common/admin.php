@@ -5,11 +5,19 @@ return [
 	$p . 'add.tab-title-general'         => [ 'en' => 'General', 'sl' => 'Splošno' ], 
 	$p . 'add.save-button'               => [ 'en' => 'Save', 'sl' => 'Shrani' ], 
 	$p . 'add.preview-button'            => [ 'en' => 'Preview', 'sl' => 'Predogled' ], 
+	
 	$p . 'add.current-image-title'       => [ 'en' => 'Current image', 'sl' => 'Trenutna slika' ], 
 	$p . 'add.current-image-remove'      => [ 'en' => 'Remove', 'sl' => 'Odstrani' ], 
 	$p . 'add.current-image-description' => [ 
 		'en' => 'Check the checkbox below to remove this image', 
 		'sl' => 'Za odstranitev te slike, obkljukajte spodnje potrditveno polje'
+	], 
+	
+	$p . 'add.current-file-title'       => [ 'en' => 'Current file', 'sl' => 'Trenutna datoteka' ], 
+	$p . 'add.current-file-remove'      => [ 'en' => 'Remove', 'sl' => 'Odstrani' ], 
+	$p . 'add.current-file-description' => [ 
+		'en' => 'Check the checkbox below to remove this file', 
+		'sl' => 'Za odstranitev te datoteke, obkljukajte spodnje potrditveno polje'
 	], 
 	
 	$p . 'add.error-dialog-message' => [ 

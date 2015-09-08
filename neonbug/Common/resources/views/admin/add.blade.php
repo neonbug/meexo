@@ -178,7 +178,8 @@
 			<table class="ui very basic table"><tbody>
 				@foreach ($fields['language_independent'] as $field)
 					@include('common::admin.add_fields.' . $field['type'], [ 'id_language' => -1, 'field' => $field, 
-						'field_title' => trans($package_name . '::admin.add.field-title.' . $field['name']) ])
+						'field_title' => trans($package_name . '::admin.add.field-title.' . $field['name']), 
+						'prefix' => $prefix ])
 				@endforeach
 			</tbody></table>
 		</div>
@@ -189,7 +190,8 @@
 					@foreach ($fields['language_dependent'][$language->id_language] as $field)
 						@include('common::admin.add_fields.' . $field['type'], 
 							[ 'id_language' => $language->id_language, 'field' => $field, 
-								'field_title' => trans($package_name . '::admin.add.field-title.' . $field['name']) ])
+								'field_title' => trans($package_name . '::admin.add.field-title.' . $field['name']), 
+								'prefix' => $prefix ])
 					@endforeach
 				</tbody></table>
 			</div>

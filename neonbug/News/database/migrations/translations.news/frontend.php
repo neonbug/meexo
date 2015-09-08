@@ -1,4 +1,5 @@
 <?php
+$p = 'news::frontend.';
 return [
-	'news::frontend.route.prefix' => [ 'en' => 'news', 'sl' => 'novice' ], 
+	$p . 'route.prefix' => [ 'en' => 'news', 'sl' => 'novice' ], 
 ];

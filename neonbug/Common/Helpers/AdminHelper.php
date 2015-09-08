@@ -169,6 +169,7 @@ class AdminHelper {
 			'messages'         => $messages, 
 			'languages'        => $languages, 
 			'check_slug_route' => $prefix . '::admin::check-slug', 
+			'prefix'           => $prefix, 
 			'item'             => null
 		];
 		
@@ -194,6 +195,7 @@ class AdminHelper {
 			'messages'         => $messages, 
 			'languages'        => $languages, 
 			'check_slug_route' => $prefix . '::admin::check-slug', 
+			'prefix'           => $prefix, 
 			'item'             => $item
 		];
 		

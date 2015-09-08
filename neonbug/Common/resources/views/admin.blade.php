@@ -207,7 +207,8 @@
 			padding-top: 19px;
 		}
 		.add .tab.segment .ui.table tr.field-boolean th, 
-			.add .tab.segment .ui.table tr.field-image th
+			.add .tab.segment .ui.table tr.field-image th, 
+			.add .tab.segment .ui.table tr.field-file th
 		{
 			padding-top: 9px;
 		}
@@ -227,6 +228,12 @@
 			.add .tab.segment .ui.table .field.error .error-label
 			{
 				display: inline-block;
+			}
+			.field-file-current .card > a
+			{
+				padding: 24px;
+				background-color: #f2711c;
+				color: #ffffff;
 			}
 	</style>
 	
