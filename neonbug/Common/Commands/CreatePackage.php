@@ -96,7 +96,14 @@ class CreatePackage extends Command {
 		
 		foreach ($templates as $template_source=>$template_destination)
 		{
-			$contents = $this->view_factory->file($template_path . $template_source . '.blade.php')
+			$filename = $template_path . $template_source . '.php';
+			if (!file_exists($filename))
+			{
+				$filename = $template_path . $template_source . '.blade.php';
+			}
+			if (!file_exists($filename)) continue;
+			
+			$contents = $this->view_factory->file($filename)
 				->with('package_name', 				$name)
 				->with('lowercase_package_name', 	mb_strtolower($name))
 				->with('table_name', 				$table_name)
@@ -120,10 +127,11 @@ class CreatePackage extends Command {
 		//inform user we're done
 		$this->info('Done!');
 		$this->info('You should now:');
-		$this->info('1) add table columns in file database/migrations/' . $migration_name . ', ');
+		$this->info('1) add table columns in file database/migrations/' . $create_table_migration_name . ', ');
 		$this->info('2) add some fields in file config/' . $config_prefix . '.php, ');
-		$this->info('3) add Neonbug\\' . $name . '\Providers\ServiceProvider to $package_providers array in file /config/app.php, ');
-		$this->info('4) run php artisan vendor:publish and php artisan migrate.');
+		$this->info('3) add translations in files ' . $trans_dir . 'admin.php and ' . $trans_dir . 'frontend.php, ');
+		$this->info('4) add Neonbug\\' . $name . '\Providers\ServiceProvider to $package_providers array in file /config/app.php, ');
+		$this->info('5) run php artisan vendor:publish and php artisan migrate.');
 	}
 
 	/**

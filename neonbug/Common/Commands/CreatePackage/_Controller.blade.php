@@ -1,6 +1,7 @@
 namespace Neonbug\{{ $package_name }}\Controllers;
 
 use App;
+use Cache;
 
 class Controller extends \App\Http\Controllers\Controller {
 	
