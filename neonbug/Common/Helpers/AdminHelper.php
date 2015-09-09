@@ -202,13 +202,10 @@ class AdminHelper {
 		return App::make('\Neonbug\Common\Helpers\CommonHelper')->loadView('common', 'admin.add', $params);
 	}
 	
-	public function handleAdminAdd(Array $fields, Array $files, $model_class, $id_user, 
-		Array $language_independent_fields, Array $language_dependent_fields, $prefix)
+	public function handleAdminAddEdit(Array $fields, Array $files, $id_user, 
+		Array $language_independent_fields, Array $language_dependent_fields, $prefix, $item, $route_postfix)
 	{
 		$errors = []; //[ 'general' => 'DB error' ];
-		
-		$item = new $model_class();
-		$item->id_user = $id_user;
 		
 		$map = function($field) { return $field['name']; };
 		$allowed_lang_independent_fields = array_map($map, $language_independent_fields);
@@ -235,10 +232,10 @@ class AdminHelper {
 		
 		if (sizeof($errors) > 0)
 		{
-			return redirect(route($prefix . '::admin::add'))
+			return redirect(route($prefix . '::admin::' . $route_postfix, [ $item->{$item->getKeyName()} ]))
 				->withErrors($errors);
 		}
-		return redirect(route($prefix . '::admin::add'))
+		return redirect(route($prefix . '::admin::' . $route_postfix, [ $item->{$item->getKeyName()} ]))
 			->with([
 				'messages' => [ 'Saved' ]
 			]);
@@ -273,45 +270,6 @@ class AdminHelper {
 				->withErrors($errors);
 		}
 		return redirect(route($prefix . '::preview', [ $key ]))
-			->with([
-				'messages' => [ 'Saved' ]
-			]);
-	}
-	
-	public function handleAdminEdit(Array $fields, Array $files, $model_class, $id_user, 
-		Array $language_independent_fields, Array $language_dependent_fields, $prefix, $item)
-	{
-		$errors = []; //[ 'general' => 'DB error' ];
-		
-		$map = function($field) { return $field['name']; };
-		$allowed_lang_independent_fields = array_map($map, $language_independent_fields);
-		$allowed_lang_dependent_fields   = array_map($map, $language_dependent_fields);
-		
-		// handle files
-		$file_fields = $this->handleFileUpload($fields, $files, $prefix);
-		
-		$all_fields = $fields;
-		foreach ($file_fields as $id_language=>$file_field_arr)
-		{
-			if (!array_key_exists($id_language, $all_fields))
-			{
-				$all_fields[$id_language] = [];
-			}
-			foreach ($file_field_arr as $field_name=>$file_field)
-			{
-				$all_fields[$id_language][$field_name] = $file_field;
-			}
-		}
-		
-		App::make('\Neonbug\Common\Helpers\AdminHelper')
-			->fillAndSaveItem($item, $all_fields, $allowed_lang_independent_fields, $allowed_lang_dependent_fields);
-		
-		if (sizeof($errors) > 0)
-		{
-			return redirect(route($prefix . '::admin::edit', [ $item->{$item->getKeyName()} ]))
-				->withErrors($errors);
-		}
-		return redirect(route($prefix . '::admin::edit', [ $item->{$item->getKeyName()} ]))
 			->with([
 				'messages' => [ 'Saved' ]
 			]);

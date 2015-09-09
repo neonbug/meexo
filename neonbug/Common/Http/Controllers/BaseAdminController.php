@@ -48,19 +48,40 @@ abstract class BaseAdminController extends \App\Http\Controllers\Controller {
 	
 	public function adminAddPost()
 	{
-		if (Request::input('preview') !== null)
-		{
-			return $this->adminAddPreviewPost();
-		}
+		$is_preview = (Request::input('preview') !== null);
 		
-		$retval = $this->admin_helper->handleAdminAdd(
+		$model = $this->getModel();
+		$item = new $model();
+		
+		return $this->adminAddPostHandle(
+			$is_preview, 
+			$item, 
 			Request::input('field'), //first level keys are language ids, second level are field names
 			Request::file('field'), //first level keys are language ids, second level are field names
-			$this->getModel(), 
 			Auth::user()->id_user, 
 			config($this->getConfigPrefix() . '.add.language_independent_fields'), 
 			config($this->getConfigPrefix() . '.add.language_dependent_fields'), 
 			$this->getRoutePrefix()
+		);
+	}
+	
+	protected function adminAddPostHandle($is_preview, $item, $fields, $files, $id_user, $lang_independent_fields, 
+		$lang_dependent_fields, $route_prefix)
+	{
+		if ($is_preview)
+		{
+			return $this->adminAddPreviewPost();
+		}
+		
+		$retval = $this->admin_helper->handleAdminAddEdit(
+			$fields, 
+			$files, 
+			$id_user, 
+			$lang_independent_fields, 
+			$lang_dependent_fields, 
+			$route_prefix, 
+			$item, 
+			'add'
 		);
 		
 		Cache::forget($this->getPackageName() . '::items');
@@ -100,23 +121,40 @@ abstract class BaseAdminController extends \App\Http\Controllers\Controller {
 	
 	public function adminEditPost($id)
 	{
-		if (Request::input('preview') !== null)
-		{
-			return $this->adminEditPreviewPost($id);
-		}
+		$is_preview = (Request::input('preview') !== null);
 		
 		$model = $this->getModel();
 		$item = $model::findOrFail($id);
 		
-		$retval = $this->admin_helper->handleAdminEdit(
+		return $this->adminEditPostHandle(
+			$is_preview, 
+			$item, 
 			Request::input('field'), //first level keys are language ids, second level are field names
 			Request::file('field'), //first level keys are language ids, second level are field names
-			$model, 
 			Auth::user()->id_user, 
-			config($this->getConfigPrefix() . '.edit.language_independent_fields'), 
-			config($this->getConfigPrefix() . '.edit.language_dependent_fields'), 
-			$this->getRoutePrefix(), 
-			$item
+			config($this->getConfigPrefix() . '.add.language_independent_fields'), 
+			config($this->getConfigPrefix() . '.add.language_dependent_fields'), 
+			$this->getRoutePrefix()
+		);
+	}
+	
+	protected function adminEditPostHandle($is_preview, $item, $fields, $files, $id_user, $lang_independent_fields, 
+		$lang_dependent_fields, $route_prefix)
+	{
+		if ($is_preview)
+		{
+			return $this->adminEditPreviewPost($item->{$item->getKeyName()});
+		}
+		
+		$retval = $this->admin_helper->handleAdminAddEdit(
+			$fields, 
+			$files, 
+			$id_user, 
+			$lang_independent_fields, 
+			$lang_dependent_fields, 
+			$route_prefix, 
+			$item, 
+			'edit'
 		);
 		
 		Cache::forget($this->getPackageName() . '::item::' . $item->{$item->getKeyName()});

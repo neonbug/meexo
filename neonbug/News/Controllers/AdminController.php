@@ -1,5 +1,8 @@
 <?php namespace Neonbug\News\Controllers;
 
+use Request;
+use Auth;
+
 class AdminController extends \Neonbug\Common\Http\Controllers\BaseAdminController {
 	
 	const CONFIG_PREFIX = 'neonbug.news';
@@ -29,5 +32,25 @@ class AdminController extends \Neonbug\Common\Http\Controllers\BaseAdminControll
 		trans($this->getPackageName() . '::admin.title.main'), 
 		trans($this->getPackageName() . '::admin.title.edit')
 	]; }
+	
+	public function adminAddPost()
+	{
+		$is_preview = (Request::input('preview') !== null);
+		
+		$model = $this->getModel();
+		$item = new $model();
+		$item->id_user = Auth::user()->id_user;
+		
+		return $this->adminAddPostHandle(
+			$is_preview, 
+			$item, 
+			Request::input('field'), //first level keys are language ids, second level are field names
+			Request::file('field'), //first level keys are language ids, second level are field names
+			Auth::user()->id_user, 
+			config($this->getConfigPrefix() . '.add.language_independent_fields'), 
+			config($this->getConfigPrefix() . '.add.language_dependent_fields'), 
+			$this->getRoutePrefix()
+		);
+	}
 	
 }
