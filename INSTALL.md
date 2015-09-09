@@ -109,4 +109,18 @@ E.g. you can find News views in `resources/views/vendor/news/` directory.
 
 ## 10. Writing your own Neonbug packages
 
-//TODO: write this section
+//TODO: extend this section
+
+### 10.1. Creating your own package
+
+To create your own package, issue this command in your terminal:
+
+```
+php artisan make:neonbug-package PackageName
+```
+
+### 10.2. Creating your own add/edit field type
+  
+To create your own field type, copy an existing field view from `/neonbug/Common/resources/views/admin/add_fields/` to your package's views directory, e.g. `/neonbug/YourPackageName/resources/views/admin/add_fields/`.
+
+To use it, edit the appropriate config file. Instead of using a common field type (e.g. `single_line_text`) in field's `type` property, enter the full path to your field view, e.g. `your_package_name::admin.add_fields.custom_field_type`.

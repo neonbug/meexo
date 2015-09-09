@@ -188,9 +188,17 @@
 		<div class="ui bottom attached active tab segment" data-tab="general">
 			<table class="ui very basic table"><tbody>
 				@foreach ($fields['language_independent'] as $field)
-					@include('common::admin.add_fields.' . $field['type'], [ 'id_language' => -1, 'field' => $field, 
+					<?php
+					$type = (stripos($field['type'], '::') !== false ? $field['type'] : 
+						'common::admin.add_fields.' . $field['type']);
+					$params = [ 
+						'id_language' => -1, 
+						'field' => $field, 
 						'field_title' => trans($package_name . '::admin.add.field-title.' . $field['name']), 
-						'prefix' => $prefix ])
+						'prefix' => $prefix
+					];
+					?>
+					@include($type, $params)
 				@endforeach
 			</tbody></table>
 		</div>
@@ -199,10 +207,17 @@
 			<div class="ui bottom attached tab segment" data-tab="{{ $language->locale }}">
 				<table class="ui very basic table"><tbody>
 					@foreach ($fields['language_dependent'][$language->id_language] as $field)
-						@include('common::admin.add_fields.' . $field['type'], 
-							[ 'id_language' => $language->id_language, 'field' => $field, 
-								'field_title' => trans($package_name . '::admin.add.field-title.' . $field['name']), 
-								'prefix' => $prefix ])
+						<?php
+						$type = (stripos($field['type'], '::') !== false ? $field['type'] : 
+							'common::admin.add_fields.' . $field['type']);
+						$params = [ 
+							'id_language' => $language->id_language, 
+							'field' => $field, 
+							'field_title' => trans($package_name . '::admin.add.field-title.' . $field['name']), 
+							'prefix' => $prefix
+						];
+						?>
+						@include($type, $params)
 					@endforeach
 				</tbody></table>
 			</div>
