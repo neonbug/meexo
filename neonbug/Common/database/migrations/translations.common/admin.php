@@ -64,4 +64,6 @@ return [
 	$p . 'login.username'      => [ 'en' => 'Username', 'sl' => 'Uporabniško ime' ], 
 	$p . 'login.password'      => [ 'en' => 'Password', 'sl' => 'Geslo' ], 
 	$p . 'login.login-button'  => [ 'en' => 'Login', 'sl' => 'Prijava' ], 
+	
+	$p . 'validation.required' => [ 'en' => 'The :attribute field is required.', 'sl' => 'Polje :attribute je obvezno.' ], 
 ];

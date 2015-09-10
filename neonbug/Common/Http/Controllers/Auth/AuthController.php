@@ -60,6 +60,8 @@ class AuthController extends Controller {
 	{
 		$this->validate($request, [
 			'username' => 'required', 'password' => 'required',
+		], [ 
+			'required' => trans('common::admin.validation.required')
 		]);
 		
 		$return_url = $request->input('return_url', '');

@@ -32,7 +32,7 @@ class DatabaseLoader implements \Illuminate\Translation\LoaderInterface {
 	{
 		if (is_null($namespace) || $namespace == '*')
 		{
-			return $this->loadData($locale, $group);
+			return $this->loadData($locale, $group, 'common');
 		}
 
 		return $this->loadNamespaced($locale, $group, $namespace);
