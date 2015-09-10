@@ -1,0 +1,130 @@
+body
+{
+	height: 100%;
+}
+.main
+{
+	display: flex;
+	flex-direction: row;
+	min-height: 100%;
+}
+	.main-menu
+	{
+		flex: 0 0 auto;
+		width: 260px;
+		
+		background-color: #1b1c1d;
+		min-height: 100%;
+	}
+		/* Smartphones (portrait and landscape) ----------- */
+		@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+			.main-menu
+			{
+				display: none;
+			}
+		}
+		.main-menu > .header
+		{
+			color: #ffffff;
+			text-align: center;
+			
+			height: 50px;
+			line-height: 50px;
+			margin: 0px;
+		}
+		.main-menu .ui.menu
+		{
+			margin-top: 0px;
+		}
+			.main-menu .ui.menu .item
+			{
+				padding: 1.5em 1.5em;
+				font-weight: bold;
+			}
+			.main-menu .ui.menu .item.level-two
+			{
+				color: #999999;
+				padding: 1.0em 4.5em;
+			}
+			.main-menu .ui.menu .item.header
+			{
+				text-transform: uppercase;
+			}
+				.main-menu .ui.vertical.menu .item > i.icon
+				{
+					float: left;
+					margin-right: 1.3em;
+				}
+	.main-content
+	{
+		flex: 1 1 auto;
+	}
+		.admin-top-menu-divider
+		{
+			display: inline;
+			border-left: 1px solid #ffffff;
+			margin-left: 12px;
+			margin-right: 12px;
+		}
+		.admin-top-menu strong
+		{
+			color: #ffffff;
+		}
+		.admin-top-menu a
+		{
+			border-bottom: 1px dotted #ffffff;
+		}
+		.admin-top-menu a:hover
+		{
+			border-bottom: 0px;
+		}
+		
+		.main-content .main-inner-content
+		{
+			padding: 24px;
+			padding-top: 10px;
+		}
+.inverted a
+{
+	color: #ffffff;
+}
+.ui.label.only-icon > .icon
+{
+	margin: 0px;
+}
+.add .tab.segment .ui.table
+{
+}
+	.add .tab.segment .ui.table tr th
+	{
+		padding-top: 19px;
+	}
+	.add .tab.segment .ui.table tr.field-boolean th, 
+		.add .tab.segment .ui.table tr.field-image th, 
+		.add .tab.segment .ui.table tr.field-file th
+	{
+		padding-top: 9px;
+	}
+	.add .tab.segment .ui.table tr td
+	{
+		border-top: 0px;
+	}
+	.add .tab.segment .ui.table td:first-child
+	{
+		min-width: 180px;
+		font-weight: bold;
+	}
+		.add .tab.segment .ui.table .field .error-label
+		{
+			display: none;
+		}
+		.add .tab.segment .ui.table .field.error .error-label
+		{
+			display: inline-block;
+		}
+		.field-file-current .card > a
+		{
+			padding: 24px;
+			background-color: #f2711c;
+			color: #ffffff;
+		}

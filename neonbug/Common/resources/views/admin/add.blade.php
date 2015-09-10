@@ -2,151 +2,23 @@
 
 @section('head')
 	<script type="text/javascript">
-	var add = {
-		current_ajax_requests: {}, 
-		
-		init: function() {
-			add.initSlugs();
-			add.initSaveButton();
-			add.initMessageClose();
-		}, 
-		initSlugs: function() {
-			$('[data-type="slug"]').each(function(idx, item) {
-				var generate_from = $('[data-name="' + item.dataset.slugGenerateFrom + '"]', $(item).closest('.tab'));
-				generate_from = (generate_from.length == 0 ? null : $(generate_from.get(0)));
-				if (generate_from.length == 0) return;
-				
-				$(item).change(function() {
-					this.dataset.slugIsEmpty = (this.value.length == 0 ? 'true' : 'false');
-					
-					if (generate_from == null) return;
-					
-					if (this.dataset.slugIsEmpty == 'true')
-					{
-						add.updateSlug($(item), $(generate_from));
-					}
-					add.checkSlug($(item));
-				});
-				
-				if (generate_from != null)
-				{
-					generate_from.keyup(function() {
-						add.updateSlug($(item), generate_from);
-						add.checkSlug($(item));
-					});
-					add.updateSlug($(item), generate_from);
-				}
-			});
-		}, 
-		updateSlug: function(slug_field, generate_from_field) {
-			if (slug_field.get(0).dataset.slugIsEmpty == 'false') return;
-			slug_field.val(getSlug(generate_from_field.val()));
-		}, 
-		checkSlug: function(slug_field) {
-			var value = slug_field.val();
-			var name = slug_field.attr('name');
-			
-			if (add.current_ajax_requests[name] != undefined)
-			{
-				add.current_ajax_requests[name].abort();
-				add.current_ajax_requests[name] = undefined;
-			}
-			
-			var field = $('.field[data-name="' + slug_field.attr('name') + '"]');
-			var error_label = $('.error-label', field);
-			
-			if (value.length == 0)
-			{
-				error_label.html({!! json_encode(trans('common::admin.add.errors.slug-empty')) !!});
-				add.markSlugField(slug_field, true);
-			}
-			else
-			{
-				var icon_div = $('.field[data-name="' + name + '"] .ui.icon.input');
-				icon_div.addClass('loading');
-				field.addClass('loading');
-				
-				var post_data = {
-					value: value, 
-					id_language: slug_field.data('id-language'), 
-					id_item: {{ $item == null ? -1 : $item->{$item->getKeyName()} }}
-				};
-				
-				add.current_ajax_requests[name] = $.post({!! json_encode(route($check_slug_route)) !!}, post_data, 
-					function(data) {
-					add.current_ajax_requests[name] = undefined;
-					
-					//TODO check for generic errors, like TokenMismatch (should catch it in Error handler of ajax response); do sth smart in that case .. like .. reload?
-					
-					error_label.html({!! json_encode(trans('common::admin.add.errors.slug-already-exists')) !!});
-					add.markSlugField(slug_field, !data.valid);
-				}, 'json');
-			}
-		}, 
-		markSlugField: function(slug_field, is_error) {
-			var field = $('.field[data-name="' + slug_field.attr('name') + '"]');
-			var icon_div = $('.field[data-name="' + slug_field.attr('name') + '"] .ui.icon.input');
-			var icon = $('.field[data-name="' + slug_field.attr('name') + '"] .ui.icon.input .icon');
-			
-			icon_div.removeClass('loading');
-			field.removeClass('loading');
-			if (is_error)
-			{
-				field.addClass('error');
-				icon.removeClass('checkmark').addClass('remove');
-			}
-			else
-			{
-				field.removeClass('error');
-				icon.removeClass('remove').addClass('checkmark');
-			}
-		}, 
-		
-		initSaveButton: function() {
-			$('form.add').submit(function(e) {
-				//if we're still loading stuff, don't continue
-				if ($('.field.loading').length > 0)
-				{
-					e.preventDefault();
-					//TODO inform user why nothing is happening
-					return;
-				}
-				
-				//if there are errors on the form, tell that to the user, and don't continue
-				if ($('.field.error').length > 0)
-				{
-					e.preventDefault();
-					
-					$('.errors-modal').modal({
-						blurring: true
-					}).modal('show');
-					
-					return;
-				}
-				
-				if ($('.preview-button').hasClass('loading'))
-				{
-					$('.preview-button').removeClass('loading');
-				}
-				else
-				{
-					$('.save-button').addClass('loading').attr('disabled', 'disabled');
-				}
-			});
-			
-			$('.preview-button').click(function() {
-				$('.preview-button').addClass('loading');
-			});
-		}, 
-		initMessageClose: function() {
-			$('.message .close').on('click', function() {
-				$(this).parent().transition('fade down');
-			});
+	var trans = {
+		errors: {
+			slug_empty: {!! json_encode(trans('common::admin.add.errors.slug-empty')) !!}, 
+			slug_already_exists: {!! json_encode(trans('common::admin.add.errors.slug-already-exists')) !!}
 		}
 	};
 	
-	$(document).ready(function() {
-		add.init();
+	var config = {
+		id_item: {{ $item == null ? -1 : $item->{$item->getKeyName()} }}, 
+		check_slug_route: {!! json_encode(route($check_slug_route)) !!}, 
+		formatter_date_pattern: {!! json_encode($formatter->getShortDatePattern()) !!}
+	};
+	
+	requirejs([
+		'moment', //we need this here because of Pikaday
+		'app/modules/add' ], function(moment, add) {
+		add.init(trans, config);
 	});
 	</script>
 @stop

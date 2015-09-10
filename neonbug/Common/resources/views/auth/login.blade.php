@@ -6,45 +6,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{{ trans('common::admin.login.title') }}</title>
 	
-	<script src="{{ cached_asset('vendor/common/admin_assets/jquery-2.1.4.min.js') }}"></script>
-	
-	<script src="{{ cached_asset('vendor/common/admin_assets/semanticui/semantic.min.js') }}"></script>
-	<link rel="stylesheet" type="text/css" href="{{ cached_asset('vendor/common/admin_assets/semanticui/semantic.min.css') }}" />
-	
-	<style type="text/css">
-	html { height: 100%; }
-	body
-	{
-		height: 100%;
-		padding: 24px;
-	}
-		body > div
-		{
-			height: 100%;
-		}
-			@media (min-height: 800px) {
-				body > div > div
-				{
-					margin-bottom: 160px;
-				}
-			}
-	.column
-	{
-		max-width: 380px;
-	}
-	.ui.form
-	{
-		box-shadow: 0 7px 12px 0 rgba(0, 0, 0, 0.25);
-	}
-	</style>
-	
-	<script type="text/javascript">
-	$(document).ready(function() {
-		$('form').submit(function(e) {
-			$('button[type="submit"]').addClass('loading');
-		});
-	});
-	</script>
+	<script src="{{ cached_asset('vendor/common/admin_assets/js/jquery-2.1.4.min.js') }}"></script>
+	<script src="{{ cached_asset('vendor/common/admin_assets/js/semanticui/semantic.min.js') }}"></script>
+	<script src="{{ cached_asset('vendor/common/admin_assets/js/require.js') }}" 
+		data-main="{{ url() . '/vendor/common/admin_assets/js/login' }}"></script>
+
+	<link rel="stylesheet" type="text/css" 
+		href="{{ cached_asset('vendor/common/admin_assets/js/semanticui/semantic.min.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ cached_asset('vendor/common/admin_assets/css/login.css') }}" />
 </head>
 <body>
 

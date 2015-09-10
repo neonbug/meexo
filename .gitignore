@@ -3,4 +3,4 @@
 .env
 /public/vendor
 /public/thumbs
-/uploads
+/public/uploads

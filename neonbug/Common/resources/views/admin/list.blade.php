@@ -2,32 +2,13 @@
 
 @section('head')
 	<script type="text/javascript">
-	$(document).ready(function() {
-		@if ($delete_route != null)
-			$('.delete-item').click(function() {
-				var id_item = this.dataset.idItem;
-				var modal = $('.delete-item-modal');
-				
-				modal.modal({
-					blurring: true, 
-					onApprove: function() {
-						$('.ui.ok', modal).addClass('loading');
-						
-						$.post({!! json_encode(route($delete_route)) !!}, { id: id_item }, function(data) {
-							//TODO check data.success
-							//TODO also check for generic errors, like TokenMismatch (should catch it in Error handler of ajax response); do sth smart in that case .. like .. reload?
-							
-							modal.modal('hide');
-							$('.ui.ok', modal).removeClass('loading');
-							
-							document.location.reload();
-						}, 'json');
-						
-						return false;
-					}
-				}).modal('show');
-			});
-		@endif
+	var trans = {};
+	var config = {
+		delete_route: {!! json_encode($delete_route === null ? null : route($delete_route)) !!}
+	};
+	
+	requirejs([ 'app/modules/list' ], function(list) {
+		list.init(trans, config);
 	});
 	</script>
 @stop
