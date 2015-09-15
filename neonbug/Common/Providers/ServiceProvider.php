@@ -52,6 +52,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 			{
 				if (stripos($route->getName(), '::admin::') !== false)
 				{
+					if (!in_array('admin.menu', $route->middleware())) continue;
 					if (!in_array('GET', $route->getMethods())) continue; //only list routes for GET
 					if (sizeof($route->parameterNames()) > 0) continue;
 					

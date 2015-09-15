@@ -73,7 +73,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 		});
 		
 		//admin
-		$router->group([ 'prefix' => $locale . '/admin/' . static::PREFIX, 'middleware' => [ 'auth.admin' ], 
+		$router->group([ 'prefix' => $locale . '/admin/' . static::PREFIX, 'middleware' => [ 'auth.admin', 'admin.menu' ], 
 			'role' => static::ROLE ], function($router)
 		{
 			$router->get('list', [
@@ -98,7 +98,11 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 				'as'   => static::PREFIX . '::admin::edit-save', 
 				'uses' => static::ADMIN_CONTROLLER . '@adminEditPost'
 			]);
-			
+		});
+
+		$router->group([ 'prefix' => $locale . '/admin/' . static::PREFIX, 'middleware' => [ 'auth.admin' ], 
+			'role' => static::ROLE ], function($router)
+		{
 			$router->post('delete', [
 				'as'   => static::PREFIX . '::admin::delete', 
 				'uses' => static::ADMIN_CONTROLLER . '@adminDeletePost'

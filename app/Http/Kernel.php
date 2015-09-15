@@ -28,6 +28,7 @@ class Kernel extends HttpKernel {
 		'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
 		'guest' => 'App\Http\Middleware\RedirectIfAuthenticated',
 		'auth.admin' => 'Neonbug\Common\Http\Middleware\AuthenticateAdmin',
+		'admin.menu' => 'Neonbug\Common\Http\Middleware\AdminMenu',
 		'online' => 'Neonbug\Common\Http\Middleware\Online',
 	];
 
