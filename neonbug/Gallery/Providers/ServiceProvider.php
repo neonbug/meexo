@@ -74,7 +74,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 		
 		//admin
 		$router->group([ 'prefix' => $locale . '/admin/' . static::PREFIX, 'middleware' => [ 'auth.admin', 'admin.menu' ], 
-			'role' => static::ROLE ], function($router)
+			'role' => static::ROLE, 'menu.icon' => 'file image outline' ], function($router)
 		{
 			$router->get('list', [
 				'as'   => static::PREFIX . '::admin::list', 

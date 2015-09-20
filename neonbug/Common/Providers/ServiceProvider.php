@@ -83,6 +83,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 					{
 						$menu_items[$arr[0]] = [
 							'title' => $arr[0], 
+							'icon' => (array_key_exists('menu.icon', $route->getAction()) ? 
+								$route->getAction()['menu.icon'] : 'arrow right'), 
 							'items' => []
 						];
 					}

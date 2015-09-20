@@ -10,7 +10,7 @@
 	
 	@foreach ($menu_items as $group_item)
 		<div class="header item">
-			<i class="newspaper icon"></i>
+			<i class="{{ $group_item['icon'] }} icon"></i>
 			{{ trans($group_item['title'] . '::admin.menu.main') }}
 		</div>
 		@foreach ($group_item['items'] as $menu_item)
