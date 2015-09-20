@@ -18,10 +18,11 @@
 	<script type="text/javascript">
 	var require = {
 		paths: {
-			//jquery:      'jquery-2.1.4.min', 
+			jquery:      'jquery-2.1.4.min', 
 			moment:      'moment-with-locales.min', 
 			speakingurl: 'speakingurl.min', 
-			pikaday:     'pikaday/pikaday'
+			pikaday:     'pikaday/pikaday', 
+			sortable:    'html.sortable.min'
 		}, 
 		config: {
 			moment: { noGlobal: true }
@@ -32,6 +33,8 @@
 	<script src="{{ cached_asset('vendor/common/admin_assets/js/jquery-2.1.4.min.js') }}"></script>
 	<script src="{{ cached_asset('vendor/common/admin_assets/js/semanticui/semantic.min.js') }}"></script>
 	<script src="{{ cached_asset('vendor/common/admin_assets/js/ckeditor/ckeditor.js') }}"></script>
+	<script src="{{ cached_asset('vendor/common/admin_assets/js/flow.min.js') }}"></script>
+	<script src="{{ cached_asset('vendor/common/admin_assets/js/html.sortable.min.js') }}"></script>
 	<script src="{{ cached_asset('vendor/common/admin_assets/js/require.js') }}" 
 		data-main="{{ url() . '/vendor/common/admin_assets/js/main' }}"></script>
 

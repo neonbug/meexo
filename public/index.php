@@ -8,6 +8,20 @@
 
 /*
 |--------------------------------------------------------------------------
+| Include Helper Overrides
+|--------------------------------------------------------------------------
+| 
+| Allows to predefine some functions (esp. helper functions), since 
+| Laravel won't redefine them, if they're already defined.
+| And we can't override them somewhere else, because they're not in a 
+| class.
+| 
+*/
+
+require __DIR__.'/../bootstrap/helper_overrides.php';
+
+/*
+|--------------------------------------------------------------------------
 | Register The Auto Loader
 |--------------------------------------------------------------------------
 |

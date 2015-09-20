@@ -97,7 +97,7 @@ return array(
 	 *
 	 * @var string|boolean
 	 */
-	'signing_key' => 'app.key',
+	'signing_key' => false, //'app.key',
 
 	/*
 	|-----------------------------------------------------------------------------

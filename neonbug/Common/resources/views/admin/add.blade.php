@@ -21,6 +21,33 @@
 		add.init(trans, config);
 	});
 	</script>
+	
+	<?php
+	$unique_types = [];
+	?>
+	@foreach ($fields['language_independent'] as $field)
+		<?php
+		$type = (stripos($field['type'], '::') !== false ? $field['type'] : 
+			'common::admin.add_fields.' . $field['type']);
+		if (!in_array($type, $unique_types)) $unique_types[] = $type;
+		?>
+	@endforeach
+	@foreach ($languages as $language)
+		<?php if (!array_key_exists($language->id_language, $fields['language_dependent'])) continue; ?>
+		@foreach ($fields['language_dependent'][$language->id_language] as $field)
+			<?php
+			$type = (stripos($field['type'], '::') !== false ? $field['type'] : 
+				'common::admin.add_fields.' . $field['type']);
+			if (!in_array($type, $unique_types)) $unique_types[] = $type;
+			?>
+		@endforeach
+	@endforeach
+	
+	@foreach ($unique_types as $type)
+		@if (view()->exists($type . '--head'))
+			@include($type . '--head')
+		@endif
+	@endforeach
 @stop
 
 @section('content')
@@ -64,6 +91,7 @@
 					$type = (stripos($field['type'], '::') !== false ? $field['type'] : 
 						'common::admin.add_fields.' . $field['type']);
 					$params = [ 
+						'item' => $item, 
 						'id_language' => -1, 
 						'field' => $field, 
 						'field_title' => trans($package_name . '::admin.add.field-title.' . $field['name']), 
@@ -83,6 +111,7 @@
 						$type = (stripos($field['type'], '::') !== false ? $field['type'] : 
 							'common::admin.add_fields.' . $field['type']);
 						$params = [ 
+							'item' => $item, 
 							'id_language' => $language->id_language, 
 							'field' => $field, 
 							'field_title' => trans($package_name . '::admin.add.field-title.' . $field['name']), 
