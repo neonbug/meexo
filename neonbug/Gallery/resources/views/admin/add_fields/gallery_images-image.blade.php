@@ -18,9 +18,10 @@
 			href="#" 
 		@else
 			data-id="{{ $image }}" 
-			href="{{ Croppa::url('uploads/gallery/' . $item->{$item->getKeyName()} . '/' . $field['name'] . '/' . $image) }}" 
+			href="{{ Croppa::url('uploads/gallery/' . $item->{$item->getKeyName()} . '/' . 
+				($id_language == -1 ? 0 : $id_language) . '/' . $field['name'] . '/' . $image) }}" 
 			style="background-image: url('{{ Croppa::url('uploads/gallery/' . $item->{$item->getKeyName()} . '/' . 
-				$field['name'] . '/' . $image, 180, 120) }}');" 
+				($id_language == -1 ? 0 : $id_language) . '/' . $field['name'] . '/' . $image, 180, 120) }}');" 
 		@endif
 		>
 		

@@ -80,7 +80,7 @@ class AdminController extends \Neonbug\Common\Http\Controllers\BaseAdminControll
 			foreach ($language_dependent_fields as $field)
 			{
 				if ($field['type'] != 'gallery::admin.add_fields.gallery_images') continue;
-				$item->gallery_images[$id_language][$field['name']] = [];
+				$item->gallery_images[$language->id_language][$field['name']] = [];
 			}
 		}
 		
@@ -221,7 +221,12 @@ class AdminController extends \Neonbug\Common\Http\Controllers\BaseAdminControll
 		$temp_dir = '../storage/app/temp/' . $this->getRoutePrefix() . '/' . $upload_dir;
 		if (!file_exists($temp_dir))
 		{
-			mkdir($temp_dir, 0777, true);
+			// create dir, but suppress possible errors
+			// since we're checking for dir existance, errors should occur, but they do, 
+			//    because of concurrent requests (request A notices this dir doesn't exist yet, 
+			//    but before it can create it, request B does so; so when request A tries to create it, 
+			//    it fails miserably)
+			@mkdir($temp_dir, 0777, true);
 		}
 		
 		$config = new \Flow\Config();
@@ -244,7 +249,12 @@ class AdminController extends \Neonbug\Common\Http\Controllers\BaseAdminControll
 			
 			if (!file_exists($dir))
 			{
-				mkdir($dir, 0777, true);
+				// create dir, but suppress possible errors
+				// since we're checking for dir existance, errors should occur, but they do, 
+				//    because of concurrent requests (request A notices this dir doesn't exist yet, 
+				//    but before it can create it, request B does so; so when request A tries to create it, 
+				//    it fails miserably)
+				@mkdir($dir, 0777, true);
 			}
 			
 			if (!$file->save($dir . '/' . $filename))
@@ -300,7 +310,7 @@ class AdminController extends \Neonbug\Common\Http\Controllers\BaseAdminControll
 							$image_filename;
 						
 						$destination_dir = 'uploads/' . $this->getRoutePrefix() . '/' . $id_item . '/' . 
-							$field_name_clean;
+							($id_language == -1 ? 0 : $id_language) . '/' . $field_name_clean;
 						$destination_path = $destination_dir . '/' . $image_filename;
 						
 						if (!file_exists($destination_dir))
@@ -331,8 +341,8 @@ class AdminController extends \Neonbug\Common\Http\Controllers\BaseAdminControll
 				// delete missing images
 				foreach ($existing_image_name_to_objs as $name=>$image_item)
 				{
-					$filename = 'uploads/' . $this->getRoutePrefix() . '/' . $field_name_clean . '/' . 
-						$id_item . '/' . $name;
+					$filename = 'uploads/' . $this->getRoutePrefix() . '/' . $id_item . '/' . 
+						($id_language == -1 ? 0 : $id_language) . '/' . $field_name_clean . '/' . $name;
 					if (file_exists($filename)) unlink($filename);
 					
 					GalleryImage::where($image_item->getKeyName(), $image_item->id_gallery_image)
