@@ -1,11 +1,12 @@
 
+$p = '{{ $lowercase_package_name }}::admin.';
 return [
-	'{{ $lowercase_package_name }}::admin.title.main' => [ 'en' => '{{ $package_name }}' ], 
-	'{{ $lowercase_package_name }}::admin.title.list' => [ 'en' => 'List' ], 
-	'{{ $lowercase_package_name }}::admin.title.add'  => [ 'en' => 'Add' ], 
-	'{{ $lowercase_package_name }}::admin.title.edit' => [ 'en' => 'Edit' ], 
+	$p . 'title.main' => [ 'en' => '{{ $package_name }}' ], 
+	$p . 'title.list' => [ 'en' => 'List' ], 
+	$p . 'title.add'  => [ 'en' => 'Add' ], 
+	$p . 'title.edit' => [ 'en' => 'Edit' ], 
 	
-	'{{ $lowercase_package_name }}::admin.menu.main' => [ 'en' => '{{ $package_name }}' ], 
-	'{{ $lowercase_package_name }}::admin.menu.list' => [ 'en' => 'List' ], 
-	'{{ $lowercase_package_name }}::admin.menu.add'  => [ 'en' => 'Add' ], 
+	$p . 'menu.main' => [ 'en' => '{{ $package_name }}' ], 
+	$p . 'menu.list' => [ 'en' => 'List' ], 
+	$p . 'menu.add'  => [ 'en' => 'Add' ], 
 ];

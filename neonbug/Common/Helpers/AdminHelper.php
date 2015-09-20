@@ -232,10 +232,12 @@ class AdminHelper {
 		
 		if (sizeof($errors) > 0)
 		{
-			return redirect(route($prefix . '::admin::' . $route_postfix, [ $item->{$item->getKeyName()} ]))
+			return redirect(route($prefix . '::admin::' . $route_postfix, 
+				($route_postfix == 'add' ? [] : [ $item->{$item->getKeyName()} ])))
 				->withErrors($errors);
 		}
-		return redirect(route($prefix . '::admin::' . $route_postfix, [ $item->{$item->getKeyName()} ]))
+		return redirect(route($prefix . '::admin::' . $route_postfix, 
+			($route_postfix == 'add' ? [] : [ $item->{$item->getKeyName()} ])))
 			->with([
 				'messages' => [ 'Saved' ]
 			]);
