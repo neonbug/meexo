@@ -259,7 +259,6 @@ class AdminController extends \Neonbug\Common\Http\Controllers\BaseAdminControll
 			
 			if (!$file->save($dir . '/' . $filename))
 			{
-				dd([ 'error saving' ]);
 				//TODO throw an error or sth
 			}
 		} else {

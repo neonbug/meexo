@@ -42,6 +42,6 @@
 	<div class="ui bottom attached red button 
 		{{ $image == null ? 'gallery-images-image-cancel' : 'gallery-images-image-remove' }}">
 		<i class="trash icon"></i>
-		Remove
+		{{ trans('gallery::admin.add.field-gallery-images.image-remove') }}
 	</div>
 </div>

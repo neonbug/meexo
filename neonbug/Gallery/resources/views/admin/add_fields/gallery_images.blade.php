@@ -7,11 +7,13 @@
 			<div class="gallery-images-upload-container">
 				<button class="ui button gallery-images-browse" type="button">
 					<i class="icon upload"></i>
-					Upload ...
+					{{ trans('gallery::admin.add.field-gallery-images.upload-button') }}
 				</button>
 				
 				<div class="gallery-images-drop-target">
-					<span>drag and drop your files here</span>
+					<span>
+						{{ trans('gallery::admin.add.field-gallery-images.drag-drop-text') }}
+					</span>
 				</div>
 				
 				<div style="clear: both;"></div>

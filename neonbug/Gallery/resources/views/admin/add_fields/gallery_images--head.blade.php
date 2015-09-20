@@ -217,8 +217,12 @@ $(document).ready(function() {
 			$('.gallery-images-image[data-id="' + file.uniqueIdentifier + '"]', el).remove();
 			
 			$('<div class="ui small modal">' + 
-				'<div class="content">Error during upload</div>' + 
-				'<div class="actions"><div class="ui cancel button red">Close</div></div>' + 
+				'<div class="content">' + 
+					{!! json_encode(trans('gallery::admin.add.field-gallery-images.upload-error')) !!} + 
+				'</div>' + 
+				'<div class="actions"><div class="ui cancel button red">' + 
+					{!! json_encode(trans('gallery::admin.add.field-gallery-images.upload-error-close')) !!} + 
+				'</div></div>' + 
 			'</div>').modal('show');
 		});
 	});

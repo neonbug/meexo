@@ -23,4 +23,16 @@ return [
 	$p . 'add.field-title.published'   => [ 'en' => 'Published',     'sl' => 'Objavljeno' ], 
 	$p . 'add.field-title.ord'         => [ 'en' => 'Order',         'sl' => 'Vrstni red' ], 
 	$p . 'add.field-title.images'      => [ 'en' => 'Images',        'sl' => 'Slike' ], 
+	
+	$p . 'add.field-gallery-images.image-remove'       => [ 'en' => 'Remove', 
+	                                                        'sl' => 'Odstrani' ], 
+	$p . 'add.field-gallery-images.upload-error'       => [ 'en' => 'Error during upload', 
+	                                                        'sl' => 'Napaka med nalaganjem' ], 
+	$p . 'add.field-gallery-images.upload-error-close' => [ 'en' => 'Close', 
+	                                                        'sl' => 'Zapri' ], 
+	$p . 'add.field-gallery-images.upload-button'      => [ 'en' => 'Browse ...', 
+	                                                        'sl' => 'Brskaj ...' ], 
+	$p . 'add.field-gallery-images.drag-drop-text'     => [ 'en' => 'drag and drop your files here', 
+	                                                        'sl' => 'povleci in spusti datoteke tukaj' ], 
+	
 ];
