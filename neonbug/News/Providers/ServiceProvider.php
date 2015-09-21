@@ -5,7 +5,7 @@ use Route;
 use View;
 use \Illuminate\Routing\Router as Router;
 
-class ServiceProvider extends \Illuminate\Support\ServiceProvider {
+class ServiceProvider extends \Neonbug\Common\Providers\BaseServiceProvider {
 	
 	const PACKAGE_NAME     = 'news';
 	const PREFIX           = 'news';

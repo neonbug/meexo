@@ -113,6 +113,7 @@ class AdminController extends \Neonbug\Common\Http\Controllers\BaseAdminControll
 			$language_independent_fields, 
 			session('messages', []), 
 			$this->getRoutePrefix(), 
+			$this->getModel(), 
 			$item
 		);
 	}

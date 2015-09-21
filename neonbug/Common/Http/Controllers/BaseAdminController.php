@@ -42,7 +42,8 @@ abstract class BaseAdminController extends \App\Http\Controllers\Controller {
 			config($this->getConfigPrefix() . '.add.language_dependent_fields'), 
 			config($this->getConfigPrefix() . '.add.language_independent_fields'), 
 			session('messages', []), 
-			$this->getRoutePrefix()
+			$this->getRoutePrefix(), 
+			$this->getModel()
 		);
 	}
 	
@@ -115,6 +116,7 @@ abstract class BaseAdminController extends \App\Http\Controllers\Controller {
 			config($this->getConfigPrefix() . '.edit.language_independent_fields'), 
 			session('messages', []), 
 			$this->getRoutePrefix(), 
+			$this->getModel(), 
 			$item
 		);
 	}

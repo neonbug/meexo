@@ -5,7 +5,9 @@ use Route;
 use View;
 use \Illuminate\Routing\Router as Router;
 
-class ServiceProvider extends \Illuminate\Support\ServiceProvider {
+class ServiceProvider extends \Neonbug\Common\Providers\BaseServiceProvider {
+	
+	use \Neonbug\Common\Traits\OrdTrait;
 	
 	const PACKAGE_NAME     = 'gallery';
 	const PREFIX           = 'gallery';

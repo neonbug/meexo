@@ -3,6 +3,7 @@
 use App;
 use Cache;
 use Request;
+use Event;
 
 //TODO this class isn't very pretty; refactor!
 class AdminHelper {
@@ -152,7 +153,7 @@ class AdminHelper {
 	}
 	
 	public function adminAdd($package_name, Array $title, Array $language_dependent_fields, 
-		Array $language_independent_fields, Array $messages, $prefix)
+		Array $language_independent_fields, Array $messages, $prefix, $model_name)
 	{
 		$languages = App::make('LanguageRepository')->getAll();
 		
@@ -161,6 +162,10 @@ class AdminHelper {
 			$language_dependent_fields, 
 			$language_independent_fields
 		);
+		
+		$event = new \Neonbug\Common\Events\AdminAddPreparedFields($model_name, $fields);
+		Event::fire($event);
+		$fields = $event->fields;
 		
 		$params = [
 			'package_name'     => $package_name, 
@@ -177,7 +182,7 @@ class AdminHelper {
 	}
 	
 	public function adminEdit($package_name, Array $title, Array $language_dependent_fields, 
-		Array $language_independent_fields, Array $messages, $prefix, $item)
+		Array $language_independent_fields, Array $messages, $prefix, $model_name, $item)
 	{
 		$languages = App::make('LanguageRepository')->getAll();
 		
