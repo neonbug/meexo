@@ -49,7 +49,7 @@ return [
 	$p . 'dashboard.title'     => [ 'en' => 'Dashboard', 'sl' => 'Nadzorna plošča' ], 
 	
 	// header
-	$p . 'header.title'        => [ 'en' => 'Admin', 'sl' => 'Admin' ], 
+	$p . 'header.title'        => [ 'en' => 'Administration', 'sl' => 'Administracija' ], 
 	$p . 'header.logged-in-as' => [ 
 		'en' => 'Logged in as <strong>:name</strong>', 
 		'sl' => 'Prijavljen/a kot <strong>:name</strong>'

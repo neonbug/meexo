@@ -7,7 +7,7 @@
 	<meta name="csrf_token" content="{{ $encrypted_csrf_token }}" />
 	
 	<title>
-		{{ trans('common::admin.dashboard.title') }}
+		{{ trans('common::admin.header.title') }}
 		@if (isSet($title) && is_array($title))
 			@foreach ($title as $title_item)
 				| {{ $title_item }}
