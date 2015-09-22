@@ -81,6 +81,7 @@ abstract class BaseAdminController extends \App\Http\Controllers\Controller {
 			$lang_independent_fields, 
 			$lang_dependent_fields, 
 			$route_prefix, 
+			$this->getModel(), 
 			$item, 
 			'add'
 		);
@@ -155,6 +156,7 @@ abstract class BaseAdminController extends \App\Http\Controllers\Controller {
 			$lang_independent_fields, 
 			$lang_dependent_fields, 
 			$route_prefix, 
+			$this->getModel(), 
 			$item, 
 			'edit'
 		);

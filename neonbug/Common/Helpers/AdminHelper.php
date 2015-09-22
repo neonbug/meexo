@@ -208,7 +208,8 @@ class AdminHelper {
 	}
 	
 	public function handleAdminAddEdit(Array $fields, Array $files, $id_user, 
-		Array $language_independent_fields, Array $language_dependent_fields, $prefix, $item, $route_postfix)
+		Array $language_independent_fields, Array $language_dependent_fields, $prefix, $model_name, $item, 
+		$route_postfix)
 	{
 		$errors = []; //[ 'general' => 'DB error' ];
 		
@@ -230,6 +231,22 @@ class AdminHelper {
 			{
 				$all_fields[$id_language][$field_name] = $file_field;
 			}
+		}
+		
+		if ($route_postfix == 'add')
+		{
+			$event = new \Neonbug\Common\Events\AdminAddSavePreparedFields(
+				$prefix, 
+				$model_name, 
+				$all_fields, 
+				$allowed_lang_independent_fields, 
+				$allowed_lang_dependent_fields
+			);
+			Event::fire($event);
+			
+			$all_fields                      = $event->fields;
+			$allowed_lang_independent_fields = $event->language_independent_fields;
+			$allowed_lang_dependent_fields   = $event->language_dependent_fields;
 		}
 		
 		App::make('\Neonbug\Common\Helpers\AdminHelper')
