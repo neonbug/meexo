@@ -261,7 +261,7 @@ class AdminHelper {
 		return redirect(route($prefix . '::admin::' . $route_postfix, 
 			($route_postfix == 'add' ? [] : [ $item->{$item->getKeyName()} ])))
 			->with([
-				'messages' => [ 'Saved' ]
+				'messages' => [ trans('common::admin.main.messages.saved') ]
 			]);
 	}
 	
@@ -295,7 +295,7 @@ class AdminHelper {
 		}
 		return redirect(route($prefix . '::preview', [ $key ]))
 			->with([
-				'messages' => [ 'Saved' ]
+				'messages' => [ trans('common::admin.main.messages.saved') ]
 			]);
 	}
 	

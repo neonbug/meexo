@@ -84,4 +84,5 @@ return [
 		'sl' => 'Ste prepričani, da želite zapreti stran? Vse neshranjene spremembe bodo izgubljene.'
 	], 
 	$p . 'main.messages.logged-in'  => [ 'en' => 'Successfully logged in', 'sl' => 'Prijava uspešna' ], 
+	$p . 'main.messages.saved'      => [ 'en' => 'Saved', 'sl' => 'Shranjeno' ], 
 ];
