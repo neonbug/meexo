@@ -35,12 +35,34 @@
 	<script src="{{ cached_asset('vendor/common/admin_assets/js/ckeditor/ckeditor.js') }}"></script>
 	<script src="{{ cached_asset('vendor/common/admin_assets/js/flow.min.js') }}"></script>
 	<script src="{{ cached_asset('vendor/common/admin_assets/js/html.sortable.min.js') }}"></script>
+	<script src="{{ cached_asset('vendor/common/admin_assets/js/jquery.noty.packaged.min.js') }}"></script>
+	<script src="{{ cached_asset('vendor/common/admin_assets/js/noty/custom_relax.js') }}"></script>
 	<script src="{{ cached_asset('vendor/common/admin_assets/js/require.js') }}" 
 		data-main="{{ url() . '/vendor/common/admin_assets/js/main' }}"></script>
-
+	
+	<script type="text/javascript">
+	requirejs([ 'app/modules/main' ], function(main) {
+		var trans = {
+			messages: {
+				close_page: {!! json_encode(trans('common::admin.main.messages.close-page')) !!}, 
+				logged_in: {!! json_encode(trans('common::admin.main.messages.logged-in')) !!}
+			}
+		};
+		
+		var config = {
+			check_token_route: {!! json_encode(url() . '/check-token') !!}, 
+			login_route: {!! json_encode(route('admin-login')) !!}, 
+			token_route: {!! json_encode(route('admin-token')) !!}, 
+		};
+		
+		main.init(trans, config);
+	});
+	</script>
+	
 	<link rel="stylesheet" type="text/css" 
 		href="{{ cached_asset('vendor/common/admin_assets/js/semanticui/semantic.min.css') }}" />
 	<link rel="stylesheet" type="text/css" href="{{ cached_asset('vendor/common/admin_assets/js/pikaday/pikaday.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ cached_asset('vendor/common/admin_assets/css/animate.css') }}" />
 	<link rel="stylesheet" type="text/css" href="{{ cached_asset('vendor/common/admin_assets/css/main.css') }}" />
 	
 	@yield('head', '')
@@ -80,5 +102,50 @@
 		</div>
 	</div>
 	
+	<div class="login-modal-template" style="display: none;">
+		<div class="ui tiny modal orange login-modal">
+			<div class="header">
+				{{ trans('common::admin.login-popup.title') }}
+			</div>
+			<div class="content">
+				<div class="ui icon message">
+					<div class="content">
+						{{ trans('common::admin.login-popup.description') }}
+					</div>
+				</div>
+				
+				<div class="ui error icon message hidden">
+					<i class="frown icon"></i>
+					<div class="content">
+						@foreach ($errors->all() as $error)
+							<p>{{ $error }}</p>
+						@endforeach
+					</div>
+				</div>
+				
+				<div class="field">
+					<div class="ui left icon input" data-name="username">
+						<i class="user icon"></i>
+						<input type="text" name="username" placeholder="{{ trans('common::admin.login-popup.username') }}" 
+							value="{{ old('username') }}" autofocus />
+					</div>
+				</div>
+				
+				<div class="field">
+					<div class="ui left icon input" data-name="password">
+						<i class="lock icon"></i>
+						<input type="password" name="password" placeholder="{{ trans('common::admin.login-popup.password') }}">
+					</div>
+				</div>
+			</div>
+			<div class="actions">
+				<div class="ui right labeled icon button orange login-button">
+					{{ trans('common::admin.login-popup.login-button') }}
+					<i class="power icon"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </body>
 </html>

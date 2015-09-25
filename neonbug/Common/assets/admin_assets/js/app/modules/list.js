@@ -1,4 +1,4 @@
-define([], function() {
+define([ 'global' ], function(global) {
 	var exports = {};
 	var app_data = {};
 	
@@ -22,7 +22,8 @@ define([], function() {
 							modal.modal('hide');
 							$('.ui.ok', modal).removeClass('loading');
 							
-							document.location.reload();
+							global.showToast('success', app_data.trans.messages.deleted);
+							setTimeout(function() { document.location.reload(); }, 3000);
 						}, 'json');
 						
 						return false;

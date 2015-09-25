@@ -2,7 +2,15 @@
 
 @section('head')
 	<script type="text/javascript">
-	var trans = {};
+	var trans = {
+		errors: {
+			slug_empty: {!! json_encode(trans('common::admin.add.errors.slug-empty')) !!}, 
+			slug_already_exists: {!! json_encode(trans('common::admin.add.errors.slug-already-exists')) !!}
+		}, 
+		messages: {
+			deleted: {!! json_encode(trans('common::admin.add.messages.deleted')) !!}
+		}
+	};
 	var config = {
 		delete_route: {!! json_encode($delete_route === null ? null : route($delete_route)) !!}
 	};

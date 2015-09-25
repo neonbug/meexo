@@ -31,6 +31,8 @@ return [
 		'sl' => 'Že obstaja, vpišite drugo vrednost'
 	], 
 	
+	$p . 'add.messages.deleted'          => [ 'en' => 'Deleted', 'sl' => 'Odstranjeno' ], 
+	
 	// list
 	$p . 'list.edit-action'                 => [ 'en' => 'Edit', 'sl' => 'Uredi' ], 
 	$p . 'list.delete-action'               => [ 'en' => 'Delete', 'sl' => 'Odstrani' ], 
@@ -65,5 +67,21 @@ return [
 	$p . 'login.password'      => [ 'en' => 'Password', 'sl' => 'Geslo' ], 
 	$p . 'login.login-button'  => [ 'en' => 'Login', 'sl' => 'Prijava' ], 
 	
+	$p . 'login-popup.title'         => [ 'en' => 'Session expired', 'sl' => 'Seja je potekla' ], 
+	$p . 'login-popup.username'      => [ 'en' => 'Username', 'sl' => 'Uporabniško ime' ], 
+	$p . 'login-popup.password'      => [ 'en' => 'Password', 'sl' => 'Geslo' ], 
+	$p . 'login-popup.login-button'  => [ 'en' => 'Login', 'sl' => 'Prijava' ], 
+	$p . 'login-popup.description'   => [ 
+		'en' => 'To continue working, please log in again.', 
+		'sl' => 'Da lahko nadaljujete z delom, se prosim še enkrat prijavite.'
+	], 
+	
 	$p . 'validation.required' => [ 'en' => 'The :attribute field is required.', 'sl' => 'Polje :attribute je obvezno.' ], 
+	
+	// messages
+	$p . 'main.messages.close-page' => [ 
+		'en' => 'Are you sure you want to close this page? Any unsaved changes will be gone.', 
+		'sl' => 'Ste prepričani, da želite zapreti stran? Vse neshranjene spremembe bodo izgubljene.'
+	], 
+	$p . 'main.messages.logged-in'  => [ 'en' => 'Successfully logged in', 'sl' => 'Prijava uspešna' ], 
 ];

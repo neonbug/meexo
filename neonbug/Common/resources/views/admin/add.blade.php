@@ -12,7 +12,9 @@
 	var config = {
 		id_item: {{ $item == null ? -1 : $item->{$item->getKeyName()} }}, 
 		check_slug_route: {!! json_encode(route($check_slug_route)) !!}, 
-		formatter_date_pattern: {!! json_encode($formatter->getShortDatePattern()) !!}
+		formatter_date_pattern: {!! json_encode($formatter->getShortDatePattern()) !!}, 
+		messages: {!! json_encode(isSet($messages) ? $messages : []) !!}, 
+		errors: {!! json_encode($errors->all()) !!}
 	};
 	
 	requirejs([
@@ -51,29 +53,6 @@
 @stop
 
 @section('content')
-	@if (isSet($messages) && count($messages) > 0)
-		<div class="ui info icon message">
-			<i class="close icon"></i>
-			<i class="smile icon"></i>
-			<div class="content">
-				@foreach ($messages as $message)
-					<p>{{ $message }}</p>
-				@endforeach
-			</div>
-		</div>
-	@endif
-	@if (count($errors) > 0)
-		<div class="ui error icon message">
-			<i class="close icon"></i>
-			<i class="frown icon"></i>
-			<div class="content">
-				@foreach ($errors->all() as $error)
-					<p>{{ $error }}</p>
-				@endforeach
-			</div>
-		</div>
-	@endif
-	
 	<form class="ui form add" method="POST" enctype="multipart/form-data" autocomplete="off">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 		

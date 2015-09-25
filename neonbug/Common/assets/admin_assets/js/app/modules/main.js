@@ -1,4 +1,4 @@
-define([], function() {
+define([ 'global' ], function(global) {
 	var exports = {};
 	var app_data = {};
 	
@@ -12,7 +12,7 @@ define([], function() {
 			
 			//TODO somehow check if the inputs are *really* different than initial (e.g. a diff against initial state)
 			
-			var message = 'Are you sure you want to close this page? Any unsaved changes will be gone.';
+			var message = app_data.trans.messages.close_page;
 			
 			e.returnValue = message;
 			return message;

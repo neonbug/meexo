@@ -50,7 +50,6 @@
 			
 			@if (count($errors) > 0)
 				<div class="ui error icon message">
-					<!-- <div class="header">Errors</div> -->
 					<i class="frown icon"></i>
 					<div class="content">
 						@foreach ($errors->all() as $error)

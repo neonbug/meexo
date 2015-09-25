@@ -1,4 +1,4 @@
-define([ 'speakingurl', 'moment', 'pikaday' ], function(speakingurl, moment, pikaday) {
+define([ 'speakingurl', 'moment', 'pikaday', 'global' ], function(speakingurl, moment, pikaday, global) {
 	var exports = {};
 	var app_data = {};
 	
@@ -180,6 +180,18 @@ define([ 'speakingurl', 'moment', 'pikaday' ], function(speakingurl, moment, pik
 		});
 	}
 	
+	function initMessages() {
+		app_data.config.messages.forEach(function(message) {
+			global.showToast('success', message);
+		});
+	}
+	
+	function initErrorMessages() {
+		app_data.config.errors.forEach(function(message) {
+			global.showToast('error', message);
+		});
+	}
+	
 	exports.init = function(trans, config) {
 		app_data.trans = trans;
 		app_data.config = config;
@@ -192,6 +204,8 @@ define([ 'speakingurl', 'moment', 'pikaday' ], function(speakingurl, moment, pik
 			initCheckboxes();
 			initTabs();
 			initDatePicker();
+			initMessages();
+			initErrorMessages();
 		});
 	};
 	
