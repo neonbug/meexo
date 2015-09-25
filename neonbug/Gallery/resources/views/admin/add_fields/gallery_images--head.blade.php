@@ -117,14 +117,12 @@ $(document).ready(function() {
 	gallery_images.init();
 	
 	$('.field-gallery-images .field').each(function(idx, el) {
-		var token = $('meta[name="csrf_token"]').attr('content');
-		
 		var upload_dir = Math.floor(Math.random() * (1000000 - 1)) + 1;
 		
 		var flow = new Flow({
 			target: {!! json_encode(route('gallery::admin::upload-gallery-file', [ 'UPLOAD_DIR' ])) !!}
 				.replace('UPLOAD_DIR', upload_dir), 
-			headers: { 'X-XSRF-TOKEN': token }
+			headers: { }
 		});
 		
 		flow.assignDrop($('.gallery-images-drop-target', el).get(0));
@@ -139,6 +137,8 @@ $(document).ready(function() {
 			});
 		
 		flow.on('filesSubmitted', function(file) {
+			flow.opts.headers['X-XSRF-TOKEN'] = $('meta[name="csrf_token"]').attr('content');
+			
 			flow.upload();
 		});
 		

@@ -5,6 +5,8 @@
 
     RewriteEngine On
 
+    RewriteRule ^(check-token) check-token.php [L]
+    
     # Redirect Trailing Slashes...
     RewriteRule ^(.*)/$ /$1 [L,R=301]
     

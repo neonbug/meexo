@@ -128,3 +128,28 @@ body
 			background-color: #f2711c;
 			color: #ffffff;
 		}
+
+.ui.tiny.modal
+{
+	margin: 0 0 0 -200px;
+	width: 350px;
+}
+
+.ui.modal.orange > .header
+{
+	background-color: #f2711c;
+	color: #ffffff;
+}
+
+.login-modal
+{
+}
+	.login-modal .field .input
+	{
+		width: 308px;
+	}
+
+#noty_customTopRight_layout_container > li
+{
+	display: flex;
+}

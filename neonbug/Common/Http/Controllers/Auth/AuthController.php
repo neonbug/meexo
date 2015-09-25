@@ -71,7 +71,19 @@ class AuthController extends Controller {
 		
 		if ($this->auth->attempt($credentials, $request->has('remember')))
 		{
+			if ($request->ajax())
+			{
+				return [ 'success' => true, 'token' => csrf_token() ];
+			}
+			
 			return ($return_url != null ? redirect($return_url) : redirect()->route('admin-home'));
+		}
+		
+		if ($request->ajax() || $request->wantsJson())
+		{
+			throw new \Illuminate\Http\Exception\HttpResponseException(
+				new \Illuminate\Http\JsonResponse([ 'username' => 'Wrong username or password' ], 422)
+			);
 		}
 		
 		return redirect(route('admin-login') . '?return_url=' . urlencode($return_url))

@@ -111,6 +111,13 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 			$router->get('login',  ['as' => 'admin-login',  'uses' => $auth_controller . '@getLogin']);
 			$router->post('login', [                        'uses' => $auth_controller . '@postLogin']);
 			$router->get('logout', ['as' => 'admin-logout', 'uses' => $auth_controller . '@getLogout']);
+			
+			$router->post('check-token', ['as' => 'admin-check-token', function() {
+				return [ 'success' => true, 'token' => csrf_token() ];
+			}]);
+			$router->get('token', ['as' => 'admin-token', function() {
+				return [ 'token' => csrf_token(), 'encrypted_token' => Crypt::encrypt(csrf_token()) ];
+			}]);
 		});
 		
 		$router->group(['prefix' => $locale . '/admin', 'middleware' => ['auth.admin']], function($router)
