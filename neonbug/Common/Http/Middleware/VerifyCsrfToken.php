@@ -1,6 +1,7 @@
 <?php namespace Neonbug\Common\Http\Middleware;
 
 use Closure;
+use Redirect;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 use Illuminate\Session\TokenMismatchException;
 
@@ -29,7 +30,8 @@ class VerifyCsrfToken extends BaseVerifier {
 			return $response;
 		}
 
-		throw new TokenMismatchException;
+		//throw new TokenMismatchException;
+		return Redirect::back()->withInput()->withErrors([ 'general' => 'Your session has expired' ]);
 	}
 
 }
