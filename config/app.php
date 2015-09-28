@@ -66,8 +66,12 @@ return [
 	*/
 
 	'locale' => 'en',
-	'available_locales' => array('en'), 
+	
+	'available_locales' => [ 'en' ],
 	'default_locale' => 'en',
+	
+	'admin_available_locales' => [ 'en' ],
+	'admin_default_locale' => 'en',
 
 	/*
 	|--------------------------------------------------------------------------

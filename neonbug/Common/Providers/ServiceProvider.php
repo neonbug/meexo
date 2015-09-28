@@ -41,7 +41,10 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 		//== ROUTES ==
 		//============
 		$language = App::make('Language');
-		$locale = ($language == null ? 'en' : $language->locale);
+		$locale = ($language == null ? Config::get('app.default_locale') : $language->locale);
+		
+		$admin_language = App::make('AdminLanguage');
+		$admin_locale = ($admin_language == null ? Config::get('app.admin_default_locale') : $admin_language->locale);
 		
 		View::composer('common::admin', function($view) use ($router)
 		{
@@ -104,7 +107,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 		
 		//admin
 		$router->get('admin', function() { return redirect(route('admin-home')); });
-		$router->group(['prefix' => $locale . '/admin'], function($router)
+		$router->group(['prefix' => $admin_locale . '/admin'], function($router)
 		{
 			$auth_controller = '\Neonbug\Common\Http\Controllers\Auth\AuthController';
 			
@@ -120,7 +123,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 			}]);
 		});
 		
-		$router->group(['prefix' => $locale . '/admin', 'middleware' => ['auth.admin']], function($router)
+		$router->group(['prefix' => $admin_locale . '/admin', 'middleware' => ['auth.admin']], function($router)
 		{
 			$router->group(['role' => '*'], function($router) {
 				$router->get('/', ['as' => 'admin-home', 

@@ -45,10 +45,13 @@ class ServiceProvider extends \Neonbug\Common\Providers\BaseServiceProvider {
 		//============
 		//== ROUTES ==
 		//============
-		$locale = App::getLocale();
+		$language = App::make('Language');
+		$locale = ($language == null ? Config::get('app.default_locale') : $language->locale);
 		
-		$resource_repo 	= App::make('ResourceRepository');
-		$language 		= App::make('Language');
+		$admin_language = App::make('AdminLanguage');
+		$admin_locale = ($admin_language == null ? Config::get('app.admin_default_locale') : $admin_language->locale);
+		
+		$resource_repo = App::make('ResourceRepository');
 		
 		//frontend
 		$router->group([ 'middleware' => [ 'online' ], 'prefix' => $locale . '/' . 
@@ -75,7 +78,7 @@ class ServiceProvider extends \Neonbug\Common\Providers\BaseServiceProvider {
 		});
 		
 		//admin
-		$router->group([ 'prefix' => $locale . '/admin/' . static::PREFIX, 'middleware' => [ 'auth.admin', 'admin.menu' ], 
+		$router->group([ 'prefix' => $admin_locale . '/admin/' . static::PREFIX, 'middleware' => [ 'auth.admin', 'admin.menu' ], 
 			'role' => static::ROLE, 'menu.icon' => 'file image outline' ], function($router)
 		{
 			$router->get('list', [
@@ -102,7 +105,7 @@ class ServiceProvider extends \Neonbug\Common\Providers\BaseServiceProvider {
 			]);
 		});
 		
-		$router->group([ 'prefix' => $locale . '/admin/' . static::PREFIX, 'middleware' => [ 'auth.admin' ], 
+		$router->group([ 'prefix' => $admin_locale . '/admin/' . static::PREFIX, 'middleware' => [ 'auth.admin' ], 
 			'role' => static::ROLE ], function($router)
 		{
 			$router->post('delete', [

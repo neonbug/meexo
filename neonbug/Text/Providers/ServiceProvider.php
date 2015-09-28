@@ -43,10 +43,13 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 		//============
 		//== ROUTES ==
 		//============
-		$locale = App::getLocale();
+		$language = App::make('Language');
+		$locale = ($language == null ? Config::get('app.default_locale') : $language->locale);
 		
-		$resource_repo 	= App::make('ResourceRepository');
-		$language 		= App::make('Language');
+		$admin_language = App::make('AdminLanguage');
+		$admin_locale = ($admin_language == null ? Config::get('app.admin_default_locale') : $admin_language->locale);
+		
+		$resource_repo = App::make('ResourceRepository');
 		
 		//frontend
 		$router->group([ 'middleware' => [ 'online' ], 'prefix' => $locale . '/' . 
@@ -73,7 +76,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 		});
 		
 		//admin
-		$router->group([ 'prefix' => $locale . '/admin/' . static::PREFIX, 'middleware' => [ 'auth.admin' ], 
+		$router->group([ 'prefix' => $admin_locale . '/admin/' . static::PREFIX, 'middleware' => [ 'auth.admin' ], 
 			'role' => static::ROLE ], function($router)
 		{
 			$router->get('list', [

@@ -13,23 +13,55 @@
 
 /* get locale from URL */
 $locale = Request::segment(1);
-if ($locale == null || !in_array($locale, Config::get('app.available_locales')))
+if ($locale == null)
 {
     $locale = Config::get('app.default_locale');
 }
+else if (!in_array($locale, Config::get('app.available_locales')))
+{
+    if (Request::segment(2) != 'admin')
+    {
+        header('Location: ' . url(Config::get('app.default_locale')));
+        exit();
+    }
+    else
+    {
+        $locale = Config::get('app.default_locale');
+    }
+}
 App::setLocale($locale);
 
-if (App::runningInConsole())
+$admin_locale = Request::segment(1);
+if ($admin_locale == null)
 {
-    $language = null;
+    $admin_locale = Config::get('app.admin_default_locale');
 }
-else
+else if (!in_array($admin_locale, Config::get('app.admin_available_locales')))
+{
+    if (Request::segment(2) == 'admin')
+    {
+        header('Location: ' . url(Config::get('app.admin_default_locale') . '/' . Request::segment(2)));
+        exit();
+    }
+    else
+    {
+        $admin_locale = Config::get('app.admin_default_locale');
+    }
+}
+
+$language = null;
+$admin_language = null;
+if (!App::runningInConsole())
 {
     $language = \Neonbug\Common\Models\Language::getByLocale($locale);
     if ($language == null) exit('Language not found');
+    
+    $admin_language = ($admin_locale == $locale ? $language : \Neonbug\Common\Models\Language::getByLocale($admin_locale));
+    if ($admin_language == null) exit('Language not found');
 }
 
 App::singleton('Language', function() use($language) { return $language; });
+App::singleton('AdminLanguage', function() use($admin_language) { return $admin_language; });
 App::singleton('LanguageRepository', '\Neonbug\Common\Repositories\LanguageRepository');
 
 //frontend
