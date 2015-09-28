@@ -3,6 +3,7 @@ namespace Neonbug\{{ $package_name }}\Providers;
 use App;
 use Route;
 use View;
+use Config;
 use \Illuminate\Routing\Router as Router;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider {

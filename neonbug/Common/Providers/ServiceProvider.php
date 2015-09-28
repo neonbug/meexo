@@ -5,6 +5,7 @@ use Route;
 use View;
 use Crypt;
 use Auth;
+use Config;
 use \Illuminate\Routing\Router as Router;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider {

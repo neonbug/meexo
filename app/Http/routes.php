@@ -19,7 +19,7 @@ if ($locale == null)
 }
 else if (!in_array($locale, Config::get('app.available_locales')))
 {
-    if (Request::segment(2) != 'admin')
+    if (Request::segment(2) != 'admin' && !App::runningInConsole())
     {
         header('Location: ' . url(Config::get('app.default_locale')));
         exit();
@@ -38,7 +38,7 @@ if ($admin_locale == null)
 }
 else if (!in_array($admin_locale, Config::get('app.admin_available_locales')))
 {
-    if (Request::segment(2) == 'admin')
+    if (Request::segment(2) == 'admin' && !App::runningInConsole())
     {
         header('Location: ' . url(Config::get('app.admin_default_locale') . '/' . Request::segment(2)));
         exit();
