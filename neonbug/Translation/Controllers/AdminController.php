@@ -39,8 +39,14 @@ class AdminController extends \Neonbug\Common\Http\Controllers\BaseAdminControll
 		$source_items = $repo->getForAdminList();
 		
 		$grouped_source_items = [
-			'frontend' => [], 
-			'admin'   => []
+			'frontend' => [
+				'title' => trans('translation::admin.list.type.frontend'), 
+				'items' => []
+			], 
+			'admin'   => [
+				'title' => trans('translation::admin.list.type.admin'), 
+				'items' => []
+			]
 		];
 		
 		foreach ($source_items as $item)
@@ -58,14 +64,22 @@ class AdminController extends \Neonbug\Common\Http\Controllers\BaseAdminControll
 			$type = $arr[0]; //should be admin or frontend
 			if (!array_key_exists($type, $grouped_source_items))
 			{
-				$grouped_source_items[$type] = [];
+				$grouped_source_items[$type] = [
+					'title' => trans('translation::admin.list.type.' . $type), 
+					'items' => []
+				];
 			}
-			if (!array_key_exists($package, $grouped_source_items[$type]))
+			if (!array_key_exists($package, $grouped_source_items[$type]['items']))
 			{
-				$grouped_source_items[$type][$package] = [];
+				$grouped_source_items[$type]['items'][$package] = [
+					'title' => trans($package . '::admin.title.main'), 
+					'items' => []
+				];
 			}
 			
-			$grouped_source_items[$type][$package][$arr[1]] = $id;
+			$grouped_source_items[$type]['items'][$package]['items'][$arr[1]] = [
+				'id' => $id
+			];
 		}
 		
 		$params = [
