@@ -1,6 +1,7 @@
 @extends('common::admin')
 
 @section('head')
+	<script src="{{ cached_asset('vendor/common/admin_assets/js/app/list.js') }}"></script>
 	<script type="text/javascript">
 	var trans = {
 		errors: {
@@ -15,9 +16,7 @@
 		delete_route: {!! json_encode($delete_route === null ? null : route($delete_route)) !!}
 	};
 	
-	requirejs([ 'app/modules/list' ], function(list) {
-		list.init(trans, config);
-	});
+	list.init(trans, config);
 	</script>
 @stop
 

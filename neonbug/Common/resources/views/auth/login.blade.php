@@ -8,12 +8,15 @@
 	
 	<script src="{{ cached_asset('vendor/common/admin_assets/js/jquery-2.1.4.min.js') }}"></script>
 	<script src="{{ cached_asset('vendor/common/admin_assets/js/semanticui/semantic.min.js') }}"></script>
-	<script src="{{ cached_asset('vendor/common/admin_assets/js/require.js') }}" 
-		data-main="{{ url() . '/vendor/common/admin_assets/js/login' }}"></script>
-
+	<script src="{{ cached_asset('vendor/common/admin_assets/js/app/login.js') }}"></script>
+	
 	<link rel="stylesheet" type="text/css" 
 		href="{{ cached_asset('vendor/common/admin_assets/js/semanticui/semantic.min.css') }}" />
 	<link rel="stylesheet" type="text/css" href="{{ cached_asset('vendor/common/admin_assets/css/login.css') }}" />
+	
+	<script type="text/javascript">
+	login.init();
+	</script>
 </head>
 <body>
 

@@ -1,0 +1,94 @@
+.add .tab.segment .ui.table tr.field-gallery-images th
+{
+	padding-top: 30px;
+}
+.gallery-images-upload-container .gallery-images-browse, 
+	.gallery-images-upload-container .gallery-images-drop-target
+{
+	float: left;
+	margin-right: 24px;
+}
+.gallery-images-upload-container .gallery-images-drop-target
+{
+	line-height: 14px;
+	
+	padding-top: 9px;
+	padding-right: 19px;
+	padding-bottom: 9px;
+	padding-left: 19px;
+	
+	border: 2px dashed #dddddd;
+	color: #dddddd;
+	border-radius: 0.285714rem;
+}
+.gallery-images-upload-container .gallery-images-drop-target.drag-over
+{
+	background-color: #f2711c;
+	border: 2px dashed #ffffff;
+	color: #ffffff;
+}
+	.gallery-images-upload-container .gallery-images-drop-target *
+	{
+		/* prevent multiple dragenter/dragleave events */
+		pointer-events: none;
+	}
+.ui.segment.gallery-images-list-container
+{
+	padding-left: 0px;
+}
+	.gallery-images-list
+	{
+		max-height: 600px;
+		overflow: auto;
+	}
+		.ui.card.gallery-images-image
+		{
+			float: left;
+			width: 180px;
+			
+			margin-right: 12px;
+			margin-bottom: 12px;
+		}
+			.ui.card.gallery-images-image > .image
+			{
+				display: block;
+				position: relative;
+				width: 180px;
+				height: 120px;
+				
+				background-repeat: no-repeat;
+				background-position: center center;
+			}
+				.gallery-images-image-upload-overlay-progress
+				{
+					position: absolute;
+					left: 0px;
+					right: 0px;
+					bottom: 0px;
+					
+					height: 0%;
+					
+					background-color: #f2711c;
+				}
+				.gallery-images-image-upload-overlay
+				{
+					position: absolute;
+					left: 0px;
+					right: 0px;
+					top: 0px;
+					bottom: 0px;
+					
+					color: #000000;
+				}
+					.gallery-images-image-progress
+					{
+						display: block;
+						text-align: center;
+						line-height: 120px;
+					}
+			.ui.card.gallery-images-image .description
+			{
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}

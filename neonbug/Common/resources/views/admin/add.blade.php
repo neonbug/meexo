@@ -1,6 +1,7 @@
 @extends('common::admin')
 
 @section('head')
+	<script src="{{ cached_asset('vendor/common/admin_assets/js/app/add.js') }}"></script>
 	<script type="text/javascript">
 	var trans = {
 		errors: {
@@ -17,11 +18,7 @@
 		errors: {!! json_encode($errors->all()) !!}
 	};
 	
-	requirejs([
-		'moment', //we need this here because of Pikaday
-		'app/modules/add' ], function(moment, add) {
-		add.init(trans, config);
-	});
+	add.init(trans, config);
 	</script>
 	
 	<?php

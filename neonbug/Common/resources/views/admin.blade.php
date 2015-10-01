@@ -15,21 +15,6 @@
 		@endif
 	</title>
 	
-	<script type="text/javascript">
-	var require = {
-		paths: {
-			jquery:      'jquery-2.1.4.min', 
-			moment:      'moment-with-locales.min', 
-			speakingurl: 'speakingurl.min', 
-			pikaday:     'pikaday/pikaday', 
-			sortable:    'html.sortable.min'
-		}, 
-		config: {
-			moment: { noGlobal: true }
-		}
-	};
-	</script>
-	
 	<script src="{{ cached_asset('vendor/common/admin_assets/js/jquery-2.1.4.min.js') }}"></script>
 	<script src="{{ cached_asset('vendor/common/admin_assets/js/semanticui/semantic.min.js') }}"></script>
 	<script src="{{ cached_asset('vendor/common/admin_assets/js/ckeditor/ckeditor.js') }}"></script>
@@ -37,31 +22,28 @@
 	<script src="{{ cached_asset('vendor/common/admin_assets/js/html.sortable.min.js') }}"></script>
 	<script src="{{ cached_asset('vendor/common/admin_assets/js/jquery.noty.packaged.min.js') }}"></script>
 	<script src="{{ cached_asset('vendor/common/admin_assets/js/noty/custom_relax.js') }}"></script>
-	<script src="{{ cached_asset('vendor/common/admin_assets/js/require.js') }}" 
-		data-main="{{ url() . '/vendor/common/admin_assets/js/main' }}"></script>
+	<script src="{{ cached_asset('vendor/common/admin_assets/js/app/main.js') }}"></script>
 	
 	<script type="text/javascript">
-	requirejs([ 'app/modules/main' ], function(main) {
-		var trans = {
-			messages: {
-				close_page: {!! json_encode(trans('common::admin.main.messages.close-page')) !!}, 
-				logged_in: {!! json_encode(trans('common::admin.main.messages.logged-in')) !!}
-			}
-		};
-		
-		var config = {
-			check_token_route: {!! json_encode(url() . '/check-token') !!}, 
-			login_route: {!! json_encode(route('admin-login')) !!}, 
-			token_route: {!! json_encode(route('admin-token')) !!}, 
-		};
-		
-		main.init(trans, config);
-	});
+	var trans = {
+		messages: {
+			close_page: {!! json_encode(trans('common::admin.main.messages.close-page')) !!}, 
+			logged_in: {!! json_encode(trans('common::admin.main.messages.logged-in')) !!}
+		}
+	};
+	
+	var config = {
+		check_token_route: {!! json_encode(url() . '/check-token') !!}, 
+		login_route: {!! json_encode(route('admin-login')) !!}, 
+		token_route: {!! json_encode(route('admin-token')) !!}, 
+	};
+	
+	main.init(trans, config);
 	</script>
 	
 	<link rel="stylesheet" type="text/css" 
 		href="{{ cached_asset('vendor/common/admin_assets/js/semanticui/semantic.min.css') }}" />
-	<link rel="stylesheet" type="text/css" href="{{ cached_asset('vendor/common/admin_assets/js/pikaday/pikaday.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ cached_asset('vendor/common/admin_assets/css/pikaday.css') }}" />
 	<link rel="stylesheet" type="text/css" href="{{ cached_asset('vendor/common/admin_assets/css/animate.css') }}" />
 	<link rel="stylesheet" type="text/css" href="{{ cached_asset('vendor/common/admin_assets/css/main.css') }}" />
 	
