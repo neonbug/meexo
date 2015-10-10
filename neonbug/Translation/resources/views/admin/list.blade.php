@@ -27,8 +27,6 @@
 	</script>
 	
 	<script type="text/jsx;harmony=true">
-	var items = {!! json_encode($items) !!};
-	
 	var SourceTypes = React.createClass({
 		getInitialState: function() {
 			return { search_value: '' };
@@ -41,16 +39,19 @@
 		}, 
 		render: function() {
 			var items = this.props.items;
+			var languages = this.props.languages;
 			var search_value = this.state.search_value;
 			
 			return <div>
 					<div className="ui icon input">
-						<input type="text" placeholder="Search..." value={search_value} onChange={this.handleSearchChange} />
+						<input type="text" placeholder="{{ trans('translation::admin.list.search-placeholder') }}" 
+							value={search_value} onChange={this.handleSearchChange} />
 						<i className="search icon"></i>
 					</div>
 					<div className="ui divider"></div>
 					{Object.keys(items).map(function(type) {
-						return <SourceType key={type} type={type} data={items[type]} search_value={search_value} />;
+						return <SourceType key={type} type={type} data={items[type]} search_value={search_value}
+							languages={languages} />;
 					})}
 				</div>;
 		}
@@ -61,11 +62,21 @@
 			var type = this.props.type;
 			var data = this.props.data;
 			var search_value = this.props.search_value;
+			var languages = this.props.languages;
 			
 			var items = Object.keys(data.items).filter(function(item) {
 				return search_value.length == 0 || Object.keys(data.items[item].items).some(function(subitem) {
-					return subitem.indexOf(search_value) != -1 || 
+					var found = subitem.indexOf(search_value) != -1 || 
 						data.items[item].items[subitem].id.indexOf(search_value) != -1;
+					
+					if (!found)
+					{
+						found = Object.keys(data.items[item].items[subitem].translations).some(function(id_language) {
+							return (data.items[item].items[subitem].translations[id_language].indexOf(search_value) != -1);
+						});
+					}
+					
+					return found;
 				});
 			});
 			
@@ -77,7 +88,7 @@
 					<div className="ui styled fluid accordion">
 						{items.map(function(package) {
 							return <SourcePackage key={type + '-' + package} type={type} package={package} 
-								data={data.items[package]} search_value={search_value} />;
+								data={data.items[package]} search_value={search_value} languages={languages} />;
 						})}
 					</div>
 				</div>;
@@ -90,11 +101,31 @@
 			var type = this.props.type;
 			var data = this.props.data;
 			var search_value = this.props.search_value;
+			var languages = this.props.languages;
 			
 			var items = Object.keys(data.items).filter(function(item) {
-				return search_value.length == 0 || 
+				var found = search_value.length == 0 || 
 					(item.indexOf(search_value) != -1 || data.items[item].id.indexOf(search_value) != -1);
+				
+				if (!found)
+				{
+					found = Object.keys(data.items[item].translations).some(function(id_language) {
+						return (data.items[item].translations[id_language].indexOf(search_value) != -1);
+					});
+				}
+				
+				return found;
 			});
+			
+			var head_items = [ {!! json_encode(trans('translation::admin.list.field-title.edit')) !!}, 
+				{!! json_encode(trans('translation::admin.list.field-title.code')) !!} ];
+			languages.forEach(function(language) {
+				head_items.push(language.locale);
+			});
+			
+			var head = <tr>{head_items.map(function(item) {
+				return <th>{item}</th>;
+			})}</tr>;
 			
 			return <div>
 					<div className="title">
@@ -103,16 +134,11 @@
 					</div>
 					<div className="content">
 						<table className="ui celled striped table">
-							<thead><tr>
-								<th>Edit</th>
-								<th>Code</th>
-								<th>En</th>
-								<th>Sl</th>
-							</tr></thead>
+							<thead>{head}</thead>
 							<tbody>
 								{items.map(function(item) {
 									return <SourceItem key={type + '-' + package + '-' + item} 
-										item={item} data={data.items[item]} />;
+										item={item} data={data.items[item]} languages={languages} />;
 								})}
 							</tbody>
 						</table>
@@ -122,9 +148,11 @@
 	});
 	
 	var SourceItem = React.createClass({
+		edit_link: {!! json_encode(route('translation::admin::edit', '==id==')) !!}, 
 		render: function() {
 			var item = this.props.item;
 			var data = this.props.data;
+			var languages = this.props.languages;
 			
 			var title = item;
 			if (item.indexOf('.') != -1)
@@ -135,23 +163,33 @@
 				title = <span><span style={style}>{title_first_part}</span>{title_last_part}</span>;
 			}
 			
+			var edit_link = this.edit_link.replace('==id==', data.id);
+			
 			return <tr className="{ (false ? 'error' : (false ? 'warning' : '')) }">
 						<td className="collapsing">
-							<a href="#" 
-								className="ui label blue only-icon"><i className="write icon"></i></a>
+							<a href={edit_link} className="ui label blue only-icon">
+								<i className="write icon"></i>
+							</a>
 						</td>
 						<td>{title}</td>
-						<td className="center aligned collapsing">
-							<i className="large green checkmark icon"></i>
-						</td>
-						<td className="center aligned collapsing">
-							<i className="large red close icon"></i>
-						</td>
+						{languages.map(function(language) {
+							var cls = 'large icon ' + 
+								(data.translations[language.id_language] != undefined && 
+									data.translations[language.id_language].length > 0 ? 
+									'green checkmark' : 'red close');
+							
+							return <td className="center aligned collapsing">
+								<i className={cls}></i>
+							</td>;
+						})}
 					</tr>;
 		}
 	});
 	
-	React.render(<SourceTypes items={items} />, document.getElementById('source-items'));
+	var items = {!! json_encode($items) !!};
+	var languages = {!! json_encode($languages) !!};
+	
+	React.render(<SourceTypes items={items} languages={languages} />, document.getElementById('source-items'));
 	</script>
 	
 	<style type="text/css">

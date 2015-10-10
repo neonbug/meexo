@@ -1,13 +1,21 @@
-<?php return [
-	'translation::admin.title.main' => [ 'en' => 'Translation', 'sl' => 'Prevod' ], 
-	'translation::admin.title.list' => [ 'en' => 'List', 'sl' => 'Seznam' ], 
-	'translation::admin.title.add'  => [ 'en' => 'Add', 'sl' => 'Dodaj' ], 
-	'translation::admin.title.edit' => [ 'en' => 'Edit', 'sl' => 'Uredi' ], 
+<?php
+$p = 'translation::admin.';
+return [
+	$p . 'title.main' => [ 'en' => 'Translation', 'sl' => 'Prevod' ], 
+	$p . 'title.list' => [ 'en' => 'List', 'sl' => 'Seznam' ], 
+	$p . 'title.edit' => [ 'en' => 'Edit', 'sl' => 'Uredi' ], 
 	
-	'translation::admin.menu.main' => [ 'en' => 'Translation', 'sl' => 'Prevod' ], 
-	'translation::admin.menu.list' => [ 'en' => 'List', 'sl' => 'Seznam' ], 
-	'translation::admin.menu.add'  => [ 'en' => 'Add', 'sl' => 'Dodaj' ], 
+	$p . 'menu.main' => [ 'en' => 'Translation', 'sl' => 'Prevod' ], 
+	$p . 'menu.list' => [ 'en' => 'List', 'sl' => 'Seznam' ], 
 	
-	'translation::admin.list.type.frontend' => [ 'en' => 'Front end', 'sl' => 'Spletna stran' ], 
-	'translation::admin.list.type.admin'    => [ 'en' => 'Administration', 'sl' => 'Administracija' ], 
+	$p . 'list.type.frontend' => [ 'en' => 'Front end', 'sl' => 'Spletna stran' ], 
+	$p . 'list.type.admin'    => [ 'en' => 'Administration', 'sl' => 'Administracija' ], 
+	
+	$p . 'list.search-placeholder' => [ 'en' => 'Search...', 'sl' => 'Išči...' ], 
+	
+	$p . 'list.field-title.edit' => [ 'en' => 'Edit', 'sl' => 'Uredi' ], 
+	$p . 'list.field-title.code' => [ 'en' => 'Code', 'sl' => 'Koda' ], 
+	
+	$p . 'add.field-title.id_translation_source' => [ 'en' => 'Code', 'sl' => 'Koda' ], 
+	$p . 'add.field-title.translation'           => [ 'en' => 'Translation', 'sl' => 'Prevod' ], 
 ];

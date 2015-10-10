@@ -59,15 +59,6 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 				'uses' => static::ADMIN_CONTROLLER . '@adminList'
 			]);
 			
-			$router->get('add', [
-				'as'   => static::PREFIX . '::admin::add', 
-				'uses' => static::ADMIN_CONTROLLER . '@adminAdd'
-			]);
-			$router->post('add', [
-				'as'   => static::PREFIX . '::admin::add-save', 
-				'uses' => static::ADMIN_CONTROLLER . '@adminAddPost'
-			]);
-			
 			$router->get('edit/{id}', [
 				'as'   => static::PREFIX . '::admin::edit', 
 				'uses' => static::ADMIN_CONTROLLER . '@adminEdit'
@@ -84,11 +75,6 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 			$router->post('delete', [
 				'as'   => static::PREFIX . '::admin::delete', 
 				'uses' => static::ADMIN_CONTROLLER . '@adminDeletePost'
-			]);
-			
-			$router->post('check-slug', [
-				'as'   => static::PREFIX . '::admin::check-slug', 
-				'uses' => static::ADMIN_CONTROLLER . '@adminCheckSlugPost'
 			]);
 		});
 

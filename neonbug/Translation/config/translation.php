@@ -23,36 +23,34 @@
 	'add' => [
 		'language_dependent_fields' => [
 			[
-				'name' => 'title', 
-				'type' => 'single_line_text', 
+				'name' => 'translation', 
+				'type' => 'translation::admin.add_fields.translation_text', 
 				'value' => ''
-			], 
-			[
-				'name' => 'slug', 
-				'type' => 'slug', 
-				'value' => '', 
-				'generate_from' => 'title'
 			]
 		], 
 		'language_independent_fields' => [
+			[
+				'name' => 'id_translation_source', 
+				'type' => 'label', 
+				'value' => ''
+			]
 		]
 	], 
 	
 	'edit' => [
 		'language_dependent_fields' => [
 			[
-				'name' => 'title', 
-				'type' => 'single_line_text', 
+				'name' => 'translation', 
+				'type' => 'translation::admin.add_fields.translation_text', 
 				'value' => ''
-			], 
-			[
-				'name' => 'slug', 
-				'type' => 'slug', 
-				'value' => '', 
-				'generate_from' => 'title'
 			]
 		], 
 		'language_independent_fields' => [
+			[
+				'name' => 'id_translation_source', 
+				'type' => 'label', 
+				'value' => ''
+			]
 		]
 	]
 	
