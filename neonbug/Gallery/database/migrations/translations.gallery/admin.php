@@ -1,12 +1,12 @@
 <?php
 $p = 'gallery::admin.';
 return [
-	$p . 'title.main' => [ 'en' => 'Gallery', 'sl' => 'Galerija' ], 
+	$p . 'title.main' => [ 'en' => 'Galleries', 'sl' => 'Galerije' ], 
 	$p . 'title.list' => [ 'en' => 'List',    'sl' => 'Seznam' ], 
 	$p . 'title.add'  => [ 'en' => 'Add',     'sl' => 'Dodaj' ], 
 	$p . 'title.edit' => [ 'en' => 'Edit',    'sl' => 'Uredi' ], 
 	
-	$p . 'menu.main' => [ 'en' => 'Gallery',  'sl' => 'Galerija' ], 
+	$p . 'menu.main' => [ 'en' => 'Galleries',  'sl' => 'Galerije' ], 
 	$p . 'menu.list' => [ 'en' => 'List',     'sl' => 'Seznam' ], 
 	$p . 'menu.add'  => [ 'en' => 'Add',      'sl' => 'Dodaj' ], 
 	

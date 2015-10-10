@@ -1,11 +1,11 @@
 <?php
 $p = 'translation::admin.';
 return [
-	$p . 'title.main' => [ 'en' => 'Translation', 'sl' => 'Prevod' ], 
+	$p . 'title.main' => [ 'en' => 'Translations', 'sl' => 'Prevodi' ], 
 	$p . 'title.list' => [ 'en' => 'List', 'sl' => 'Seznam' ], 
 	$p . 'title.edit' => [ 'en' => 'Edit', 'sl' => 'Uredi' ], 
 	
-	$p . 'menu.main' => [ 'en' => 'Translation', 'sl' => 'Prevod' ], 
+	$p . 'menu.main' => [ 'en' => 'Translations', 'sl' => 'Prevodi' ], 
 	$p . 'menu.list' => [ 'en' => 'List', 'sl' => 'Seznam' ], 
 	
 	$p . 'list.type.frontend' => [ 'en' => 'Front end', 'sl' => 'Spletna stran' ], 
