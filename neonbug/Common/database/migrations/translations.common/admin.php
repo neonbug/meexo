@@ -1,6 +1,8 @@
 <?php
 $p = 'common::admin.';
 return [
+	$p . 'title.main' => [ 'en' => 'Common', 'sl' => 'Splošno' ], 
+	
 	// add
 	$p . 'add.tab-title-general'         => [ 'en' => 'General', 'sl' => 'Splošno' ], 
 	$p . 'add.save-button'               => [ 'en' => 'Save', 'sl' => 'Shrani' ], 
