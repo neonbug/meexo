@@ -15,7 +15,8 @@
 		check_slug_route: {!! json_encode(route($check_slug_route)) !!}, 
 		formatter_date_pattern: {!! json_encode($formatter->getShortDatePattern()) !!}, 
 		messages: {!! json_encode(isSet($messages) ? $messages : []) !!}, 
-		errors: {!! json_encode($errors->all()) !!}
+		errors: {!! json_encode($errors->all()) !!}, 
+		base_url: {!! json_encode(url()) !!}
 	};
 	
 	add.init(trans, config);

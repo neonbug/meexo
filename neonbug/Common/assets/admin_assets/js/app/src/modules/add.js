@@ -153,7 +153,7 @@ function initRichEditors() {
 	$('textarea[data-type="rich_text"]').each(function(idx, el) {
 		CKEDITOR.replace(el, {
 			entities: false, 
-			baseHref: app_data.config.baseUrl
+			baseHref: app_data.config.base_url
 		});
 	});
 }
