@@ -95,7 +95,7 @@ body
 .add .tab.segment .ui.table
 {
 }
-	.add .tab.segment .ui.table tr th
+	.add .tab.segment .ui.table tr th, .add .tab.segment .ui.table tr.field-label td
 	{
 		padding-top: 19px;
 	}
