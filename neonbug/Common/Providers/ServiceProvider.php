@@ -129,6 +129,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 			$router->group(['role' => '*'], function($router) {
 				$router->get('/', ['as' => 'admin-home', 
 					'uses' => '\Neonbug\Common\Http\Controllers\AdminController@index']);
+				$router->get('/dashboard/analytics-data', ['as' => 'admin-dashboard-analytics-data', 
+					'uses' => '\Neonbug\Common\Http\Controllers\AdminController@getAnalyticsData']);
 			});
 		});
 	}

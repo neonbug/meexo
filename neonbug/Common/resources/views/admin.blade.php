@@ -22,6 +22,7 @@
 	<script src="{{ cached_asset('vendor/common/admin_assets/js/html.sortable.min.js') }}"></script>
 	<script src="{{ cached_asset('vendor/common/admin_assets/js/jquery.noty.packaged.min.js') }}"></script>
 	<script src="{{ cached_asset('vendor/common/admin_assets/js/noty/custom_relax.js') }}"></script>
+	<script src="{{ cached_asset('vendor/common/admin_assets/js/d3.min.js') }}"></script>
 	<script src="{{ cached_asset('vendor/common/admin_assets/js/app/main.js') }}"></script>
 	
 	<script type="text/javascript">
