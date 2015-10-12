@@ -2,9 +2,10 @@
 
 @section('head')
 <style type="text/css">
-.analytics-sessions-graph, .analytics-views-graph
+.analytics-graph
 {
-	font: 10px sans-serif;
+	font-size: 12px;
+	margin-top: 64px;
 }
 
 .axis path, .axis line
@@ -17,6 +18,14 @@
 {
 	fill: #aaaaaa;
 }
+.y.axis .tick line
+{
+	stroke: #eeeeee;
+}
+.x.axis .tick line, .axis .domain
+{
+	display: none;
+}
 
 .line
 {
@@ -26,15 +35,20 @@
 .gridline
 {
 	stroke-width: 1px;
-}
-
-.area
-{
-	opacity: 0.5;
+	stroke: #eeeeee;
+	shape-rendering: crispEdges;
 }
 </style>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+	<defs>
+		<linearGradient id="area_gradient" x1="0" x2="0" y1="0" y2="1">
+			<stop offset="5%" stop-color="#f2711c" stop-opacity="0.8" />
+			<stop offset="95%" stop-color="#f2711c" stop-opacity="0.5" />
+		</linearGradient>
+	</defs>
+</svg>
 <script type="text/javascript">
-function loadChart(data, data_key, max_val, selector, graph_width, graph_height)
+function loadChart(data, max_val, selector, graph_width, graph_height)
 {
 	var margin = { top: 20, right: 80, bottom: 30, left: 50 },
 		width = graph_width - margin.left - margin.right,
@@ -45,7 +59,7 @@ function loadChart(data, data_key, max_val, selector, graph_width, graph_height)
 
 	var color = d3.scale.category10();
 	var xAxis = d3.svg.axis().scale(x).orient('bottom'); //.tickFormat(d3.time.format('%m/%d/%y'));
-	var yAxis = d3.svg.axis().scale(y).orient('left');
+	var yAxis = d3.svg.axis().scale(y).orient('left').ticks(6);
 
 	var line = d3.svg.line()
 		.interpolate('cardinal')
@@ -73,7 +87,7 @@ function loadChart(data, data_key, max_val, selector, graph_width, graph_height)
 		.append('g')
 		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-	color.domain([ data_key ]);
+	color.domain([ 'sessions', 'views' ]);
 
 	var cities = color.domain().map(function(name) {
 		return {
@@ -101,30 +115,32 @@ function loadChart(data, data_key, max_val, selector, graph_width, graph_height)
 		.attr('class', 'y axis')
 		.call(yAxis)
 		.append('text')
-		.attr('transform', 'rotate(-90)')
-		.attr('y', 6)
-		.attr('dy', '.71em')
-		.style('text-anchor', 'end');
+			.style('text-anchor', 'end');
 	
 	var gridline_data = [];
-	for (var y_val=max_val/6; y_val<max_val; y_val += max_val/6)
-	{
-		gridline_data.push({ values: [[x_extent[0], y_val], [x_extent[1], y_val]] });
-	}
+	svg.selectAll('.y.axis .tick').each(function(data) {
+		var tick = d3.select(this);
+		var transform = d3.transform(tick.attr('transform')).translate;
+		
+		if (data > 0)
+		{
+			gridline_data.push({ values: [[x_extent[0], transform[1]], [x_extent[1], transform[1]]] });
+		}
+	});
 	
 	gridline_data.forEach(function(data) {
-		svg.append('path')
-			//.data([ { date: new Date(2015, 8, 13), value: 0 }, { date: new Date(), value: 1600 } ])
-			.data([ data ])
+		svg.append('line')
 			.attr('class', 'gridline')
-			.style('stroke', function(d) { return '#eeeeee'; })
-			.attr('d', function(d) { console.log(d.values); return line_gridline(d.values); });
+			.attr('x1', x(data.values[0][0]))
+			.attr('x2', x(data.values[1][0]))
+			.attr('y1',   data.values[0][1])
+			.attr('y2',   data.values[1][1]);
 	});
 
 	var city = svg.selectAll('.city')
 		.data(cities)
 		.enter().append('g')
-		.attr('class', 'city');
+			.attr('class', 'city');
 
 	city.append('path')
 		.attr('class', 'line')
@@ -134,7 +150,7 @@ function loadChart(data, data_key, max_val, selector, graph_width, graph_height)
 	city.append('path')
 		.attr('class', 'area')
 		.attr('d', function(d) { return area(d.values); })
-		.style('fill', function(d) { return '#f2711c'; });
+		.style('fill', function(d) { return 'url("#area_gradient")'; });
 	
 	/*cities.forEach(function(category) {
 		category.values.forEach(function(item) {
@@ -166,9 +182,8 @@ $(document).ready(function() {
 	}, 'json');
 });
 
-var aspect = 2;
-var chart_1 = null;
-var chart_2 = null;
+var aspect = 4;
+var chart = null;
 
 var data = null;
 var max_val = 0;
@@ -176,18 +191,11 @@ var max_val = 0;
 var resize_timeout = -1;
 function resize()
 {
-	if (chart_1 != null)
+	if (chart != null)
 	{
-		var width = $('.analytics-sessions-graph').width();
-		chart_1.attr('width', width);
-		chart_1.attr('height', Math.round(width / aspect));
-	}
-	
-	if (chart_2 != null)
-	{
-		var width = $('.analytics-views-graph').width();
-		chart_2.attr('width', width);
-		chart_2.attr('height', Math.round(width / aspect));
+		var width = $('.analytics-graph').width();
+		chart.attr('width', width);
+		chart.attr('height', Math.round(width / aspect));
 	}
 	
 	if (resize_timeout != -1) clearTimeout(resize_timeout);
@@ -200,13 +208,9 @@ function loadCharts()
 {
 	if (data == null) return;
 	
-	loadChart(data, 'sessions', max_val, '.analytics-sessions-graph', 
-		$('.analytics-sessions-graph').width(), $('.analytics-sessions-graph').width()/aspect);
-	chart_1 = $('.analytics-sessions-graph > svg');
-	
-	loadChart(data, 'views', max_val, '.analytics-views-graph', 
-		$('.analytics-views-graph').width(), $('.analytics-views-graph').width()/aspect);
-	chart_2 = $('.analytics-views-graph > svg');
+	loadChart(data, max_val, '.analytics-graph', 
+		$('.analytics-graph').width(), $('.analytics-graph').width()/aspect);
+	chart = $('.analytics-graph > svg');
 }
 </script>
 @stop
@@ -243,13 +247,7 @@ function loadCharts()
 				</div>
 			</div>
 		</div>
-		<div class="stackable two column row">
-			<div class="column">
-				<div class="analytics-sessions-graph"></div>
-			</div>
-			<div class="column">
-				<div class="analytics-views-graph"></div>
-			</div>
-		</div>
 	</div>
+	
+	<div class="analytics-graph"></div>
 @stop
