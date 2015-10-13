@@ -14,12 +14,12 @@
 @stop
 
 @section('content')
-	<h2 class="ui header">
+	<h3 class="ui header">
 		<i class="area chart icon"></i>
 		<div class="content">
 			{{ trans('common::admin.dashboard.title') }}
 		</div>
-	</h2>
+	</h3>
 	<div class="ui divider"></div>
 	
 	<div class="analytics-graph-container">
