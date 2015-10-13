@@ -153,3 +153,54 @@ body
 {
 	display: flex;
 }
+
+.analytics-graph-container
+{
+	padding-top: 64px;
+}
+	.analytics-graph-container .ui.loader
+	{
+		font-size: 0.3em;
+	}
+	
+	.analytics-graph-container .analytics-graph
+	{
+		font-size: 12px;
+		margin-top: 64px;
+	}
+	
+	.analytics-graph-container .axis path, .analytics-graph-container .axis line
+	{
+		fill: none;
+		stroke: #aaaaaa;
+		shape-rendering: crispEdges;
+	}
+	.analytics-graph-container .axis text
+	{
+		fill: #aaaaaa;
+	}
+	.analytics-graph-container .y.axis .tick line
+	{
+		stroke: #eeeeee;
+	}
+	.analytics-graph-container .x.axis .tick line, .analytics-graph-container .axis .domain
+	{
+		display: none;
+	}
+
+	.analytics-graph-container .line
+	{
+		fill: none;
+		stroke-width: 2.5px;
+	}
+	.analytics-graph-container .gridline
+	{
+		stroke-width: 1px;
+		stroke: #eeeeee;
+		shape-rendering: crispEdges;
+	}
+	
+	.analytics-graph-container .area
+	{
+		opacity: 0.5;
+	}

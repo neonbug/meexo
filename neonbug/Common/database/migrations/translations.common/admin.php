@@ -50,7 +50,9 @@ return [
 	$p . 'menu.title'          => [ 'en' => 'Admin menu', 'sl' => 'Admin meni' ], 
 	
 	// dashboard
-	$p . 'dashboard.title'     => [ 'en' => 'Dashboard', 'sl' => 'Nadzorna plošča' ], 
+	$p . 'dashboard.title'              => [ 'en' => 'Dashboard', 'sl' => 'Nadzorna plošča' ], 
+	$p . 'dashboard.analytics.sessions' => [ 'en' => 'Sessions',  'sl' => 'Obiski' ], 
+	$p . 'dashboard.analytics.views'    => [ 'en' => 'Views',     'sl' => 'Ogledi' ], 
 	
 	// header
 	$p . 'header.title'        => [ 'en' => 'Administration', 'sl' => 'Administracija' ], 

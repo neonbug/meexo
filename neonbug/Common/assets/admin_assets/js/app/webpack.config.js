@@ -3,10 +3,11 @@ var path = require('path');
 
 module.exports = {
 	entry: {
-		main:  './src/main', 
-		list:  './src/list', 
-		add:   './src/add', 
-		login: './src/login', 
+		main:      './src/main', 
+		list:      './src/list', 
+		add:       './src/add', 
+		login:     './src/login', 
+		dashboard: './src/dashboard'
 	}, 
 	resolve: {
 		alias: {
