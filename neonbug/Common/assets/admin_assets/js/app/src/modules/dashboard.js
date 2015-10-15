@@ -25,7 +25,7 @@ function initCharts()
 
 function loadChart(data, max_val, selector, graph_width, graph_height)
 {
-	var margin = { top: 20, right: 80, bottom: 30, left: 50 },
+	var margin = { top: 20, right: 0, bottom: 30, left: 50 },
 		width = graph_width - margin.left - margin.right,
 		height = graph_height - margin.top - margin.bottom;
 	
@@ -55,8 +55,6 @@ function loadChart(data, max_val, selector, graph_width, graph_height)
 	
 	d3.select(selector + ' > svg').remove();
 	var svg = d3.select(selector).append('svg')
-		.attr('width', width + margin.left + margin.right)
-		.attr('height', height + margin.top + margin.bottom)
 		.attr('viewBox', '0 0 ' + graph_width + ' ' + graph_height)
 		.attr('perserveAspectRatio', 'xMinYMid')
 		.append('g')
@@ -160,13 +158,6 @@ var max_val = 0;
 var resize_timeout = -1;
 function resize()
 {
-	if (chart != null)
-	{
-		var width = $('.analytics-graph').width();
-		chart.attr('width', width);
-		chart.attr('height', Math.round(width / aspect));
-	}
-	
 	if (resize_timeout != -1) clearTimeout(resize_timeout);
 	resize_timeout = setTimeout(function() {
 		resize_timeout = -1;
@@ -177,7 +168,10 @@ function loadCharts()
 {
 	if (data == null) return;
 	
-	loadChart(data, max_val, '.analytics-graph', $('.analytics-graph').width(), $('.analytics-graph').width()/aspect);
+	var width = $('.analytics-graph').width();
+	var height = Math.max(200, $('.analytics-graph').width()/aspect); //prevents height to be smaller than 200px
+	
+	loadChart(data, max_val, '.analytics-graph', width, height);
 	chart = $('.analytics-graph > svg');
 }
 
