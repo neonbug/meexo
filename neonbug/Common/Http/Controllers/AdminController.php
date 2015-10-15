@@ -1,6 +1,7 @@
 <?php namespace Neonbug\Common\Http\Controllers;
 
 use App;
+use Config;
 
 class AdminController extends Controller {
 
@@ -17,17 +18,26 @@ class AdminController extends Controller {
 
 	public function index()
 	{
+		$google_account = Config::get('neonbug.common.analytics.google_account');
+		$analytics_supported = ($google_account != null && $google_account != '');
+		
 		return App::make('\Neonbug\Common\Helpers\CommonHelper')
-			->loadView(static::PACKAGE_NAME, 'admin.index', []);
+			->loadView(static::PACKAGE_NAME, 'admin.index', [
+				'analytics_supported' => $analytics_supported
+			]);
 	}
 	
 	public function getAnalyticsData()
 	{
+		$google_account     = Config::get('neonbug.common.analytics.google_account');
+		$google_certificate = Config::get('neonbug.common.analytics.google_certificate');
+		$default_profile_id = Config::get('neonbug.common.analytics.default_profile_id');
+		
 		$google_analytics_repo = new \Neonbug\Common\Repositories\GoogleAnalyticsRepository(
-			'36744352652-aekjq1eiq7q4ojqhpbfa8op8p0f7dmdu@developer.gserviceaccount.com', 
-			__DIR__ . '/../../../../resources/assets/analytics_key.p12'
+			$google_account, 
+			$google_certificate
 		);
-		$rows = $google_analytics_repo->getDailyForLastThirtyDays('41764974');
+		$rows = $google_analytics_repo->getDailyForLastThirtyDays($default_profile_id);
 		
 		return [ 
 			'total_sessions' => array_reduce($rows, function($c, $item) { return $c + $item['sessions']; }, 0), 

@@ -22,32 +22,34 @@
 	</h3>
 	<div class="ui divider"></div>
 	
-	<div class="analytics-graph-container">
-		<div class="ui grid">
-			<div class="stackable two column row center aligned">
-				<div class="column">
-					<div class="ui statistic">
-						<div class="value sessions-value">
-							<div class="ui active inline small loader"></div>
-						</div>
-						<div class="label">
-							<i class="users icon"></i> {{ trans('common::admin.dashboard.analytics.sessions') }}
+	@if ($analytics_supported)
+		<div class="analytics-graph-container">
+			<div class="ui grid">
+				<div class="stackable two column row center aligned">
+					<div class="column">
+						<div class="ui statistic">
+							<div class="value sessions-value">
+								<div class="ui active inline small loader"></div>
+							</div>
+							<div class="label">
+								<i class="users icon"></i> {{ trans('common::admin.dashboard.analytics.sessions') }}
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="column">
-					<div class="ui statistic">
-						<div class="value views-value">
-							<div class="ui active inline small loader"></div>
-						</div>
-						<div class="label">
-							<i class="unhide icon"></i> {{ trans('common::admin.dashboard.analytics.views') }}
+					<div class="column">
+						<div class="ui statistic">
+							<div class="value views-value">
+								<div class="ui active inline small loader"></div>
+							</div>
+							<div class="label">
+								<i class="unhide icon"></i> {{ trans('common::admin.dashboard.analytics.views') }}
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			
+			<div class="analytics-graph"></div>
 		</div>
-		
-		<div class="analytics-graph"></div>
-	</div>
+	@endif
 @stop
