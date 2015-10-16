@@ -52,35 +52,45 @@
 </head>
 <body>
 	
-	<div class="main">
-		<div class="main-menu">
-			<h3 class="ui header">{{ trans('common::admin.menu.title') }}</h3>
-			
-			@include('common::admin.menu')
-		</div>
+	<div class="main-menu ui sidebar">
+		<h3 class="ui header">{{ trans('common::admin.menu.title') }}</h3>
 		
-		<div class="main-content">
-			<div class="admin-top-menu ui basic segment inverted orange">
-				<div class="ui grid">
-					<div class="left floated left aligned ten wide column">
-						{{ trans('common::admin.breadcrumbs.first-item') }}
-						@if (isSet($title) && is_array($title))
-							@foreach ($title as $title_item)
-								<i class="right angle icon divider"></i> {{ $title_item }}
-							@endforeach
-						@endif
-					</div>
-					<div class="right floated right aligned six wide column">
-						{!! trans('common::admin.header.logged-in-as', [ 'name' => $user->name ]) !!}
-						<div class="admin-top-menu-divider"></div>
-						<a href="{{ route('admin-logout') }}">{{ trans('common::admin.header.logout') }}</a>
-						<i class="sign out icon"></i>
-					</div>
-				</div>
+		@include('common::admin.menu')
+	</div>
+	
+	<div class="main-container pusher">
+		<div class="main-inner-container">
+			<div class="main-menu desktop-only">
+				<h3 class="ui header">{{ trans('common::admin.menu.title') }}</h3>
+				
+				@include('common::admin.menu')
 			</div>
 			
-			<div class="main-inner-content ui basic segment">
-				@yield('content')
+			<div class="main-content">
+				<div class="admin-top-menu ui basic segment inverted orange">
+					<div class="ui grid">
+						<div class="left floated left aligned ten wide column">
+							<i id="open-menu" class="link sidebar icon mobile-only"></i>
+							
+							{{ trans('common::admin.breadcrumbs.first-item') }}
+							@if (isSet($title) && is_array($title))
+								@foreach ($title as $title_item)
+									<i class="right angle icon divider"></i> {{ $title_item }}
+								@endforeach
+							@endif
+						</div>
+						<div class="right floated right aligned six wide column">
+							{!! trans('common::admin.header.logged-in-as', [ 'name' => $user->name ]) !!}
+							<div class="admin-top-menu-divider"></div>
+							<a href="{{ route('admin-logout') }}">{{ trans('common::admin.header.logout') }}</a>
+							<i class="sign out icon"></i>
+						</div>
+					</div>
+				</div>
+				
+				<div class="main-inner-content ui basic segment">
+					@yield('content')
+				</div>
 			</div>
 		</div>
 	</div>

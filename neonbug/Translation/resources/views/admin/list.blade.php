@@ -133,7 +133,7 @@
 						{data.title}
 					</div>
 					<div className="content">
-						<table className="ui celled striped table">
+						<table className="ui celled striped table unstackable">
 							<thead>{head}</thead>
 							<tbody>
 								{items.map(function(item) {

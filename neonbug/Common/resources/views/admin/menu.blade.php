@@ -1,4 +1,4 @@
-<div class="ui inverted vertical menu sticky fluid borderless">
+<div class="ui inverted vertical menu left sticky fluid borderless">
 	<?php
 	$route = route('admin-home');
 	$active = ($route == Request::url());

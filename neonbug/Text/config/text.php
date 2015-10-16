@@ -11,10 +11,12 @@
 				'type' => 'text'
 			], 
 			'slug' => [
-				'type' => 'text'
+				'type' => 'text', 
+				'important' => false
 			], 
 			'updated_at' => [
-				'type' => 'date'
+				'type' => 'date', 
+				'important' => false
 			]
 		]
 	], 

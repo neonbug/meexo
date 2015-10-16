@@ -21,7 +21,7 @@
 @stop
 
 @section('content')
-	<table class="ui striped padded table">
+	<table class="ui striped padded table unstackable">
 		<thead>
 			<tr>
 				@if ($edit_route != null)
@@ -31,7 +31,11 @@
 					<th>{{ trans('common::admin.list.delete-action') }}</th>
 				@endif
 				@foreach ($fields as $field_name=>$field)
-					<th>{{ trans($package_name . '::admin.list.field-title.' . $field_name) }}</th>
+					<?php
+					$cls = (!array_key_exists('important', $field) || $field['important'] === true ? 
+						'' : 'desktop-only');
+					?>
+					<th class="{{ $cls }}">{{ trans($package_name . '::admin.list.field-title.' . $field_name) }}</th>
 				@endforeach
 			</tr>
 		</thead>
@@ -51,7 +55,11 @@
 						</td>
 					@endif
 					@foreach ($fields as $field_name=>$field)
-						<td>
+						<?php
+						$cls = (!array_key_exists('important', $field) || $field['important'] === true ? 
+						'' : 'desktop-only');
+						?>
+						<td class="{{ $cls }}">
 							@include('common::admin.list_fields.' . $field['type'], 
 								[ 'item' => $item, 'field_name' => $field_name, 'field' => $field ])
 						</td>

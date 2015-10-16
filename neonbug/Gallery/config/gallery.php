@@ -11,16 +11,20 @@
 				'type' => 'text'
 			], 
 			'slug' => [
-				'type' => 'text'
+				'type' => 'text', 
+				'important' => false
 			], 
 			'updated_at' => [
-				'type' => 'date'
+				'type' => 'date', 
+				'important' => false
 			], 
 			'published' => [
-				'type' => 'boolean'
+				'type' => 'boolean', 
+				'important' => false
 			], 
 			'ord' => [
-				'type' => 'text'
+				'type' => 'text', 
+				'important' => false
 			]
 		]
 	], 

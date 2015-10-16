@@ -1,3 +1,19 @@
+@media (max-width: 767px) {
+	.mobile-only { }
+	
+	.desktop-only {
+		display:none !important;
+	}
+}
+
+@media (min-width:768px) {
+	.mobile-only {
+		display:none !important;
+	}
+	
+	.desktop-only { }
+}
+
 body
 {
 	height: 100%;
@@ -16,13 +32,6 @@ body
 		background-color: #1b1c1d;
 		min-height: 100%;
 	}
-		/* Smartphones (portrait and landscape) ----------- */
-		@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-			.main-menu
-			{
-				display: none;
-			}
-		}
 		.main-menu > .header
 		{
 			color: #ffffff;
@@ -55,35 +64,45 @@ body
 					float: left;
 					margin-right: 1.3em;
 				}
-	.main-content
+	.main-container
 	{
-		flex: 1 1 auto;
+		display: flex;
+		min-height: 100%;
 	}
-		.admin-top-menu-divider
+		.main-inner-container
 		{
-			display: inline;
-			border-left: 1px solid #ffffff;
-			margin-left: 12px;
-			margin-right: 12px;
+			display: flex;
+			flex: 1;
 		}
-		.admin-top-menu strong
-		{
-			color: #ffffff;
-		}
-		.admin-top-menu a
-		{
-			border-bottom: 1px dotted #ffffff;
-		}
-		.admin-top-menu a:hover
-		{
-			border-bottom: 0px;
-		}
-		
-		.main-content .main-inner-content
-		{
-			padding: 24px;
-			padding-top: 10px;
-		}
+			.main-content
+			{
+				flex: 1 1 auto;
+			}
+				.admin-top-menu-divider
+				{
+					display: inline;
+					border-left: 1px solid #ffffff;
+					margin-left: 12px;
+					margin-right: 12px;
+				}
+				.admin-top-menu strong
+				{
+					color: #ffffff;
+				}
+				.admin-top-menu a
+				{
+					border-bottom: 1px dotted #ffffff;
+				}
+				.admin-top-menu a:hover
+				{
+					border-bottom: 0px;
+				}
+				
+				.main-content .main-inner-content
+				{
+					padding: 24px;
+					padding-top: 10px;
+				}
 .inverted a
 {
 	color: #ffffff;

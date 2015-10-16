@@ -135,6 +135,29 @@ function loginUser(username, password, options)
 	}, 'json');
 }
 
+function initSidebar()
+{
+	$('#open-menu').click(function()
+	{
+		$('.main-menu.ui.sidebar').sidebar({ dimPage: false }).sidebar('toggle');
+	});
+
+	$(window).resize(function()
+	{
+		if($(window).width() > 767) // desktop
+		{
+			var sidebar = $('.main-menu.ui.sidebar');
+			if (sidebar.sidebar('is visible'))
+			{
+				sidebar.sidebar('hide');
+			}
+		}
+		else // mobile
+		{
+		}
+	});
+}
+
 module.exports.init = function(trans, config) {
 	app_data.trans = trans;
 	app_data.config = config;
@@ -150,5 +173,6 @@ module.exports.init = function(trans, config) {
 	$(document).ready(function() {
 		//initCloseWarning();
 		initTokenChecking();
+		initSidebar();
 	});
 };

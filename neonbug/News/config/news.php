@@ -13,16 +13,20 @@ return [
 				'type' => 'text'
 			], 
 			'slug' => [
-				'type' => 'text'
+				'type' => 'text', 
+				'important' => false
 			], 
 			'published' => [
-				'type' => 'boolean'
+				'type' => 'boolean', 
+				'important' => false
 			], 
 			'published_from_date' => [
-				'type' => 'date'
+				'type' => 'date', 
+				'important' => false
 			], 
 			'updated_at' => [
-				'type' => 'date'
+				'type' => 'date', 
+				'important' => false
 			]
 		]
 	], 
