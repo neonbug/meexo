@@ -51,8 +51,9 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 		$resource_repo = App::make('ResourceRepository');
 		
 		//admin
-		$router->group([ 'prefix' => $admin_locale . '/admin/' . static::PREFIX, 'middleware' => [ 'auth.admin', 'admin.menu' ], 
-			'role' => static::ROLE ], function($router)
+		$router->group([ 'prefix' => $admin_locale . '/admin/' . static::PREFIX, 
+			'middleware' => [ 'auth.admin', 'admin.menu' ], 'role' => static::ROLE, 
+			'menu.icon' => 'translate' ], function($router)
 		{
 			$router->get('list', [
 				'as'   => static::PREFIX . '::admin::list', 
