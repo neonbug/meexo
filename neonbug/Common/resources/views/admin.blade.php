@@ -116,18 +116,22 @@
 					</div>
 				</div>
 				
-				<div class="field">
-					<div class="ui left icon input" data-name="username">
-						<i class="user icon"></i>
-						<input type="text" name="username" placeholder="{{ trans('common::admin.login-popup.username') }}" 
-							value="{{ old('username') }}" autofocus />
+				<div class="ui form">
+					<div class="field">
+						<div class="ui left icon input" data-name="username">
+							<i class="user icon"></i>
+							<input type="text" name="username" 
+								placeholder="{{ trans('common::admin.login-popup.username') }}" 
+								value="{{ old('username') }}" autofocus />
+						</div>
 					</div>
-				</div>
-				
-				<div class="field">
-					<div class="ui left icon input" data-name="password">
-						<i class="lock icon"></i>
-						<input type="password" name="password" placeholder="{{ trans('common::admin.login-popup.password') }}">
+					
+					<div class="field">
+						<div class="ui left icon input" data-name="password">
+							<i class="lock icon"></i>
+							<input type="password" name="password" 
+								placeholder="{{ trans('common::admin.login-popup.password') }}">
+						</div>
 					</div>
 				</div>
 			</div>
