@@ -150,10 +150,33 @@ function initMessageClose() {
 }
 
 function initRichEditors() {
+	var is_mobile = ($(window).width() < 768);
+	var remove_buttons = is_mobile ? 
+		'Print,Preview,Save,Templates,NewPage,Find,Replace,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Language,BidiRtl,BidiLtr,About,Source,Cut,Copy,Paste,PasteText,PasteFromWord,Outdent,Indent,Blockquote,CreateDiv,Flash,SpecialChar,Smiley,PageBreak,Iframe,ShowBlocks'
+		:
+		'Print,Preview,Save,Templates,Find,Replace,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Language,BidiRtl,BidiLtr,About,Flash,NewPage';
+	
 	$('textarea[data-type="rich_text"]').each(function(idx, el) {
 		CKEDITOR.replace(el, {
 			entities: false, 
-			baseHref: app_data.config.base_url
+			baseHref: app_data.config.base_url, 
+			toolbarGroups: [
+				{ name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+				{ name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+				{ name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
+				{ name: 'forms', groups: [ 'forms' ] },
+				{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+				{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+				'/',
+				{ name: 'links', groups: [ 'links' ] },
+				{ name: 'insert', groups: [ 'insert' ] },
+				{ name: 'styles', groups: [ 'styles' ] },
+				{ name: 'colors', groups: [ 'colors' ] },
+				{ name: 'tools', groups: [ 'tools' ] },
+				{ name: 'others', groups: [ 'others' ] },
+				{ name: 'about', groups: [ 'about' ] }
+			], 
+			removeButtons: remove_buttons
 		});
 	});
 }

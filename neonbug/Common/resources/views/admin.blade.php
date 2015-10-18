@@ -69,7 +69,7 @@
 			<div class="main-content">
 				<div class="admin-top-menu ui basic segment inverted orange">
 					<div class="ui grid">
-						<div class="left floated left aligned ten wide column">
+						<div class="left floated left aligned eight wide column">
 							<i id="open-menu" class="link sidebar icon mobile-only"></i>
 							
 							{{ trans('common::admin.breadcrumbs.first-item') }}
@@ -79,9 +79,11 @@
 								@endforeach
 							@endif
 						</div>
-						<div class="right floated right aligned six wide column">
-							{!! trans('common::admin.header.logged-in-as', [ 'name' => $user->name ]) !!}
-							<div class="admin-top-menu-divider"></div>
+						<div class="right floated right aligned eight wide column">
+							<span class="desktop-only">
+								{!! trans('common::admin.header.logged-in-as', [ 'name' => $user->name ]) !!}
+								<div class="admin-top-menu-divider"></div>
+							</span>
 							<a href="{{ route('admin-logout') }}">{{ trans('common::admin.header.logout') }}</a>
 							<i class="sign out icon"></i>
 						</div>

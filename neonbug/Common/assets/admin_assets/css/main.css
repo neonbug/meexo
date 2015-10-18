@@ -97,6 +97,10 @@ body
 				{
 					border-bottom: 0px;
 				}
+				.admin-top-menu .column
+				{
+					white-space: nowrap;
+				}
 				
 				.main-content .main-inner-content
 				{
