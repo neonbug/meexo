@@ -32,6 +32,10 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 		$this->loadTranslationsFrom('/', static::PACKAGE_NAME);
 		
 		$this->publishes([
+			__DIR__.'/../assets/' => public_path('vendor/translation'),
+		], 'public');
+		
+		$this->publishes([
 			__DIR__.'/../database/migrations/' => database_path('/migrations')
 		], 'migrations');
 		

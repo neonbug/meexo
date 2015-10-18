@@ -2,6 +2,7 @@
 
 @section('head')
 	<script src="{{ cached_asset('vendor/common/admin_assets/js/app/add.js') }}"></script>
+	<script src="{{ cached_asset('vendor/translation/admin_assets/js/app/translation_add.js') }}"></script>
 	<script type="text/javascript">
 	var trans = {
 		errors: {
@@ -20,31 +21,7 @@
 	};
 	
 	add.init(trans, config);
-	
-	$(document).ready(function() {
-		var editor_instances = {};
-		
-		$('.field-translation-text').each(function(idx, el) {
-			$('[type="checkbox"]', el).change(function() {
-				var textarea = $('textarea', el);
-				if (this.checked)
-				{
-					editor_instances[textarea.attr('name')] = CKEDITOR.replace(textarea.get(0), {
-						entities: false, 
-						basicEntities: false, 
-						baseHref: config.base_url
-					});
-				}
-				else
-				{
-					if (editor_instances[textarea.attr('name')] != undefined)
-					{
-						editor_instances[textarea.attr('name')].destroy();
-					}
-				}
-			});
-		});
-	});
+	translation_add.init({}, {});
 	</script>
 	
 	<?php

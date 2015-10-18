@@ -18,4 +18,9 @@ return [
 	
 	$p . 'add.field-title.id_translation_source' => [ 'en' => 'Code', 'sl' => 'Koda' ], 
 	$p . 'add.field-title.translation'           => [ 'en' => 'Translation', 'sl' => 'Prevod' ], 
+	
+	$p . 'add.edit-with-rich-editor' => [ 
+		'en' => 'Edit with rich text editor', 
+		'sl' => 'Uredi z naprednim urejevalnikom besedil'
+	], 
 ];

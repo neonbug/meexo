@@ -10,7 +10,7 @@
 		<div class="field">
 			<div class="ui checkbox">
 				<input type="checkbox" />
-				<label>Edit with rich text editor</label>
+				<label>{{ trans('translation::admin.add.edit-with-rich-editor') }}</label>
 			</div>
 		</div>
 	</td>

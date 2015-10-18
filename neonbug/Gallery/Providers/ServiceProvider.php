@@ -36,6 +36,10 @@ class ServiceProvider extends \Neonbug\Common\Providers\BaseServiceProvider {
 		$this->loadTranslationsFrom('/', static::PACKAGE_NAME);
 		
 		$this->publishes([
+			__DIR__.'/../assets/' => public_path('vendor/gallery'),
+		], 'public');
+		
+		$this->publishes([
 			__DIR__.'/../database/migrations/' => database_path('/migrations')
 		], 'migrations');
 		
