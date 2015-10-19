@@ -220,6 +220,10 @@ function initErrorMessages() {
 	});
 }
 
+function initDropdowns() {
+	$('.ui.dropdown').dropdown();
+}
+
 module.exports.init = function(trans, config) {
 	app_data.trans = trans;
 	app_data.config = config;
@@ -234,5 +238,6 @@ module.exports.init = function(trans, config) {
 		initDatePicker();
 		initMessages();
 		initErrorMessages();
+		initDropdowns();
 	});
 };

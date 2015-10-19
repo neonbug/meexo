@@ -6,6 +6,7 @@ use View;
 use Crypt;
 use Auth;
 use Config;
+use Event;
 use \Illuminate\Routing\Router as Router;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider {
@@ -133,6 +134,11 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 					'uses' => '\Neonbug\Common\Http\Controllers\AdminController@getAnalyticsData']);
 			});
 		});
+		
+		//============
+		//== ROUTES ==
+		//============
+		Event::subscribe('\\Neonbug\\Common\\Handlers\\Events\\DropdownEventHandler');
 	}
 
 	/**

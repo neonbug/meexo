@@ -53,6 +53,10 @@ class AdminHelper {
 				{
 					$field = $lang_dependent_fields[$id_language][$i];
 					
+					$event = new \Neonbug\Common\Events\AdminAddEditPrepareField('dependent', $field);
+					Event::fire($event);
+					$lang_dependent_fields[$id_language][$i] = $event->field;
+					
 					if (array_key_exists($id_language, $values) && 
 						array_key_exists($field['name'], $values[$id_language]))
 					{
@@ -66,6 +70,15 @@ class AdminHelper {
 			'language_independent' => $language_independent_fields_config, 
 			'language_dependent'   => $lang_dependent_fields
 		];
+			
+		for ($i=0; $i<sizeof($fields['language_independent']); $i++)
+		{
+			$field = $fields['language_independent'][$i];
+			
+			$event = new \Neonbug\Common\Events\AdminAddEditPrepareField('independent', $field);
+			Event::fire($event);
+			$fields['language_independent'][$i] = $event->field;
+		}
 		
 		if ($item != null)
 		{
