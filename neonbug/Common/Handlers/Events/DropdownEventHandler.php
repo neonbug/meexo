@@ -4,6 +4,8 @@ use App;
 
 class DropdownEventHandler
 {
+	protected $cache = [];
+	
 	/**
 	* Register the listeners for the subscriber.
 	*
@@ -14,31 +16,43 @@ class DropdownEventHandler
 	{
 		$events->listen('Neonbug\\Common\\Events\\AdminAddEditPrepareField', function($event) {
 			if ($event->field['type'] != 'dropdown') return;
-			if (array_key_exists('values', $event->field)) return; //already has values
 			
-			if (!array_key_exists('from', $event->field) || 
-				!array_key_exists('value_field', $event->field) || 
-				!array_key_exists('title_field', $event->field)) return;
-			
-			$class = $event->field['from'];
-			$items = $class::all();
-			
-			$language      = App::make('Language');
-			$resource_repo = App::make('ResourceRepository');
-			$resource_repo->inflateObjectsWithValues($items, $language->id_language);
-			
-			$value_field = $event->field['value_field'];
-			$title_field = $event->field['title_field'];
-			
-			$values = [];
-			foreach ($items as $item)
+			if (!array_key_exists('values', $event->field) && //already has values
+				array_key_exists('from', $event->field) && 
+				array_key_exists('value_field', $event->field) && 
+				array_key_exists('title_field', $event->field))
 			{
-				$values[$item->{$value_field}] = $item->{$title_field};
+				$class = $event->field['from'];
+				if (array_key_exists($class, $this->cache))
+				{
+					$items = $this->cache[$class];
+				}
+				else
+				{
+					$items = $class::all();
+					$this->cache[$class] = $items;
+				}
+				
+				$language      = App::make('Language');
+				$resource_repo = App::make('ResourceRepository');
+				$resource_repo->inflateObjectsWithValues($items, $language->id_language);
+				
+				$value_field = $event->field['value_field'];
+				$title_field = $event->field['title_field'];
+				
+				$values = [];
+				foreach ($items as $item)
+				{
+					$values[$item->{$value_field}] = $item->{$title_field};
+				}
+				
+				$event->field['values'] = $values;
 			}
 			
-			$event->field['values'] = $values;
-			
-			//TODO do sth with default value
+			if (array_key_exists('default_value', $event->field))
+			{
+				$event->field['value'] = $event->field['default_value'];
+			}
 		});
 	}
 }
