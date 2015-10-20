@@ -1,6 +1,8 @@
 <h1>News</h1>
 
 @foreach ($items as $item)
+	<?php if (mb_strlen($item->slug) == 0) continue; ?>
+	
 	<a href="{{ route('news::slug::' . $item->slug) }}" style="display: block;">
 		<div style="border: 1px solid black; width: 150px; height: 150px; float: left; margin-right: 12px;">
 			@if ($item->main_image != null && $item->main_image != '')
