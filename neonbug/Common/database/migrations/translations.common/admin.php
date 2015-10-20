@@ -66,7 +66,7 @@ return [
 	$p . 'breadcrumbs.first-item' => [ 'en' => 'Home', 'sl' => 'Domov' ], 
 	
 	// login
-	$p . 'login.title'         => [ 'en' => 'Admin login', 'sl' => 'Admin prijava' ], 
+	$p . 'login.title'         => [ 'en' => 'Administration', 'sl' => 'Administracija' ], 
 	$p . 'login.username'      => [ 'en' => 'Username', 'sl' => 'Uporabniško ime' ], 
 	$p . 'login.password'      => [ 'en' => 'Password', 'sl' => 'Geslo' ], 
 	$p . 'login.login-button'  => [ 'en' => 'Login', 'sl' => 'Prijava' ], 

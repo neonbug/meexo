@@ -24,7 +24,10 @@
 	<div class="column">
 		<div>
 			<form class="ui large form" method="POST">
-				<div class="ui orange padded segment">
+				<div class="ui orange padded segment inverted top attached">
+					<h2>{{ trans('common::admin.login.title') }}</h2>
+				</div>
+				<div class="ui orange padded segment bottom attached">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
 					<div class="field {{ $errors->has('username') ? 'error' : '' }}">

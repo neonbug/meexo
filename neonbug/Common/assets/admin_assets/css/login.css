@@ -22,3 +22,7 @@ body
 {
 	box-shadow: 0 7px 12px 0 rgba(0, 0, 0, 0.25);
 }
+	.ui.form .ui.segment.inverted
+	{
+		border: 0px;
+	}
