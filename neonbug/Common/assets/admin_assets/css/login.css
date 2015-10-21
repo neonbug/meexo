@@ -8,17 +8,32 @@ body
 	background-position: center center;
 	background-size: cover;
 }
-body.background-1 { background-image: url("../images/login/backgrounds/1.jpg"); }
-body.background-2 { background-image: url("../images/login/backgrounds/2.jpg"); }
-body.background-3 { background-image: url("../images/login/backgrounds/3.jpg"); }
-body.background-4 { background-image: url("../images/login/backgrounds/4.jpg"); }
-body.background-5 { background-image: url("../images/login/backgrounds/5.jpg"); }
-body.background-6 { background-image: url("../images/login/backgrounds/6.jpg"); }
-body.background-7 { background-image: url("../images/login/backgrounds/7.jpg"); }
-body.background-8 { background-image: url("../images/login/backgrounds/8.jpg"); }
-body.background-9 { background-image: url("../images/login/backgrounds/9.jpg"); }
-body.background-10 { background-image: url("../images/login/backgrounds/10.jpg"); }
-body.background-11 { background-image: url("../images/login/backgrounds/11.jpg"); }
+@media (min-height: 800px) {
+	body.background-1 { background-image: url("../images/login/backgrounds/1.jpg"); }
+	body.background-2 { background-image: url("../images/login/backgrounds/2.jpg"); }
+	body.background-3 { background-image: url("../images/login/backgrounds/3.jpg"); }
+	body.background-4 { background-image: url("../images/login/backgrounds/4.jpg"); }
+	body.background-5 { background-image: url("../images/login/backgrounds/5.jpg"); }
+	body.background-6 { background-image: url("../images/login/backgrounds/6.jpg"); }
+	body.background-7 { background-image: url("../images/login/backgrounds/7.jpg"); }
+	body.background-8 { background-image: url("../images/login/backgrounds/8.jpg"); }
+	body.background-9 { background-image: url("../images/login/backgrounds/9.jpg"); }
+	body.background-10 { background-image: url("../images/login/backgrounds/10.jpg"); }
+	body.background-11 { background-image: url("../images/login/backgrounds/11.jpg"); }
+}
+@media (max-height: 799px) {
+	body.background-1 { background-image: url("../images/login/backgrounds/1_small.jpg"); }
+	body.background-2 { background-image: url("../images/login/backgrounds/2_small.jpg"); }
+	body.background-3 { background-image: url("../images/login/backgrounds/3_small.jpg"); }
+	body.background-4 { background-image: url("../images/login/backgrounds/4_small.jpg"); }
+	body.background-5 { background-image: url("../images/login/backgrounds/5_small.jpg"); }
+	body.background-6 { background-image: url("../images/login/backgrounds/6_small.jpg"); }
+	body.background-7 { background-image: url("../images/login/backgrounds/7_small.jpg"); }
+	body.background-8 { background-image: url("../images/login/backgrounds/8_small.jpg"); }
+	body.background-9 { background-image: url("../images/login/backgrounds/9_small.jpg"); }
+	body.background-10 { background-image: url("../images/login/backgrounds/10_small.jpg"); }
+	body.background-11 { background-image: url("../images/login/backgrounds/11_small.jpg"); }
+}
 	body > div.ui.grid
 	{
 		height: 100%;
