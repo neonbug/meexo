@@ -17,15 +17,21 @@
 	<script type="text/javascript">
 	login.init();
 	</script>
+	
+	<?php
+	$background_idx = rand(1, 11);
+	$background_url = file_get_contents('vendor/common/admin_assets/images/login/backgrounds/' . 
+		$background_idx . '.txt');
+	?>
 </head>
-<body>
+<body class="background-{{ $background_idx }}">
 
 <div class="ui middle aligned center aligned grid">
 	<div class="column">
 		<div>
 			<form class="ui large form" method="POST">
-				<div class="ui orange padded segment inverted top attached">
-					<h2>{{ trans('common::admin.login.title') }}</h2>
+				<div class="ui orange segment inverted top attached">
+					<h3>{{ trans('common::admin.login.title') }}</h3>
 				</div>
 				<div class="ui orange padded segment bottom attached">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -67,6 +73,9 @@
 		</div>
 	</div>
 </div>
+<a class="background-image-attribution" href="{{ $background_url }}" target="_blank">
+	{{ $background_url }}
+</a>
 
 </body>
 </html>
