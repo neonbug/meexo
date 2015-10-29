@@ -45,7 +45,7 @@ class AdminController extends \Neonbug\Common\Http\Controllers\BaseAdminControll
 			$is_preview, 
 			$item, 
 			Request::input('field'), //first level keys are language ids, second level are field names
-			Request::file('field'), //first level keys are language ids, second level are field names
+			(Request::file('field') == null ? [] : Request::file('field')), //first level keys are language ids, second level are field names
 			Auth::user()->id_user, 
 			config($this->getConfigPrefix() . '.add.language_independent_fields'), 
 			config($this->getConfigPrefix() . '.add.language_dependent_fields'), 

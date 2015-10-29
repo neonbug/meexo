@@ -1,6 +1,7 @@
 <?php return [
 	
 	'model' => '\Neonbug\Gallery\Models\Gallery', 
+	'supports_preview' => false, 
 	
 	'list' => [
 		'fields' => [
