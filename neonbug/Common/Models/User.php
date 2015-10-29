@@ -2,8 +2,9 @@
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Neonbug\Common\Traits\PasswordTraitInterface as PasswordTraitInterface;
 
-class User extends BaseModel implements AuthenticatableContract {
+class User extends BaseModel implements AuthenticatableContract, PasswordTraitInterface {
 
 	use Authenticatable;
 
@@ -32,5 +33,7 @@ class User extends BaseModel implements AuthenticatableContract {
 	{
 		return $this->belongsToMany('\Neonbug\Common\Models\Role', 'user_role', 'id_user', 'id_role');
 	}
+	
+	public static function getPasswordFields() { return ['password']; }
 
 }
