@@ -114,7 +114,8 @@ class AdminController extends \Neonbug\Common\Http\Controllers\BaseAdminControll
 			session('messages', []), 
 			$this->getRoutePrefix(), 
 			$this->getModel(), 
-			$item
+			$item, 
+			config($this->getConfigPrefix() . '.supports_preview', true)
 		);
 	}
 	

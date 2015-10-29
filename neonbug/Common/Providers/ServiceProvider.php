@@ -9,7 +9,9 @@ use Config;
 use Event;
 use \Illuminate\Routing\Router as Router;
 
-class ServiceProvider extends \Illuminate\Support\ServiceProvider {
+class ServiceProvider extends \Neonbug\Common\Providers\BaseServiceProvider {
+	
+	use \Neonbug\Common\Traits\PasswordTrait;
 	
 	const PACKAGE_NAME = 'common';
 	
@@ -136,9 +138,11 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 		});
 		
 		//============
-		//== ROUTES ==
+		//== EVENTS ==
 		//============
 		Event::subscribe('\\Neonbug\\Common\\Handlers\\Events\\DropdownEventHandler');
+
+		parent::boot($router);
 	}
 
 	/**

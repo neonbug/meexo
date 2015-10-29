@@ -43,7 +43,8 @@ abstract class BaseAdminController extends \App\Http\Controllers\Controller {
 			config($this->getConfigPrefix() . '.add.language_independent_fields'), 
 			session('messages', []), 
 			$this->getRoutePrefix(), 
-			$this->getModel()
+			$this->getModel(), 
+			config($this->getConfigPrefix() . '.supports_preview', true)
 		);
 	}
 	
@@ -118,7 +119,8 @@ abstract class BaseAdminController extends \App\Http\Controllers\Controller {
 			session('messages', []), 
 			$this->getRoutePrefix(), 
 			$this->getModel(), 
-			$item
+			$item, 
+			config($this->getConfigPrefix() . '.supports_preview', true)
 		);
 	}
 	

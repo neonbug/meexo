@@ -6,7 +6,7 @@ use View;
 use Config;
 use \Illuminate\Routing\Router as Router;
 
-class ServiceProvider extends \Illuminate\Support\ServiceProvider {
+class ServiceProvider extends \Neonbug\Common\Providers\BaseServiceProvider {
 	
 	const PACKAGE_NAME     = 'translation';
 	const PREFIX           = 'translation';

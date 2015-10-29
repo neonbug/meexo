@@ -107,9 +107,11 @@
 			<i class="icon checkmark"></i>
 			{{ trans('common::admin.add.save-button') }}
 		</button>
-		<button type="submit" formaction="?preview" formtarget="_blank" class="preview-button ui button">
-			{{ trans('common::admin.add.preview-button') }}
-		</button>
+		@if (!isSet($supports_preview) || $supports_preview === true)
+			<button type="submit" formaction="?preview" formtarget="_blank" class="preview-button ui button">
+				{{ trans('common::admin.add.preview-button') }}
+			</button>
+		@endif
 	</form>
 	<div class="ui small modal errors-modal">
 		<div class="content">

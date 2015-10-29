@@ -166,7 +166,7 @@ class AdminHelper {
 	}
 	
 	public function adminAdd($package_name, Array $title, Array $language_dependent_fields, 
-		Array $language_independent_fields, Array $messages, $prefix, $model_name)
+		Array $language_independent_fields, Array $messages, $prefix, $model_name, $supports_preview)
 	{
 		$languages = App::make('LanguageRepository')->getAll();
 		
@@ -188,14 +188,15 @@ class AdminHelper {
 			'languages'        => $languages, 
 			'check_slug_route' => $prefix . '::admin::check-slug', 
 			'prefix'           => $prefix, 
-			'item'             => null
+			'item'             => null, 
+			'supports_preview' => $supports_preview
 		];
 		
 		return App::make('\Neonbug\Common\Helpers\CommonHelper')->loadView('common', 'admin.add', $params);
 	}
 	
 	public function adminEdit($package_name, Array $title, Array $language_dependent_fields, 
-		Array $language_independent_fields, Array $messages, $prefix, $model_name, $item)
+		Array $language_independent_fields, Array $messages, $prefix, $model_name, $item, $supports_preview)
 	{
 		$languages = App::make('LanguageRepository')->getAll();
 		
@@ -214,7 +215,8 @@ class AdminHelper {
 			'languages'        => $languages, 
 			'check_slug_route' => $prefix . '::admin::check-slug', 
 			'prefix'           => $prefix, 
-			'item'             => $item
+			'item'             => $item, 
+			'supports_preview' => $supports_preview
 		];
 		
 		return App::make('\Neonbug\Common\Helpers\CommonHelper')->loadView('common', 'admin.add', $params);
