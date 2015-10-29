@@ -207,6 +207,10 @@ class AdminHelper {
 			$item
 		);
 		
+		$event = new \Neonbug\Common\Events\AdminEditPreparedFields($model_name, $fields);
+		Event::fire($event);
+		$fields = $event->fields;
+		
 		$params = [
 			'package_name'     => $package_name, 
 			'title'            => $title, 
@@ -248,6 +252,7 @@ class AdminHelper {
 			}
 		}
 		
+		$event = null;
 		if ($route_postfix == 'add')
 		{
 			$event = new \Neonbug\Common\Events\AdminAddSavePreparedFields(
@@ -257,6 +262,20 @@ class AdminHelper {
 				$allowed_lang_independent_fields, 
 				$allowed_lang_dependent_fields
 			);
+		}
+		else if ($route_postfix == 'edit')
+		{
+			$event = new \Neonbug\Common\Events\AdminEditSavePreparedFields(
+				$prefix, 
+				$model_name, 
+				$all_fields, 
+				$allowed_lang_independent_fields, 
+				$allowed_lang_dependent_fields
+			);
+		}
+		
+		if ($event != null)
+		{
 			Event::fire($event);
 			
 			$all_fields                      = $event->fields;
