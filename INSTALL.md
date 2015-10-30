@@ -44,7 +44,7 @@
 
 ### 3.2. config/app.php file
 
-* Add available languages to `available_locales` array and change the default language by changing `default_locale` value.
+* Add available languages to `available_locales` and `admin_available_locales` arrays and change the default languages by changing `default_locale` and `admin_default_locale` values.
 
 ## 4. Add packages
 
