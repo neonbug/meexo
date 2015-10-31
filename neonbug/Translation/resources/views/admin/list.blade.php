@@ -67,12 +67,13 @@
 			var items = Object.keys(data.items).filter(function(item) {
 				return search_value.length == 0 || Object.keys(data.items[item].items).some(function(subitem) {
 					var found = subitem.indexOf(search_value) != -1 || 
-						data.items[item].items[subitem].id.indexOf(search_value) != -1;
+						data.items[item].items[subitem].id.toLowerCase().indexOf(search_value.toLowerCase()) != -1;
 					
 					if (!found)
 					{
 						found = Object.keys(data.items[item].items[subitem].translations).some(function(id_language) {
-							return (data.items[item].items[subitem].translations[id_language].indexOf(search_value) != -1);
+							return (data.items[item].items[subitem].translations[id_language].toLowerCase()
+								.indexOf(search_value.toLowerCase()) != -1);
 						});
 					}
 					
@@ -105,12 +106,14 @@
 			
 			var items = Object.keys(data.items).filter(function(item) {
 				var found = search_value.length == 0 || 
-					(item.indexOf(search_value) != -1 || data.items[item].id.indexOf(search_value) != -1);
+					(item.toLowerCase().indexOf(search_value.toLowerCase()) != -1 || 
+						data.items[item].id.toLowerCase().indexOf(search_value.toLowerCase()) != -1);
 				
 				if (!found)
 				{
 					found = Object.keys(data.items[item].translations).some(function(id_language) {
-						return (data.items[item].translations[id_language].indexOf(search_value) != -1);
+						return (data.items[item].translations[id_language].toLowerCase()
+							.indexOf(search_value.toLowerCase()) != -1);
 					});
 				}
 				
