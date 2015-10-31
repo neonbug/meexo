@@ -222,6 +222,11 @@ class ServiceProvider extends \Neonbug\Common\Providers\BaseServiceProvider {
 				$lang = (array_key_exists('HTTP_ACCEPT_LANGUAGE', $_SERVER) ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : 
 					'en-US');
 				
+				if (!class_exists('\Locale'))
+				{
+					throw new \Exception('Locale not found. Please install Intl PHP extension.');
+				}
+				
 				return new \Neonbug\Common\Helpers\FormatterHelper(
 					\Locale::acceptFromHttp($lang), 
 					new \Neonbug\Common\Helpers\MomentFormatTransformer()
