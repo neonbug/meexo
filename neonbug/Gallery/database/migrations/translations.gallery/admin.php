@@ -23,6 +23,7 @@ return [
 	$p . 'add.field-title.published'   => [ 'en' => 'Published',     'sl' => 'Objavljeno' ], 
 	$p . 'add.field-title.ord'         => [ 'en' => 'Order',         'sl' => 'Vrstni red' ], 
 	$p . 'add.field-title.images'      => [ 'en' => 'Images',        'sl' => 'Slike' ], 
+	$p . 'add.field-title.contents'    => [ 'en' => 'Description',   'sl' => 'Opis' ], 
 	
 	$p . 'add.field-gallery-images.image-remove'       => [ 'en' => 'Remove', 
 	                                                        'sl' => 'Odstrani' ], 

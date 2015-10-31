@@ -1,3 +1,3 @@
 <?php return [
-	'gallery::frontend.route.prefix' => [ 'en' => 'gallery' ], 
+	'gallery::frontend.route.prefix' => [ 'en' => 'gallery', 'sl' => 'galerija' ], 
 ];
