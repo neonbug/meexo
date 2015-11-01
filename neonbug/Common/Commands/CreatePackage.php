@@ -139,12 +139,17 @@ class CreatePackage extends Command {
 		
 		//inform user we're done
 		$this->info('Done!');
-		$this->info('You should now:');
-		$this->info('1) add table columns in file database/migrations/' . $create_table_migration_name . ', ');
-		$this->info('2) add some fields in file config/' . $config_prefix . '.php, ');
-		$this->info('3) add translations in files ' . $trans_dir . 'admin.php and ' . $trans_dir . 'frontend.php, ');
-		$this->info('4) add Neonbug\\' . $name . '\Providers\ServiceProvider to $package_providers array in file /config/app.php, ');
-		$this->info('5) run php artisan vendor:publish and php artisan migrate.');
+		$this->line('You should now:');
+		$this->line('1) add table columns in file ' . 
+			realpath($packages_path . $name . '/database/migrations/' . $create_table_migration_name) . ', ');
+		$this->line('2) add some fields in file ' . 
+			realpath($packages_path . $name . '/config/' . $config_prefix . '.php') . ', ');
+		$this->line('3) add translations in files ' . 
+			realpath($packages_path . $name . '/' . $trans_dir . 'admin.php') . ' and ' . 
+			realpath($packages_path . $name . '/' . $trans_dir . 'frontend.php') . ', ');
+		$this->line('4) add ' . $namespace . '\\' . $name . '\Providers\ServiceProvider to ' . 
+			'$package_providers array in file /config/app.php, ');
+		$this->line('5) run php artisan vendor:publish and php artisan migrate.');
 	}
 
 	/**
