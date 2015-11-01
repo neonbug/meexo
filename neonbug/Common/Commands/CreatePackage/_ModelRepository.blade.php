@@ -1,8 +1,8 @@
-namespace Neonbug\{{ $package_name }}\Repositories;
+namespace {{ $namespace }}\{{ $package_name }}\Repositories;
 
 class {{ $model_name }}Repository {
 	
-	const CONFIG_PREFIX = 'neonbug.{{ $config_prefix }}';
+	const CONFIG_PREFIX = '{{ $config_root }}.{{ $config_prefix }}';
 	
 	protected $latest_items_limit = 20;
 	protected $model;

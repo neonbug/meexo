@@ -1,4 +1,4 @@
-namespace Neonbug\{{ $package_name }}\Controllers;
+namespace {{ $namespace }}\{{ $package_name }}\Controllers;
 
 use App;
 use Cache;
@@ -7,7 +7,7 @@ class Controller extends \App\Http\Controllers\Controller {
 	
 	const PACKAGE_NAME  = '{{ $lowercase_package_name }}';
 	const PREFIX        = '{{ $route_prefix }}';
-	const CONFIG_PREFIX = 'neonbug.{{ $config_prefix }}';
+	const CONFIG_PREFIX = '{{ $config_root }}.{{ $config_prefix }}';
 	
 	private $model;
 	
@@ -19,7 +19,7 @@ class Controller extends \App\Http\Controllers\Controller {
 	public function index()
 	{
 		$get_items = function() {
-			$repo = App::make('\Neonbug\{{ $package_name }}\Repositories\{{ $model_name }}Repository');
+			$repo = App::make('\{{ $namespace }}\{{ $package_name }}\Repositories\{{ $model_name }}Repository');
 			$items = $repo->getLatest();
 			
 			$language = App::make('Language');

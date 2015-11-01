@@ -1,7 +1,7 @@
 
 return [
 	
-	'model' => '\Neonbug\{{ $package_name }}\Models\{{ $model_name }}', 
+	'model' => '\{{ $namespace }}\{{ $package_name }}\Models\{{ $model_name }}', 
 	
 	'list' => [
 		'fields' => [

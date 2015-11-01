@@ -1,8 +1,8 @@
-namespace Neonbug\{{ $package_name }}\Controllers;
+namespace {{ $namespace }}\{{ $package_name }}\Controllers;
 
 class AdminController extends \Neonbug\Common\Http\Controllers\BaseAdminController {
 	
-	const CONFIG_PREFIX = 'neonbug.{{ $config_prefix }}';
+	const CONFIG_PREFIX = '{{ $config_root }}.{{ $config_prefix }}';
 	private $model;
 	
 	public function __construct()
@@ -13,7 +13,7 @@ class AdminController extends \Neonbug\Common\Http\Controllers\BaseAdminControll
 	}
 	
 	protected function getModel()        { return $this->model; }
-	protected function getRepository()   { return '\Neonbug\{{ $package_name }}\Repositories\{{ $model_name }}Repository'; }
+	protected function getRepository()   { return '\{{ $namespace }}\{{ $package_name }}\Repositories\{{ $model_name }}Repository'; }
 	protected function getConfigPrefix() { return self::CONFIG_PREFIX; }
 	protected function getRoutePrefix()  { return '{{ $route_prefix }}'; }
 	protected function getPackageName()  { return '{{ $lowercase_package_name }}'; }

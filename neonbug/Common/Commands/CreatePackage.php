@@ -48,8 +48,19 @@ class CreatePackage extends Command {
 		//gather information
 		$name = studly_case($this->argument('name'));
 		
-		$package_path = $this->neonbug_packages_path . $name . '/';
-		if (file_exists($package_path)) exit('Package already exists');
+		$is_neonbug_package = 
+			($this->choice('What type of package is this? Enter 0 or 1 [0]', ['app', 'neonbug'], '0') == 'neonbug');
+		
+		$neonbug_packages_path = $this->neonbug_packages_path;
+		$packages_path         = ($is_neonbug_package ? 
+			$this->neonbug_packages_path : 
+			$this->neonbug_packages_path . '../app/Packages/');
+		$namespace             = ($is_neonbug_package ? 'Neonbug' : 'App\\Packages');
+		$config_root           = ($is_neonbug_package ? 'neonbug' : 'packages');
+		
+		$package_path          = $packages_path . $name . '/';
+		$neonbug_package_path  = $neonbug_packages_path . $name . '/';
+		if (file_exists($package_path) || file_exists($neonbug_package_path)) exit('Package already exists');
 		
 		$snake_package_name = snake_case($name);
 		
@@ -104,11 +115,13 @@ class CreatePackage extends Command {
 			if (!file_exists($filename)) continue;
 			
 			$contents = $this->view_factory->file($filename)
+				->with('namespace', 				$namespace)
 				->with('package_name', 				$name)
 				->with('lowercase_package_name', 	mb_strtolower($name))
 				->with('table_name', 				$table_name)
 				->with('model_name', 				$model_name)
 				->with('route_prefix', 				$route_prefix)
+				->with('config_root', 				$config_root)
 				->with('config_prefix', 			$config_prefix)
 				->render();
 			

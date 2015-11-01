@@ -1,4 +1,4 @@
-namespace Neonbug\{{ $package_name }}\Providers;
+namespace {{ $namespace }}\{{ $package_name }}\Providers;
 
 use App;
 use Route;
@@ -12,8 +12,9 @@ class ServiceProvider extends \Neonbug\Common\Providers\BaseServiceProvider {
 	const PREFIX           = '{{ $route_prefix }}';
 	const ROLE             = '{{ $table_name }}';
 	const TABLE_NAME       = '{{ $table_name }}';
-	const CONTROLLER       = '\Neonbug\{{ $package_name }}\Controllers\Controller';
-	const ADMIN_CONTROLLER = '\Neonbug\{{ $package_name }}\Controllers\AdminController';
+	const CONTROLLER       = '\{{ $namespace }}\{{ $package_name }}\Controllers\Controller';
+	const ADMIN_CONTROLLER = '\{{ $namespace }}\{{ $package_name }}\Controllers\AdminController';
+	const CONFIG_PREFIX    = '{{ $config_prefix }}';
 	
 	/**
 	 * Define your route model bindings, pattern filters, etc.
@@ -38,7 +39,8 @@ class ServiceProvider extends \Neonbug\Common\Providers\BaseServiceProvider {
 		], 'migrations');
 		
 		$this->publishes([
-			__DIR__.'/../config/' . static::PACKAGE_NAME . '.php' => config_path('neonbug/' . static::PACKAGE_NAME . '.php'),
+			__DIR__.'/../config/' . static::CONFIG_PREFIX . '.php' => 
+				config_path('{{ $config_root }}/' . static::CONFIG_PREFIX . '.php'),
 		]);
 		
 		//============
@@ -135,9 +137,9 @@ class ServiceProvider extends \Neonbug\Common\Providers\BaseServiceProvider {
 		//===========
 		//== BINDS ==
 		//===========
-		if (!App::bound('\Neonbug\{{ $package_name }}\Repositories\{{ $model_name }}Repository'))
+		if (!App::bound('\{{ $namespace }}\{{ $package_name }}\Repositories\{{ $model_name }}Repository'))
 		{
-			App::singleton('\Neonbug\{{ $package_name }}\Repositories\{{ $model_name }}Repository', '\Neonbug\{{ $package_name }}\Repositories\{{ $model_name }}Repository');
+			App::singleton('\{{ $namespace }}\{{ $package_name }}\Repositories\{{ $model_name }}Repository', '\{{ $namespace }}\{{ $package_name }}\Repositories\{{ $model_name }}Repository');
 		}
 	}
 
