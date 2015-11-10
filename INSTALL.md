@@ -105,7 +105,17 @@ E.g. you can find News views in `resources/views/vendor/news/` directory.
 
 ## 9. Extending Neonbug packages
 
-//TODO: write this section
+//TODO: extend this section
+
+### 9.1. Customizing package admin views
+
+To modify a package's admin views, you need to publish them first (i.e. copy them to appropriate folder).
+
+To make it easier, you can use `vendor:publish-admin` artisan command. Views are copied to `/resources/views/vendor/packagename` folder.
+
+Example:
+
+Running `php artisan vendor:publish-admin --provider="Neonbug\Gallery\Providers\ServiceProvider"` copies Gallery views to folder `/resources/views/vendor/gallery_admin`.
 
 ## 10. Writing your own Neonbug packages
 
