@@ -32,6 +32,29 @@ body
 		background-color: #1b1c1d;
 		min-height: 100%;
 	}
+	@media (max-width: 767px) {
+		.main-menu
+		{
+			position: absolute;
+			width: 280px;
+			height: 100%;
+			
+			overflow-y: auto;
+			z-index: 1000;
+			transition: all 1s;
+			transform: translate3d(-280px, 0px, 0px);
+		}
+		.main-menu.visible
+		{
+			transform: translate3d(0px, 0px, 0px);
+		}
+	}
+		.main-menu > .open-menu
+		{
+			float: right;
+			padding-top: 16px;
+			padding-right: 24px;
+		}
 		.main-menu > .header
 		{
 			color: #ffffff;

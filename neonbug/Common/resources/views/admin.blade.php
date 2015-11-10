@@ -51,16 +51,10 @@
 	@yield('head', '')
 </head>
 <body>
-	
-	<div class="main-menu ui sidebar">
-		<h3 class="ui header">{{ trans('common::admin.menu.title') }}</h3>
-		
-		@include('common_admin::menu')
-	</div>
-	
-	<div class="main-container pusher">
+	<div class="main-container">
 		<div class="main-inner-container">
-			<div class="main-menu desktop-only">
+			<div class="main-menu">
+				<i class="open-menu link sidebar inverted icon mobile-only"></i>
 				<h3 class="ui header">{{ trans('common::admin.menu.title') }}</h3>
 				
 				@include('common_admin::menu')
@@ -70,7 +64,7 @@
 				<div class="admin-top-menu ui basic segment inverted orange">
 					<div class="ui grid">
 						<div class="left floated left aligned eight wide column">
-							<i id="open-menu" class="link sidebar icon mobile-only"></i>
+							<i class="open-menu link sidebar icon mobile-only"></i>
 							
 							{{ trans('common::admin.breadcrumbs.first-item') }}
 							@if (isSet($title) && is_array($title))

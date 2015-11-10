@@ -137,24 +137,9 @@ function loginUser(username, password, options)
 
 function initSidebar()
 {
-	$('#open-menu').click(function()
+	$('.open-menu').click(function()
 	{
-		$('.main-menu.ui.sidebar').sidebar({ dimPage: false }).sidebar('toggle');
-	});
-
-	$(window).resize(function()
-	{
-		if($(window).width() > 767) // desktop
-		{
-			var sidebar = $('.main-menu.ui.sidebar');
-			if (sidebar.sidebar('is visible'))
-			{
-				sidebar.sidebar('hide');
-			}
-		}
-		else // mobile
-		{
-		}
+		$('.main-menu').toggleClass('visible');
 	});
 }
 
