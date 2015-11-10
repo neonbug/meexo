@@ -112,7 +112,7 @@ class AdminController extends \Neonbug\Common\Http\Controllers\BaseAdminControll
 		];
 		
 		return App::make('\Neonbug\Common\Helpers\CommonHelper')
-			->loadView(self::PREFIX, 'admin.list', $params);
+			->loadAdminView(self::PREFIX, 'list', $params);
 	}
 	
 	public function adminEdit($id)
@@ -140,7 +140,7 @@ class AdminController extends \Neonbug\Common\Http\Controllers\BaseAdminControll
 			'item'             => $item
 		];
 		
-		return App::make('\Neonbug\Common\Helpers\CommonHelper')->loadView('translation', 'admin.add', $params);
+		return App::make('\Neonbug\Common\Helpers\CommonHelper')->loadAdminView('translation', 'add', $params);
 	}
 	
 	public function adminEditPost($id)

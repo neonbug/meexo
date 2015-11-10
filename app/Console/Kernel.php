@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel {
 	protected $commands = [
 		'App\Console\Commands\Inspire',
 		'Neonbug\Common\Commands\CreatePackage',
+		'Neonbug\Common\Commands\AdminVendorPublish',
 	];
 
 	/**

@@ -30,7 +30,7 @@
 	@foreach ($fields['language_independent'] as $field)
 		<?php
 		$type = (stripos($field['type'], '::') !== false ? $field['type'] : 
-			'common::admin.add_fields.' . $field['type']);
+			'common_admin::add_fields.' . $field['type']);
 		if (!in_array($type, $unique_types)) $unique_types[] = $type;
 		?>
 	@endforeach
@@ -39,7 +39,7 @@
 		@foreach ($fields['language_dependent'][$language->id_language] as $field)
 			<?php
 			$type = (stripos($field['type'], '::') !== false ? $field['type'] : 
-				'common::admin.add_fields.' . $field['type']);
+				'common_admin::add_fields.' . $field['type']);
 			if (!in_array($type, $unique_types)) $unique_types[] = $type;
 			?>
 		@endforeach
@@ -68,7 +68,7 @@
 				@foreach ($fields['language_independent'] as $field)
 					<?php
 					$type = (stripos($field['type'], '::') !== false ? $field['type'] : 
-						'common::admin.add_fields.' . $field['type']);
+						'common_admin::add_fields.' . $field['type']);
 					$params = [ 
 						'item' => $item, 
 						'id_language' => -1, 
@@ -88,7 +88,7 @@
 					@foreach ($fields['language_dependent'][$language->id_language] as $field)
 						<?php
 						$type = (stripos($field['type'], '::') !== false ? $field['type'] : 
-							'common::admin.add_fields.' . $field['type']);
+							'common_admin::add_fields.' . $field['type']);
 						$params = [ 
 							'item' => $item, 
 							'id_language' => $language->id_language, 

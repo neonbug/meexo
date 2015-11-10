@@ -27,6 +27,8 @@ class ServiceProvider extends \Neonbug\Common\Providers\BaseServiceProvider {
 		//== ASSETS ==
 		//============
 		$this->loadViewsFrom(__DIR__.'/../resources/views', static::PACKAGE_NAME);
+		$this->loadViewsFrom(__DIR__.'/../resources/admin_views', static::PACKAGE_NAME . '_admin');
+		
 		$this->loadTranslationsFrom('/', 'common');
 		
 		$this->publishes([

@@ -60,7 +60,7 @@
 						'' : 'desktop-only');
 						?>
 						<td class="{{ $cls }}">
-							@include('common::admin.list_fields.' . $field['type'], 
+							@include('common_admin::list_fields.' . $field['type'], 
 								[ 'item' => $item, 'field_name' => $field_name, 'field' => $field ])
 						</td>
 					@endforeach

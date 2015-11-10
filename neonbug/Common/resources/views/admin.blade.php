@@ -55,7 +55,7 @@
 	<div class="main-menu ui sidebar">
 		<h3 class="ui header">{{ trans('common::admin.menu.title') }}</h3>
 		
-		@include('common::admin.menu')
+		@include('common_admin::menu')
 	</div>
 	
 	<div class="main-container pusher">
@@ -63,7 +63,7 @@
 			<div class="main-menu desktop-only">
 				<h3 class="ui header">{{ trans('common::admin.menu.title') }}</h3>
 				
-				@include('common::admin.menu')
+				@include('common_admin::menu')
 			</div>
 			
 			<div class="main-content">

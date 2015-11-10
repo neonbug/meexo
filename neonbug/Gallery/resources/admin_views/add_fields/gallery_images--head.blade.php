@@ -20,6 +20,6 @@ gallery_images.init(trans, config);
 </script>
 
 <script type="text/template" id="gallery-images-image-template">
-	@include('gallery::admin.add_fields.gallery_images-image', [ 'item' => null, 'image' => null, 'field' => null, 
+	@include('gallery_admin::add_fields.gallery_images-image', [ 'item' => null, 'image' => null, 'field' => null, 
 		'id_language' => null ])
 </script>

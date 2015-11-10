@@ -22,7 +22,7 @@ class AdminController extends Controller {
 		$analytics_supported = ($google_account != null && $google_account != '');
 		
 		return App::make('\Neonbug\Common\Helpers\CommonHelper')
-			->loadView(static::PACKAGE_NAME, 'admin.index', [
+			->loadView(static::PACKAGE_NAME . '_admin', 'index', [
 				'analytics_supported' => $analytics_supported
 			]);
 	}

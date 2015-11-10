@@ -24,7 +24,7 @@
 		'language_dependent_fields' => [
 			[
 				'name' => 'translation', 
-				'type' => 'translation::admin.add_fields.translation_text', 
+				'type' => 'translation_admin::add_fields.translation_text', 
 				'value' => ''
 			]
 		], 
@@ -41,7 +41,7 @@
 		'language_dependent_fields' => [
 			[
 				'name' => 'translation', 
-				'type' => 'translation::admin.add_fields.translation_text', 
+				'type' => 'translation_admin::add_fields.translation_text', 
 				'value' => ''
 			]
 		], 

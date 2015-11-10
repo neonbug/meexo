@@ -67,7 +67,7 @@
 			], 
 			[
 				'name' => 'images', 
-				'type' => 'gallery::admin.add_fields.gallery_images', 
+				'type' => 'gallery_admin::add_fields.gallery_images', 
 				'value' => ''
 			]
 		]
@@ -110,7 +110,7 @@
 			], 
 			[
 				'name' => 'images', 
-				'type' => 'gallery::admin.add_fields.gallery_images', 
+				'type' => 'gallery_admin::add_fields.gallery_images', 
 				'value' => ''
 			]
 		]

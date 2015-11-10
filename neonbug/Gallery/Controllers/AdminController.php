@@ -79,14 +79,14 @@ class AdminController extends \Neonbug\Common\Http\Controllers\BaseAdminControll
 		{
 			foreach ($language_dependent_fields as $field)
 			{
-				if ($field['type'] != 'gallery::admin.add_fields.gallery_images') continue;
+				if ($field['type'] != 'gallery_admin::add_fields.gallery_images') continue;
 				$item->gallery_images[$language->id_language][$field['name']] = [];
 			}
 		}
 		
 		foreach ($language_independent_fields as $field)
 		{
-			if ($field['type'] != 'gallery::admin.add_fields.gallery_images') continue;
+			if ($field['type'] != 'gallery_admin::add_fields.gallery_images') continue;
 			$item->gallery_images[-1][$field['name']] = [];
 		}
 		

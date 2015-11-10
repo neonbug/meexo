@@ -162,7 +162,7 @@ class AdminHelper {
 		];
 		
 		return App::make('\Neonbug\Common\Helpers\CommonHelper')
-			->loadView('common', 'admin.list', $params);
+			->loadAdminView('common', 'list', $params);
 	}
 	
 	public function adminAdd($package_name, Array $title, Array $language_dependent_fields, 
@@ -192,7 +192,7 @@ class AdminHelper {
 			'supports_preview' => $supports_preview
 		];
 		
-		return App::make('\Neonbug\Common\Helpers\CommonHelper')->loadView('common', 'admin.add', $params);
+		return App::make('\Neonbug\Common\Helpers\CommonHelper')->loadAdminView('common', 'add', $params);
 	}
 	
 	public function adminEdit($package_name, Array $title, Array $language_dependent_fields, 
@@ -223,7 +223,7 @@ class AdminHelper {
 			'supports_preview' => $supports_preview
 		];
 		
-		return App::make('\Neonbug\Common\Helpers\CommonHelper')->loadView('common', 'admin.add', $params);
+		return App::make('\Neonbug\Common\Helpers\CommonHelper')->loadAdminView('common', 'add', $params);
 	}
 	
 	public function handleAdminAddEdit(Array $fields, Array $files, $id_user, 

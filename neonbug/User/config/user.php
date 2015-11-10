@@ -43,7 +43,7 @@
 			], 
 			[
 				'name' => 'role', 
-				'type' => 'user::admin.add_fields.role', 
+				'type' => 'user_admin::add_fields.role', 
 				'value' => ''
 			]
 		]
@@ -71,7 +71,7 @@
 			], 
 			[
 				'name' => 'role', 
-				'type' => 'user::admin.add_fields.role', 
+				'type' => 'user_admin::add_fields.role', 
 				'value' => ''
 			]
 		]

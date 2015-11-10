@@ -13,7 +13,7 @@ class RoleEventHandler
 	public function subscribe($events)
 	{
 		$events->listen('Neonbug\\Common\\Events\\AdminAddEditPrepareField', function($event) {
-			if ($event->field['type'] != 'user::admin.add_fields.role') return;
+			if ($event->field['type'] != 'user_admin::add_fields.role') return;
 			
 			$event->field['values'] = [
 				'gallery' => 'Gallery editor', 

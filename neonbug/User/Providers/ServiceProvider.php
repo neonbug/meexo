@@ -32,6 +32,11 @@ class ServiceProvider extends \Neonbug\Common\Providers\BaseServiceProvider {
 			__DIR__.'/../resources/views' => base_path('resources/views/vendor/' . static::PACKAGE_NAME),
 		]);
 		
+		$this->loadViewsFrom(__DIR__.'/../resources/admin_views', static::PACKAGE_NAME . '_admin');
+		$this->publishesAdmin([
+			__DIR__.'/../resources/admin_views' => base_path('resources/views/vendor/' . static::PACKAGE_NAME . '_admin'),
+		]);
+		
 		$this->loadTranslationsFrom('/', static::PACKAGE_NAME);
 		
 		$this->publishes([
@@ -78,8 +83,9 @@ class ServiceProvider extends \Neonbug\Common\Providers\BaseServiceProvider {
 		});
 		
 		//admin
-		$router->group([ 'prefix' => $admin_locale . '/admin/' . static::PREFIX, 'middleware' => [ 'auth.admin', 'admin.menu' ], 
-			'role' => static::ROLE ], function($router)
+		$router->group([ 'prefix' => $admin_locale . '/admin/' . static::PREFIX, 
+			'middleware' => [ 'auth.admin', 'admin.menu' ], 'role' => static::ROLE, 
+			'menu.icon' => 'user' ], function($router)
 		{
 			$router->get('list', [
 				'as'   => static::PREFIX . '::admin::list', 
