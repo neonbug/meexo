@@ -12,6 +12,8 @@ $translation_provider = ($is_artisan_migrate || $is_artisan_vendor_publish ?
 
 $package_providers = ($is_artisan_migrate ? [] : [ //don't load package providers because of migrations
     'Neonbug\Common\Providers\ServiceProvider', 
+    'Neonbug\Translation\Providers\ServiceProvider', 
+    'Neonbug\User\Providers\ServiceProvider', 
 ]);
 return [
 
