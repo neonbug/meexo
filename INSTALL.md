@@ -50,7 +50,7 @@
 
 * Open `config/app.php` file and add packages to `$package_providers` array. E.g. for News package add `'Neonbug\News\Providers\ServiceProvider'`.
 
-* FUTURE USE: Add packages to `composer.json` (e.g. //*TODO write this*// and issue `composer install` command in your terminal.
+* Add packages to `composer.json` file (e.g. for News package add `"neonbug/meexo-news": "0.*"` to `require`). See `https://packagist.org/packages/neonbug/` for a list of all Neonbug packages. Issue `composer install` command in your terminal to install newly added packages.
 
 ## 5. Copy package files to proper locations and initialize database
 
@@ -99,11 +99,11 @@ Visit `http://yoursite/admin` and enter `admin` as username and `admin` again as
 
 ## 8. Start coding
 
-You can start by customizing the News package views. Since you can not modify any files in `neonbug` directory, `migrate` command copies those files into your app.
+You can start by customizing the News package views. Since you can not modify any files in `vendor/neonbug` directory, `migrate` command copies those files into your app.
 
 E.g. you can find News views in `resources/views/vendor/news/` directory.
 
-## 9. Extending Neonbug packages
+## 9. Extending Meexo packages
 
 //TODO: extend this section
 
@@ -117,20 +117,40 @@ Example:
 
 Running `php artisan vendor:publish-admin --provider="Neonbug\Gallery\Providers\ServiceProvider"` copies Gallery views to folder `/resources/views/vendor/gallery_admin`.
 
-## 10. Writing your own Neonbug packages
+## 10. Writing your own Meexo packages
 
-//TODO: extend this section
+There are two types of packages: Neonbug packages and App packages.
+
+Neonbug packages are meant to be used on multiple sites, they reside in separate Git repositories, they are published to Packagist and installed using Composer, which installs them under `vendor/` folder.
+
+On the other hand, App packages are meant for one specific site and they reside in `app/Packages/` folder. They are also meant to be commited to site's repository.
+
+Both types of packages can be created using `make:meexo-package` command and the only difference (besides the above ones) is the namespace: Neonbug packages are created in `\Neonbug\` namespace, while App packages are created in `\App\Packages\` namespace. 
 
 ### 10.1. Creating your own package
 
 To create your own package, issue this command in your terminal:
 
 ```
-php artisan make:neonbug-package PackageName
+php artisan make:meexo-package PackageName
 ```
+
+Now simply follow the instructions.
 
 ### 10.2. Creating your own add/edit field type
   
-To create your own field type, copy an existing field view from `/neonbug/Common/resources/views/admin/add_fields/` to your package's views directory, e.g. `/neonbug/YourPackageName/resources/views/admin/add_fields/`.
+To create your own field type, copy an existing field view from `/vendor/neonbug/meexo-common/resources/views/admin/add_fields/` to your package's views directory, e.g. `/app/Packages/YourPackageName/resources/views/admin/add_fields/`.
 
 To use it, edit the appropriate config file. Instead of using a common field type (e.g. `single_line_text`) in field's `type` property, enter the full path to your field view, e.g. `your_package_name::admin.add_fields.custom_field_type`.
+
+## 11. FAQ
+
+### 11.1. What happens if I already migrated everything and want to add another language?
+
+As stated in sections `3.2. config/app.php file` and `5.1. Add languages` you need to add the new language to `config/app.php` and `config/neonbug/common.php` files.
+
+Afterwards, you will need to rerun the migrations. But since those migrations have already been ran, you first need to remove them manually from the DB (there will be an artisan command for this in the future).
+
+To remove existing migrations from DB, execute this query: `DELETE FROM migrations WHERE migration LIKE '%_insert_%_translations'`.
+
+When done, you can now rerun the migrations by issuing `php artisan migrate` in your terminal.
