@@ -8,7 +8,10 @@
 		"laravel/framework": "5.0.*", 
 		"bkwld/croppa": "~4.0",
 		"flowjs/flow-php-server": "dev-master",
-		"google/apiclient": "^1.1"
+		"google/apiclient": "^1.1", 
+		"neonbug/meexo-common": "0.*", 
+		"neonbug/meexo-translation": "0.*", 
+		"neonbug/meexo-user": "0.*"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",
@@ -20,8 +23,7 @@
 			"database"
 		],
 		"psr-4": {
-			"App\\": "app/", 
-			"Neonbug\\": "neonbug/"
+			"App\\": "app/"
 		}
 	},
 	"autoload-dev": {

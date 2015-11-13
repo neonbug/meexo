@@ -1,1 +1,0 @@
-{{ $item->$field_name }}
