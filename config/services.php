@@ -34,4 +34,8 @@ return [
 		'secret' => '',
 	],
 
+	'sendgrid' => [
+		'secret' => '',
+	],
+
 ];
