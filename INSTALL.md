@@ -38,7 +38,7 @@
 
 * Change `APP_URL` to match your environment.
 
-* Change `APP_KEY` constant to a random value (only necessary when manually installing).
+* Change `APP_KEY` constant to a random value of 32 characters (only necessary when manually installing).
 
 * Change `DB_*` constants.
 
