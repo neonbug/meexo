@@ -5,12 +5,14 @@ $cli_args = (isSet($argv) && $argv != null ? $argv :
 
 $is_artisan_migrate = (sizeof($cli_args) >= 2 && $cli_args[0] == 'artisan' && $cli_args[1] == 'migrate');
 $is_artisan_vendor_publish = (sizeof($cli_args) >= 2 && $cli_args[0] == 'artisan' && $cli_args[1] == 'vendor:publish');
+$is_artisan_clear_compiled = (sizeof($cli_args) >= 2 && $cli_args[0] == 'artisan' && $cli_args[1] == 'clear-compiled');
 
-$translation_provider = ($is_artisan_migrate || $is_artisan_vendor_publish ? 
+$translation_provider = ($is_artisan_migrate || $is_artisan_vendor_publish || $is_artisan_clear_compiled ? 
 	'Neonbug\Common\Translation\MockTranslationServiceProvider' : 
 	'Neonbug\Common\Translation\TranslationServiceProvider');
 
-$package_providers = ($is_artisan_migrate ? [] : [ //don't load package providers because of migrations
+//don't load package providers because of migrations
+$package_providers = ($is_artisan_migrate || $is_artisan_clear_compiled ? [] : [
     'Neonbug\Common\Providers\ServiceProvider', 
     'Neonbug\Translation\Providers\ServiceProvider', 
     'Neonbug\User\Providers\ServiceProvider', 
