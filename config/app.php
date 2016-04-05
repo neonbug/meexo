@@ -3,16 +3,18 @@
 $cli_args = (isSet($argv) && $argv != null ? $argv : 
     (array_key_exists('argv', $_SERVER) ? $_SERVER['argv'] : []));
 
-$is_artisan_migrate = (sizeof($cli_args) >= 2 && $cli_args[0] == 'artisan' && $cli_args[1] == 'migrate');
+$is_artisan_migrate        = (sizeof($cli_args) >= 2 && $cli_args[0] == 'artisan' && $cli_args[1] == 'migrate');
 $is_artisan_vendor_publish = (sizeof($cli_args) >= 2 && $cli_args[0] == 'artisan' && $cli_args[1] == 'vendor:publish');
 $is_artisan_clear_compiled = (sizeof($cli_args) >= 2 && $cli_args[0] == 'artisan' && $cli_args[1] == 'clear-compiled');
+$is_artisan_optimize       = (sizeof($cli_args) >= 2 && $cli_args[0] == 'artisan' && $cli_args[1] == 'optimize');
 
-$translation_provider = ($is_artisan_migrate || $is_artisan_vendor_publish || $is_artisan_clear_compiled ? 
+$translation_provider = ($is_artisan_migrate || $is_artisan_vendor_publish || $is_artisan_clear_compiled || 
+	$is_artisan_optimize ? 
 	'Neonbug\Common\Translation\MockTranslationServiceProvider' : 
 	'Neonbug\Common\Translation\TranslationServiceProvider');
 
 //don't load package providers because of migrations
-$package_providers = ($is_artisan_migrate || $is_artisan_clear_compiled ? [] : [
+$package_providers = ($is_artisan_migrate || $is_artisan_clear_compiled || $is_artisan_optimize ? [] : [
     'Neonbug\Common\Providers\ServiceProvider', 
     'Neonbug\Translation\Providers\ServiceProvider', 
     'Neonbug\User\Providers\ServiceProvider', 
