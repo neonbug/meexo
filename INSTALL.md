@@ -139,9 +139,9 @@ Now simply follow the instructions.
 
 ### 10.2. Creating your own add/edit field type
   
-To create your own field type, copy an existing field view from `/vendor/neonbug/meexo-common/resources/views/admin/add_fields/` to your package's views directory, e.g. `/app/Packages/YourPackageName/resources/views/admin/add_fields/`.
+To create your own field type, copy an existing field view from `/vendor/neonbug/meexo-common/resources/admin_views/add_fields/` to your package's views directory, e.g. `/app/Packages/YourPackageName/resources/admin_views/add_fields/`.
 
-To use it, edit the appropriate config file. Instead of using a common field type (e.g. `single_line_text`) in field's `type` property, enter the full path to your field view, e.g. `your_package_name::admin.add_fields.custom_field_type`.
+To use it, edit the appropriate config file. Instead of using a common field type (e.g. `single_line_text`) in field's `type` property, enter the full path to your field view, e.g. `your_package_name_admin::add_fields.custom_field_type`.
 
 ## 11. FAQ
 
