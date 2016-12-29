@@ -24,7 +24,7 @@
 		
 		composer create-project neonbug/meexo {directory}
 
-### 2.2. Manually install
+### 2.2. Manual install
 
 * Download the files from `https://github.com/neonbug/meexo` into a directory. 
 
