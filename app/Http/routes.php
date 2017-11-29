@@ -62,6 +62,7 @@ if (!App::runningInConsole())
     if ($admin_language == null) exit('Language not found');
 }
 
+App::singleton('\Neonbug\Common\Models\Language', function() use($language) { return $language; });
 App::singleton('Language', function() use($language) { return $language; });
 App::singleton('AdminLanguage', function() use($admin_language) { return $admin_language; });
 App::singleton('LanguageRepository', '\Neonbug\Common\Repositories\LanguageRepository');
