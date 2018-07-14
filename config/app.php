@@ -80,6 +80,8 @@ return [
 	
 	'admin_available_locales' => [ 'en' ],
 	'admin_default_locale' => 'en',
+	
+	'compact_admin_menu' => false,
 
 	/*
 	|--------------------------------------------------------------------------
