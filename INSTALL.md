@@ -50,7 +50,9 @@
 
 * Open `config/app.php` file and add packages to `$package_providers` array. E.g. for News package add `'Neonbug\News\Providers\ServiceProvider'`.
 
-* Add packages to `composer.json` file (e.g. for News package add `"neonbug/meexo-news": "0.*"` to `require`). See `https://packagist.org/packages/neonbug/` for a list of all Neonbug packages. **Issue `composer update` command in your terminal to install newly added packages.**
+* Add packages to `composer.json` file (e.g. for News package add `"neonbug/meexo-news": "0.*"` to `require`). See `https://packagist.org/packages/neonbug/` for a list of all Neonbug packages. 
+
+* **Issue `composer update` command in your terminal to install newly added packages.**
 
 ## 5. Copy package files to proper locations and initialize database
 
