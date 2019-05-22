@@ -24,7 +24,20 @@ class RouteServiceProvider extends ServiceProvider {
 	{
 		parent::boot($router);
 
-		//
+		// delay loading this stuff after app has booted, 
+		//    to allow all modules to load their stuff first (e.g. register views)
+		App::booted(function()
+		{
+			try
+			{
+				// load language
+				$language = App::make('Language');
+				View::share('language', $language);
+			}
+			catch (\Exception $ex)
+			{
+			}
+		});
 	}
 
 	/**
