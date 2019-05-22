@@ -3,6 +3,9 @@
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
+use App;
+use View;
+
 class RouteServiceProvider extends ServiceProvider {
 
 	/**
