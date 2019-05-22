@@ -14,15 +14,15 @@
 ### 2.1. Install using composer
 
 * Issue this command in your terminal:
+	
+	To install the latest stable version, issue this:
+		
+		composer create-project neonbug/meexo {directory}
 
 	To install the latest dev version, issue this:
 		
 		composer create-project -s dev neonbug/meexo {directory}
 		# answer Yes when asked "Do you want to remove the existing VCS (.git, .svn..) history?"
-	
-	To install the latest stable version, issue this:
-		
-		composer create-project neonbug/meexo {directory}
 
 ### 2.2. Manual install
 
