@@ -1,6 +1,24 @@
 <?php
 
 /*
+|---------------------------------------------------------------
+| PHP ERROR REPORTING LEVEL
+|---------------------------------------------------------------
+|
+| Disable deprecation warnings for PHP 7.1 and above, 
+| since PHP 7.1 deprecates mcrypt.
+|
+*/
+if (version_compare(PHP_VERSION, '7.1.0', '>='))
+{
+	error_reporting(E_ALL ^ E_DEPRECATED);
+}
+else
+{
+	error_reporting(E_ALL);
+}
+
+/*
 |--------------------------------------------------------------------------
 | Application Routes
 |--------------------------------------------------------------------------
