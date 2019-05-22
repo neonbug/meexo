@@ -11,7 +11,7 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		//
+		$this->loadTranslationsFrom('/', 'site'); //enables site translations, such as site::frontend.header.title
 	}
 
 	/**
@@ -21,7 +21,6 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		//
 	}
 
 }
