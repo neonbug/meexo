@@ -88,7 +88,9 @@ App::singleton('LanguageRepository', '\Neonbug\Common\Repositories\LanguageRepos
 //frontend
 Route::group(['middleware' => ['online']], function() use ($locale)
 {
-    Route::get('/', 'HomeController@index'); //special route without locale prefix
+    Route::get('/', [ 'as' => 'home', 'uses' => 'HomeController@index' ]); //special route without locale prefix
+    Route::get('/' . $locale, [ 'as' => 'current-home', 'uses' => 'HomeController@index' ]);
+    
     Route::group(['prefix' => $locale], function()
     {
         Route::get('/', 'HomeController@index');
