@@ -1,7 +1,6 @@
 /vendor
 /node_modules
 .env
-/public/vendor
 /public/thumbs
 /public/uploads
 neonbug/Common/assets/admin_assets/js/semanticui/_src/dist/
