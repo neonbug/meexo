@@ -18,6 +18,7 @@ class Kernel extends HttpKernel {
 		\Neonbug\Common\Http\Middleware\VerifyCsrfToken::class,
 		\Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
 		\App\Http\Middleware\TrimStrings::class,
+		\App\Http\Middleware\TrustProxies::class,
 	];
 
 	/**

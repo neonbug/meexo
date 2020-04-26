@@ -5,11 +5,17 @@
 
     RewriteEngine On
 
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
     RewriteRule ^(check-token) check-token.php [L]
     
-    # Redirect Trailing Slashes...
-    RewriteRule ^(.*)/$ /$1 [L,R=301]
-    
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
     <FilesMatch "\.(jpg|jpeg|png|gif|swf|js|css)$">
         Header set Cache-Control "max-age=604800, public"
     </FilesMatch>
