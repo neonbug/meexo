@@ -25,6 +25,8 @@ class RouteServiceProvider extends ServiceProvider {
 	 */
 	public function boot(Router $router)
 	{
+		$router->setRoutes(new \App\Http\RouteCollection());
+		
 		parent::boot($router);
 
 		// delay loading this stuff after app has booted, 
@@ -41,8 +43,6 @@ class RouteServiceProvider extends ServiceProvider {
 			{
 			}
 		});
-		
-		$router->setRoutes(new \App\Http\RouteCollection());
 	}
 
 	/**

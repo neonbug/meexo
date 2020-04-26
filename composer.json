@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"type": "project",
 	"require": {
-		"laravel/framework": "5.1.11", 
+		"laravel/framework": "5.2.*", 
 		"bkwld/croppa": "~4.0",
 		"flowjs/flow-php-server": "dev-master",
 		"google/apiclient": "^1.1", 
@@ -16,7 +16,9 @@
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",
 		"phpspec/phpspec": "~2.1",
-		"barryvdh/composer-cleanup-plugin": "0.1.x@dev"
+		"barryvdh/composer-cleanup-plugin": "0.1.x@dev",
+		"symfony/dom-crawler": "~3.0",
+		"symfony/css-selector": "~3.0"
 	},
 	"autoload": {
 		"classmap": [
