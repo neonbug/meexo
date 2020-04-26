@@ -10,6 +10,7 @@ class Kernel extends HttpKernel {
 	 * @var array
 	 */
 	protected $middleware = [
+		\App\Http\Middleware\TrustProxies::class,
 		\App\Http\Middleware\CheckForMaintenanceMode::class,
 		\Illuminate\Cookie\Middleware\EncryptCookies::class,
 		\Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
@@ -18,7 +19,6 @@ class Kernel extends HttpKernel {
 		\Neonbug\Common\Http\Middleware\VerifyCsrfToken::class,
 		\Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
 		\App\Http\Middleware\TrimStrings::class,
-		\App\Http\Middleware\TrustProxies::class,
 	];
 
 	/**
