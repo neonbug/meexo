@@ -11,15 +11,15 @@ $is_artisan_key_generate   = (sizeof($cli_args) >= 2 && $cli_args[0] == 'artisan
 
 $translation_provider = ($is_artisan_migrate || $is_artisan_vendor_publish || $is_artisan_clear_compiled || 
 	$is_artisan_optimize || $is_artisan_key_generate ? 
-	'Neonbug\Common\Translation\MockTranslationServiceProvider' : 
-	'Neonbug\Common\Translation\TranslationServiceProvider');
+	Neonbug\Common\Translation\MockTranslationServiceProvider::class : 
+	Neonbug\Common\Translation\TranslationServiceProvider::class);
 
 //don't load package providers because of migrations
 $package_providers = ($is_artisan_migrate || $is_artisan_clear_compiled || $is_artisan_optimize || 
 	$is_artisan_key_generate ? [] : [
-    'Neonbug\Common\Providers\ServiceProvider', 
-    'Neonbug\Translation\Providers\ServiceProvider', 
-    'Neonbug\User\Providers\ServiceProvider', 
+    Neonbug\Common\Providers\ServiceProvider::class,
+    Neonbug\Translation\Providers\ServiceProvider::class,
+    Neonbug\User\Providers\ServiceProvider::class,
 ]);
 return [
 
@@ -48,7 +48,6 @@ return [
 	*/
 
 	'debug' => env('APP_DEBUG'),
-
 	
 	/*
 	|--------------------------------------------------------------------------
@@ -123,7 +122,7 @@ return [
 
 	'key' => env('APP_KEY', 'SomeRandomString'),
 
-	'cipher' => MCRYPT_RIJNDAEL_128,
+	'cipher' => 'AES-256-CBC',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -156,37 +155,39 @@ return [
 		/*
 		 * Laravel Framework Service Providers...
 		 */
-		'Illuminate\Auth\AuthServiceProvider',
-		'Illuminate\Cache\CacheServiceProvider',
-		'Illuminate\Foundation\Providers\ConsoleSupportServiceProvider',
-		'Illuminate\Cookie\CookieServiceProvider',
-		'Illuminate\Database\DatabaseServiceProvider',
-		'Illuminate\Encryption\EncryptionServiceProvider',
-		'Illuminate\Filesystem\FilesystemServiceProvider',
-		'Illuminate\Foundation\Providers\FoundationServiceProvider',
-		'Illuminate\Hashing\HashServiceProvider',
-		'Neonbug\Common\Mail\MailServiceProvider',
-		'Illuminate\Pagination\PaginationServiceProvider',
-		'Illuminate\Pipeline\PipelineServiceProvider',
-		'Illuminate\Queue\QueueServiceProvider',
-		'Illuminate\Redis\RedisServiceProvider',
-		'Illuminate\Auth\Passwords\PasswordResetServiceProvider',
-		'Illuminate\Session\SessionServiceProvider',
+		Illuminate\Auth\AuthServiceProvider::class,
+		Illuminate\Cache\CacheServiceProvider::class,
+		Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
+		Illuminate\Cookie\CookieServiceProvider::class,
+		Illuminate\Database\DatabaseServiceProvider::class,
+		Illuminate\Encryption\EncryptionServiceProvider::class,
+		Illuminate\Filesystem\FilesystemServiceProvider::class,
+		Illuminate\Foundation\Providers\FoundationServiceProvider::class,
+		Illuminate\Hashing\HashServiceProvider::class,
+		Neonbug\Common\Mail\MailServiceProvider::class,
+		Illuminate\Pagination\PaginationServiceProvider::class,
+		Illuminate\Pipeline\PipelineServiceProvider::class,
+		Illuminate\Queue\QueueServiceProvider::class,
+		Illuminate\Redis\RedisServiceProvider::class,
+		Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
+		Illuminate\Session\SessionServiceProvider::class,
 		$translation_provider,
-		'Illuminate\Validation\ValidationServiceProvider',
-		'Illuminate\View\ViewServiceProvider',
-		'Illuminate\Broadcasting\BroadcastServiceProvider',
+		Illuminate\Validation\ValidationServiceProvider::class,
+		Illuminate\View\ViewServiceProvider::class,
+		Illuminate\Broadcasting\BroadcastServiceProvider::class,
+		Illuminate\Notifications\NotificationServiceProvider::class,
 
 		/*
 		 * Application Service Providers...
 		 */
-		'App\Providers\AppServiceProvider',
-		'App\Providers\ConfigServiceProvider',
-		'App\Providers\EventServiceProvider',
-		'App\Providers\RouteServiceProvider',
-		'App\Providers\AuthServiceProvider',
+		App\Providers\AppServiceProvider::class,
+		App\Providers\ConfigServiceProvider::class,
+		App\Providers\EventServiceProvider::class,
+		App\Providers\RouteServiceProvider::class,
+		App\Providers\AuthServiceProvider::class,
+		App\Providers\BroadcastServiceProvider::class,
 		
-		'Bkwld\Croppa\ServiceProvider',
+		Bkwld\Croppa\ServiceProvider::class,
 
 	], $package_providers),
 
@@ -203,41 +204,42 @@ return [
 
 	'aliases' => [
 
-		'App'       => 'Illuminate\Support\Facades\App',
-		'Artisan'   => 'Illuminate\Support\Facades\Artisan',
-		'Auth'      => 'Illuminate\Support\Facades\Auth',
-		'Blade'     => 'Illuminate\Support\Facades\Blade',
-		'Bus'       => 'Illuminate\Support\Facades\Bus',
-		'Cache'     => 'Illuminate\Support\Facades\Cache',
-		'Config'    => 'Illuminate\Support\Facades\Config',
-		'Cookie'    => 'Illuminate\Support\Facades\Cookie',
-		'Crypt'     => 'Illuminate\Support\Facades\Crypt',
-		'DB'        => 'Illuminate\Support\Facades\DB',
-		'Eloquent'  => 'Illuminate\Database\Eloquent\Model',
-		'Event'     => 'Illuminate\Support\Facades\Event',
-		'File'      => 'Illuminate\Support\Facades\File',
-		'Gate'      => 'Illuminate\Support\Facades\Gate',
-		'Hash'      => 'Illuminate\Support\Facades\Hash',
-		'Input'     => 'Illuminate\Support\Facades\Input',
-		'Inspiring' => 'Illuminate\Foundation\Inspiring',
-		'Lang'      => 'Illuminate\Support\Facades\Lang',
-		'Log'       => 'Illuminate\Support\Facades\Log',
-		'Mail'      => 'Illuminate\Support\Facades\Mail',
-		'Password'  => 'Illuminate\Support\Facades\Password',
-		'Queue'     => 'Illuminate\Support\Facades\Queue',
-		'Redirect'  => 'Illuminate\Support\Facades\Redirect',
-		'Redis'     => 'Illuminate\Support\Facades\Redis',
-		'Request'   => 'Illuminate\Support\Facades\Request',
-		'Response'  => 'Illuminate\Support\Facades\Response',
-		'Route'     => 'Illuminate\Support\Facades\Route',
-		'Schema'    => 'Illuminate\Support\Facades\Schema',
-		'Session'   => 'Illuminate\Support\Facades\Session',
-		'Storage'   => 'Illuminate\Support\Facades\Storage',
-		'URL'       => 'Illuminate\Support\Facades\URL',
-		'Validator' => 'Illuminate\Support\Facades\Validator',
-		'View'      => 'Illuminate\Support\Facades\View',
+		'App'          => Illuminate\Support\Facades\App::class,
+		'Artisan'      => Illuminate\Support\Facades\Artisan::class,
+		'Auth'         => Illuminate\Support\Facades\Auth::class,
+		'Blade'        => Illuminate\Support\Facades\Blade::class,
+		'Bus'          => Illuminate\Support\Facades\Bus::class,
+		'Cache'        => Illuminate\Support\Facades\Cache::class,
+		'Config'       => Illuminate\Support\Facades\Config::class,
+		'Cookie'       => Illuminate\Support\Facades\Cookie::class,
+		'Crypt'        => Illuminate\Support\Facades\Crypt::class,
+		'DB'           => Illuminate\Support\Facades\DB::class,
+		'Eloquent'     => Illuminate\Database\Eloquent\Model::class,
+		'Event'        => Illuminate\Support\Facades\Event::class,
+		'File'         => Illuminate\Support\Facades\File::class,
+		'Gate'         => Illuminate\Support\Facades\Gate::class,
+		'Hash'         => Illuminate\Support\Facades\Hash::class,
+		'Input'        => Illuminate\Support\Facades\Input::class,
+		'Inspiring'    => Illuminate\Foundation\Inspiring::class,
+		'Lang'         => Illuminate\Support\Facades\Lang::class,
+		'Log'          => Illuminate\Support\Facades\Log::class,
+		'Mail'         => Illuminate\Support\Facades\Mail::class,
+		'Notification' => Illuminate\Support\Facades\Notification::class,
+		'Password'     => Illuminate\Support\Facades\Password::class,
+		'Queue'        => Illuminate\Support\Facades\Queue::class,
+		'Redirect'     => Illuminate\Support\Facades\Redirect::class,
+		'Redis'        => Illuminate\Support\Facades\Redis::class,
+		'Request'      => Illuminate\Support\Facades\Request::class,
+		'Response'     => Illuminate\Support\Facades\Response::class,
+		'Route'        => Illuminate\Support\Facades\Route::class,
+		'Schema'       => Illuminate\Support\Facades\Schema::class,
+		'Session'      => Illuminate\Support\Facades\Session::class,
+		'Storage'      => Illuminate\Support\Facades\Storage::class,
+		'URL'          => Illuminate\Support\Facades\URL::class,
+		'Validator'    => Illuminate\Support\Facades\Validator::class,
+		'View'         => Illuminate\Support\Facades\View::class,
 		
-		'Croppa'    => 'Neonbug\Common\Facades\Croppa',
+		'Croppa'       => Neonbug\Common\Facades\Croppa::class,
 
 	],
 
