@@ -41,6 +41,8 @@ class RouteServiceProvider extends ServiceProvider {
 			{
 			}
 		});
+		
+		$router->setRoutes(new \App\Http\RouteCollection());
 	}
 
 	/**
