@@ -1,16 +1,17 @@
-<?php namespace App\Providers;
+<?php
 
-use Illuminate\Routing\Router;
+namespace App\Providers;
+
+use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 use App;
 use View;
-use Route;
 
-class RouteServiceProvider extends ServiceProvider {
-
+class RouteServiceProvider extends ServiceProvider
+{
 	/**
-	 * This namespace is applied to the controller routes in your routes file.
+	 * This namespace is applied to your controller routes.
 	 *
 	 * In addition, it is set as the URL generator's root namespace.
 	 *
@@ -26,8 +27,6 @@ class RouteServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		Route::setRoutes(new \App\Http\RouteCollection());
-		
-		parent::boot();
 
 		// delay loading this stuff after app has booted, 
 		//    to allow all modules to load their stuff first (e.g. register views)
@@ -43,6 +42,8 @@ class RouteServiceProvider extends ServiceProvider {
 			{
 			}
 		});
+		
+		parent::boot();
 	}
 
 	/**
@@ -50,12 +51,41 @@ class RouteServiceProvider extends ServiceProvider {
 	 *
 	 * @return void
 	 */
-	public function map(Router $router)
+	public function map()
 	{
-		Route::group(['namespace' => $this->namespace], function($router)
-		{
-			require app_path('Http/routes.php');
-		});
+		$this->mapApiRoutes();
+
+		$this->mapWebRoutes();
+
+		//
 	}
 
+	/**
+	 * Define the "web" routes for the application.
+	 *
+	 * These routes all receive session state, CSRF protection, etc.
+	 *
+	 * @return void
+	 */
+	protected function mapWebRoutes()
+	{
+		Route::middleware('web')
+			 ->namespace($this->namespace)
+			 ->group(base_path('routes/web.php'));
+	}
+
+	/**
+	 * Define the "api" routes for the application.
+	 *
+	 * These routes are typically stateless.
+	 *
+	 * @return void
+	 */
+	protected function mapApiRoutes()
+	{
+		Route::prefix('api')
+			 ->middleware('api')
+			 ->namespace($this->namespace)
+			 ->group(base_path('routes/api.php'));
+	}
 }

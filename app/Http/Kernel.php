@@ -11,11 +11,13 @@ class Kernel extends HttpKernel {
 	 */
 	protected $middleware = [
 		\Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
-		'Illuminate\Cookie\Middleware\EncryptCookies',
-		'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
-		'Illuminate\Session\Middleware\StartSession',
-		'Illuminate\View\Middleware\ShareErrorsFromSession',
-		'Neonbug\Common\Http\Middleware\VerifyCsrfToken',
+		\Illuminate\Cookie\Middleware\EncryptCookies::class,
+		\Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+		\Illuminate\Session\Middleware\StartSession::class,
+		\Illuminate\View\Middleware\ShareErrorsFromSession::class,
+		\Neonbug\Common\Http\Middleware\VerifyCsrfToken::class,
+		\Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
+		\App\Http\Middleware\TrimStrings::class,
 	];
 
 	/**
@@ -29,7 +31,7 @@ class Kernel extends HttpKernel {
 			\Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
 			\Illuminate\Session\Middleware\StartSession::class,
 			\Illuminate\View\Middleware\ShareErrorsFromSession::class,
-			\App\Http\Middleware\VerifyCsrfToken::class,
+			\Neonbug\Common\Http\Middleware\VerifyCsrfToken::class,
 			\Illuminate\Routing\Middleware\SubstituteBindings::class,
 		],
 

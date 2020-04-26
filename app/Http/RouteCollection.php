@@ -5,7 +5,7 @@ class RouteCollection extends \Illuminate\Routing\RouteCollection {
 	// overriden method, to allow for multiple routes with the same URI
 	protected function addToCollections($route)
 	{
-		$domainAndUri = $route->domain().$route->getUri();
+		$domainAndUri = $route->domain().$route->uri();
 		
 		foreach ($route->methods() as $method) {
 			while (

@@ -1,7 +1,7 @@
 <?php
 
 $cli_args = (isSet($argv) && $argv != null ? $argv : 
-    (array_key_exists('argv', $_SERVER) ? $_SERVER['argv'] : []));
+	(array_key_exists('argv', $_SERVER) ? $_SERVER['argv'] : []));
 
 $is_artisan_migrate        = (sizeof($cli_args) >= 2 && $cli_args[0] == 'artisan' && $cli_args[1] == 'migrate');
 $is_artisan_vendor_publish = (sizeof($cli_args) >= 2 && $cli_args[0] == 'artisan' && $cli_args[1] == 'vendor:publish');
@@ -17,12 +17,24 @@ $translation_provider = ($is_artisan_migrate || $is_artisan_vendor_publish || $i
 //don't load package providers because of migrations
 $package_providers = ($is_artisan_migrate || $is_artisan_clear_compiled || $is_artisan_optimize || 
 	$is_artisan_key_generate ? [] : [
-    Neonbug\Common\Providers\ServiceProvider::class,
-    Neonbug\Translation\Providers\ServiceProvider::class,
-    Neonbug\User\Providers\ServiceProvider::class,
+	Neonbug\Common\Providers\ServiceProvider::class,
+	Neonbug\Translation\Providers\ServiceProvider::class,
+	Neonbug\User\Providers\ServiceProvider::class,
 ]);
 return [
 
+	/*
+	|--------------------------------------------------------------------------
+	| Application Name
+	|--------------------------------------------------------------------------
+	|
+	| This value is the name of your application. This value is used when the
+	| framework needs to place the application's name in a notification or
+	| any other location as required by the application or its packages.
+	*/
+
+	'name' => env('APP_NAME', 'Laravel'),
+	
 	/*
 	|--------------------------------------------------------------------------
 	| Application Environment
@@ -177,6 +189,11 @@ return [
 		Illuminate\Broadcasting\BroadcastServiceProvider::class,
 		Illuminate\Notifications\NotificationServiceProvider::class,
 
+		/*
+		 * Package Service Providers...
+		 */
+		Laravel\Tinker\TinkerServiceProvider::class,
+		
 		/*
 		 * Application Service Providers...
 		 */
