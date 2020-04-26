@@ -24,7 +24,7 @@
     RewriteCond %{REQUEST_URI} (.*)/cached/[0-9]+/(.*)
     RewriteRule ^ %1/%2 [L]
     
-    # Handle Front Controller...
+    # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]

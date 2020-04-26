@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |---------------------------------------------------------------
 | PHP ERROR REPORTING LEVEL
