@@ -2,8 +2,7 @@
 
 ## 1. Requirements ##
 
-* PHP >= 5.4
-* Mcrypt PHP Extension
+* PHP >= 7.2.5
 * OpenSSL PHP Extension
 * Mbstring PHP Extension
 * Tokenizer PHP Extension
@@ -50,7 +49,7 @@
 
 * Open `config/app.php` file and add packages to `$package_providers` array. E.g. for News package add `'Neonbug\News\Providers\ServiceProvider'`.
 
-* Add packages to `composer.json` file (e.g. for News package add `"neonbug/meexo-news": "0.*"` to `require`). See `https://packagist.org/packages/neonbug/` for a list of all Neonbug packages. 
+* Add packages to `composer.json` file (e.g. for News package add `"neonbug/meexo-news": "^1.0"` to `require`). See `https://packagist.org/packages/neonbug/` for a list of all Neonbug packages. 
 
 * **Issue `composer update` command in your terminal to install newly added packages.**
 
@@ -59,7 +58,7 @@
 Issue these commands in your terminal:
 ```
 composer dump-autoload
-php artisan vendor:publish
+php artisan vendor:publish --all
 ```
 
 ### 5.1. Add languages
