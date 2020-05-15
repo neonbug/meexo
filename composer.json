@@ -8,6 +8,7 @@
 		"bkwld/croppa": "~4.0",
 		"fideloper/proxy": "^4.2",
 		"flowjs/flow-php-server": "dev-master",
+		"flowjs/flow-php-server": "^1.0.3",
 		"fruitcake/laravel-cors": "^1.0",
 		"guzzlehttp/guzzle": "^6.3",
 		"laravel/framework": "^7.0",
