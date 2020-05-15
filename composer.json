@@ -14,7 +14,7 @@
 		"laravel/framework": "^7.0",
 		"laravel/tinker": "^2.0",
 		"google/apiclient": "^1.1", 
-		"neonbug/meexo-common": "^1.0", 
+		"neonbug/meexo-common": "^1.0.1", 
 		"neonbug/meexo-translation": "^1.0", 
 		"neonbug/meexo-user": "^1.0"
 	},
