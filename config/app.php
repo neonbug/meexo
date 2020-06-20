@@ -260,7 +260,7 @@ return [
 		'Validator'    => Illuminate\Support\Facades\Validator::class,
 		'View'         => Illuminate\Support\Facades\View::class,
 		
-		'Croppa'       => Neonbug\Common\Facades\Croppa::class,
+		'CroppaExt'    => Neonbug\Common\Facades\Croppa::class,
 
 	],
 

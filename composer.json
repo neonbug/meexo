@@ -6,6 +6,7 @@
 	"type": "project",
 	"require": {
 		"bkwld/croppa": "~4.0",
+		"bkwld/croppa": "^4.9.0",
 		"fideloper/proxy": "^4.2",
 		"flowjs/flow-php-server": "^1.0.3",
 		"fruitcake/laravel-cors": "^1.0",

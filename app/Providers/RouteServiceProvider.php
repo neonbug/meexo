@@ -26,8 +26,6 @@ class RouteServiceProvider extends ServiceProvider
 	 */
 	public function boot()
 	{
-		Route::setRoutes(new \App\Http\RouteCollection());
-
 		// delay loading this stuff after app has booted, 
 		//    to allow all modules to load their stuff first (e.g. register views)
 		App::booted(function()
@@ -44,6 +42,12 @@ class RouteServiceProvider extends ServiceProvider
 		});
 		
 		parent::boot();
+	}
+	
+	public function register()
+	{
+		// replace route collection, to prevent Laravel removing duplicate routes (albeit with different names)
+		Route::setRoutes(new \App\Http\RouteCollection());
 	}
 
 	/**

@@ -19,7 +19,7 @@ if ( ! function_exists('resize_contents_images'))
 					return $matches[0];
 				}
 				return $matches[1] . 
-					Croppa::url_resize($matches[2], $width) . 
+					CroppaExt::url_resize($matches[2], $width) . 
 					$matches[3];
 			}, 
 			$contents
