@@ -3,24 +3,6 @@
 use Illuminate\Support\Facades\Route;
 
 /*
-|---------------------------------------------------------------
-| PHP ERROR REPORTING LEVEL
-|---------------------------------------------------------------
-|
-| Disable deprecation warnings for PHP 7.1 and above, 
-| since PHP 7.1 deprecates mcrypt.
-|
-*/
-if (version_compare(PHP_VERSION, '7.1.0', '>='))
-{
-	error_reporting(E_ALL ^ E_DEPRECATED);
-}
-else
-{
-	error_reporting(E_ALL);
-}
-
-/*
 |--------------------------------------------------------------------------
 | Application Routes
 |--------------------------------------------------------------------------
@@ -82,7 +64,7 @@ if (!App::runningInConsole())
     if ($admin_language == null) exit('Language not found');
 }
 
-App::singleton('\Neonbug\Common\Models\Language', function() use($language) { return $language; });
+App::singleton('Neonbug\Common\Models\Language', function() use($language) { return $language; });
 App::singleton('Language', function() use($language) { return $language; });
 App::singleton('AdminLanguage', function() use($admin_language) { return $admin_language; });
 App::singleton('LanguageRepository', '\Neonbug\Common\Repositories\LanguageRepository');
